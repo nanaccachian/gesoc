@@ -5,4 +5,4 @@
 - Bongiorno, Maria Gracia
 - Naccachian, Nicolas Armen
 
-#### El repo inicial quedó acá https://github.com/rbestardpino/gesoc-old pero me mandé cagadas y tuve que pasarlo a otro
+#### El repo inicial es este https://github.com/rbestardpino/gesoc-old pero me mandé cagadas y tuve que pasarlo a otro
