@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
 import com.testigos.gesoc.persistence.DAO;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UsuarioService {
 
     private final DAO<Usuario> dao = new DAO<>(Usuario.class);
