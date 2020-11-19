@@ -1,27 +1,29 @@
 package com.testigos.gesoc.model.Mongo;
 
 import com.testigos.gesoc.GesocApplication;
-import com.testigos.gesoc.model.ABM.Alta;
-import com.testigos.gesoc.persistence.MongoRepositories.AltaRepository;
+import com.testigos.gesoc.model.ABM.Registro;
+import com.testigos.gesoc.model.ABM.TipoRegistro;
+import com.testigos.gesoc.repository.RegistroRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GesocApplication.class)
-public class AltaMongoRepositoryTest {
+public class RegistroMongoRepositoryTest {
 
     @Autowired
-    private AltaRepository repo;
+    private RegistroRepository repo;
 
     @Test
     public void loadingData() {
-        Alta a1 = new Alta("Se modifico el campo a1");
-        Alta a2 = new Alta("Se modifico el campo a2");
+        Registro a1 = new Registro(TipoRegistro.ALTA, null, "Se modifico el campo a1");
+        Registro a2 = new Registro(TipoRegistro.MODIFICACION, null, "Se modifico el campo a2");
 
         //save product, verify has ID value after save
         Assert.assertNull(a1.getId());
@@ -33,12 +35,25 @@ public class AltaMongoRepositoryTest {
     @Test
     public void update(){
         /*Test update*/
-        Alta userB = repo.findByDescripcion("Se modifico el campo a1");
+        Registro userB = repo.findByDescripcion("Se modifico el campo a1");
         userB.setDescripcion("He sido modificado");
         repo.save(userB);
-        Alta userC= repo.findByDescripcion("He sido modificado");
+        Registro userC= repo.findByDescripcion("He sido modificado");
         Assert.assertNotNull(userC);
         Assert.assertEquals("He sido modificado", "He sido modificado");
+    }
+
+    @Test
+    public void findByTipoRegistro(){
+        /*Test update*/
+        List<Registro> reg = repo.findAllByTipoRegistro(TipoRegistro.ALTA);
+        Assert.assertNotNull(reg);
+        Assert.assertEquals(1, reg.size());
+    }
+
+    @Test
+    public void tearDown() throws Exception {
+        this.repo.deleteAll();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.testigos.gesoc.persistence;
+package com.testigos.gesoc.repository;
 
 import java.util.List;
 

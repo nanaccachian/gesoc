@@ -1,4 +1,4 @@
-package com.testigos.gesoc.persistence.converters;
+package com.testigos.gesoc.repository.converters;
 
 import java.sql.Date;
 import java.time.LocalDate;

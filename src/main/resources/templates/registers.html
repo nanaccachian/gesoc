@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/bootstrap-grid.css">
+<link rel="stylesheet" href="../static/css/bootstrap.css">
+<link rel="stylesheet" href="../static/css/bootstrap-reboot.css">
+  <body>
+      <h1 type="text">Registros</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Tipo de registro</th>
+            <th>Entidad</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="registro : ${registros}">
+            <!--td>
+              <a
+                    href="registers.html"
+                    th:href="@{|/registers/${registro.id}|}">
+            </td-->
+            <td th:text="${registro.tipoRegistro}"></td>
+            <td th:text="${registro.entidad}"></td>
+            <td th:text="${registro.descripcion}"></td>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </body>
+</html>
