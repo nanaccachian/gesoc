@@ -3,7 +3,7 @@ package com.testigos.gesoc.model.Mongo;
 import com.testigos.gesoc.GesocApplication;
 import com.testigos.gesoc.model.ABM.Registro;
 import com.testigos.gesoc.model.ABM.TipoRegistro;
-import com.testigos.gesoc.repository.RegistroRepository;
+import com.testigos.gesoc.persistence.MongoRepositories.RegistroRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

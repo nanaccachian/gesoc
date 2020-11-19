@@ -8,7 +8,7 @@ public class Archivo {
     private Scanner archivo;
 
     public void abrirArchivo() {
-        try { // NO PUEDE IR EL PATH DIRECTO
+        try {
             archivo = new Scanner(new File("src/main/resources/OWASP_Top10k_mostCommon.txt").getAbsoluteFile());
         } catch (Exception e) {
             System.out.println("No se pudo encontrar archivo");

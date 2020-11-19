@@ -1,4 +1,4 @@
-package com.testigos.gesoc.repository;
+package com.testigos.gesoc.persistence.MongoRepositories;
 
 import com.testigos.gesoc.model.ABM.Registro;
 import com.testigos.gesoc.model.ABM.TipoRegistro;

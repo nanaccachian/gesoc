@@ -5,6 +5,7 @@ import java.util.List;
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
 import com.testigos.gesoc.model.services.UsuarioService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
-    private final UsuarioService usuarioService = new UsuarioService();
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping(path = "/all")
     public List<Usuario> usuarios() {
