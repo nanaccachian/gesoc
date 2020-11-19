@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AltaRepository extends MongoRepository<Alta, MongoId> {
+
+    Alta findByDescripcion(String bob);
 }

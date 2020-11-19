@@ -19,7 +19,7 @@ public class AltaMongoRepositoryTest {
     private AltaRepository repo;
 
     @Test
-    public void setUp() {
+    public void loadingData() {
         Alta a1 = new Alta("Se modifico el campo a1");
         Alta a2 = new Alta("Se modifico el campo a2");
 
@@ -29,11 +29,16 @@ public class AltaMongoRepositoryTest {
         this.repo.save(a1);
         this.repo.save(a2);
 
-        Iterable<Alta> altas = repo.findAll();
-        int count = 0;
-        for(Alta p : altas){
-            count++;
-        }
-        Assert.assertEquals(count, 2);
     }
+    @Test
+    public void update(){
+        /*Test update*/
+        Alta userB = repo.findByDescripcion("Se modifico el campo a1");
+        userB.setDescripcion("He sido modificado");
+        repo.save(userB);
+        Alta userC= repo.findByDescripcion("He sido modificado");
+        Assert.assertNotNull(userC);
+        Assert.assertEquals("He sido modificado", "He sido modificado");
+    }
+
 }
