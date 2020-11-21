@@ -1,7 +1,7 @@
 package com.testigos.gesoc.model.services;
 
-import com.testigos.gesoc.model.ABM.Registro;
-import com.testigos.gesoc.model.ABM.TipoRegistro;
+import com.testigos.gesoc.model.domain.abm.Registro;
+import com.testigos.gesoc.model.domain.abm.TipoRegistro;
 import com.testigos.gesoc.persistence.MongoRepositories.RegistroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

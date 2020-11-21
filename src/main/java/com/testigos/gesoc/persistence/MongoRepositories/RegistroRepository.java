@@ -1,7 +1,7 @@
 package com.testigos.gesoc.persistence.MongoRepositories;
 
-import com.testigos.gesoc.model.ABM.Registro;
-import com.testigos.gesoc.model.ABM.TipoRegistro;
+import com.testigos.gesoc.model.domain.abm.Registro;
+import com.testigos.gesoc.model.domain.abm.TipoRegistro;
 import com.testigos.gesoc.model.domain.entidades.Entidad;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -1,27 +1,30 @@
 package com.testigos.gesoc.views;
 
+import com.testigos.gesoc.model.domain.usuarios.Usuario;
+import com.testigos.gesoc.model.services.MensajeService;
+import com.testigos.gesoc.model.services.UsuarioService;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class Controllers {
 
-    @RequestMapping(method = GET, path = "/hello")
-    public String helloView(Model model, Authentication auth) {
-        // se agrega un objeto al modelo para que Thymeleaf lo pueda usar
-        // durante el procesamiento
-        model.addAttribute("nombre", "Juanito");
-        // se puede usar el objeto auth para obtener datos de la sesion
-        model.addAttribute("usuarioLogeado", auth.getName());
-        return "hello";
+    private UsuarioService usuarioService = new UsuarioService();
+    private MensajeService mensajeService = new MensajeService();
+
+    @GetMapping(path = { "/index", "/index*" })
+    public String index(Model model, Authentication auth) {
+        Usuario user = usuarioService.find(auth.getName());
+        model.addAttribute("user", user);
+        model.addAttribute("mensajes", mensajeService.getMensajes(user));
+        return "index";
     }
 
-    @RequestMapping(method = GET, path = "/login")
-    public String loginView(Model model) {
-        model.addAttribute("nombre", "Juanito");
+    @GetMapping(path = { "/login", "/login*" })
+    public String loginView() {
         return "login";
     }
 }

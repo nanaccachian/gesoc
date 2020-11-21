@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="https://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add usuario</title>
+  </head>
+  <body>
+    <h1>Agregar usuario</h1>
+    <form
+      th:action="@{/api/usuarios/add}"
+      th:object="${new_user}"
+      method="post"
+    >
+      <p>Username: <input type="text" th:field="*{username}" /></p>
+      <p>Password: <input type="text" th:field="*{password}" /></p>
+      <p>Permisos: <input type="text" th:field="*{permisos}" /></p>
+      <p>Nombre: <input type="text" th:field="*{name}" /></p>
+      <p>Apellido: <input type="text" th:field="*{surname}" /></p>
+      <p><input type="submit" value="Submit" /></p>
+      <h3>
+        La contraseña debe contener al menos 8 letras, 1 mayúscula, 1 número y
+        no puede tener 3 caracteres consecutivos iguales o secuenciales ("aaa" o
+        "abc")
+      </h3>
+    </form>
+  </body>
+</html>

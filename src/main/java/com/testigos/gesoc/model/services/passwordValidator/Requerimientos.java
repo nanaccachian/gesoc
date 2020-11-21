@@ -4,7 +4,7 @@ import java.util.stream.IntStream;
 
 public class Requerimientos {
 
-    public boolean cumpleRequerimientos(String contrasenia) {
+    public static boolean cumpleRequerimientos(String contrasenia) {
         return (tiene8Caracteres(contrasenia) && noTieneCaracteresRepetidos(contrasenia)
                 && noTieneCaracteresSecuenciales(contrasenia) && tieneUnaMayus(contrasenia)
                 && tieneUnaMinus(contrasenia) && tieneUnNumero(contrasenia) && sonTodosUNICODE(contrasenia));
@@ -39,21 +39,21 @@ public class Requerimientos {
 
     private static boolean tieneUnaMayus(String contrasenia) {
         IntStream vecContrasenia = contrasenia.chars();
-        return vecContrasenia.anyMatch(str -> Character.isUpperCase(str));
+        return vecContrasenia.anyMatch(Character::isUpperCase);
     }
 
-    private boolean tieneUnaMinus(String contrasenia) {
+    private static boolean tieneUnaMinus(String contrasenia) {
         IntStream vecContrasenia = contrasenia.chars();
-        return vecContrasenia.anyMatch(str -> Character.isLowerCase(str));
+        return vecContrasenia.anyMatch(Character::isLowerCase);
     }
 
     private static boolean tieneUnNumero(String contrasenia) {
         IntStream vecContrasenia = contrasenia.chars();
-        return vecContrasenia.anyMatch(str -> Character.isDigit(str));
+        return vecContrasenia.anyMatch(Character::isDigit);
     }
 
     private static boolean sonTodosUNICODE(String contrasenia) {
         IntStream vecContrasenia = contrasenia.chars();
-        return vecContrasenia.allMatch(str -> Character.isDefined(str));
+        return vecContrasenia.allMatch(Character::isDefined);
     }
 }

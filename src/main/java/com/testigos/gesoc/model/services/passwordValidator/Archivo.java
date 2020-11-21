@@ -5,26 +5,29 @@ import java.util.Scanner;
 
 public class Archivo {
 
-    private Scanner archivo;
+    private static Scanner archivo;
 
-    public void abrirArchivo() {
+    public static void abrirArchivo() {
         try {
-            archivo = new Scanner(new File("src/main/resources/OWASP_Top10k_mostCommon.txt").getAbsoluteFile());
+            String path = new File("com/testigos/gesoc/model/services/passwordValidator/OWASP_Top10k_mostCommon.txt").getAbsolutePath();
+            archivo = new Scanner(path);
         } catch (Exception e) {
             System.out.println("No se pudo encontrar archivo");
         }
     }
 
-    public boolean noEstaEnArchivo(String contrasenia) {
+    public static boolean noEstaEnArchivo(String contrasenia) {
+        abrirArchivo();
         boolean noEstaEnArchivo = true;
         while (noEstaEnArchivo && archivo.hasNext()) {
             String a = archivo.next();
             noEstaEnArchivo = !(contrasenia.equals(a));
         }
+        cerrarArchivo();
         return noEstaEnArchivo;
     }
 
-    public void cerrarArchivo() {
+    public static void cerrarArchivo() {
         archivo.close();
     }
 }

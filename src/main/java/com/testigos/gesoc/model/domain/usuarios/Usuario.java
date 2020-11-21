@@ -30,17 +30,27 @@ public class Usuario {
     @Column
     private @Getter @Setter String permisos;
 
+    @Column
+    private @Getter @Setter String name;
+
+    @Column
+    private @Getter @Setter String surname;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private @Getter @Setter List<EgresoConPresupuestos> egresosConPresupuestos = new ArrayList<>();
 
-    public Usuario(String username, String password, String permisos) {
+    public Usuario(String username, String password, String permisos, String name, String surname) {
         this.username = username;
         this.password = password;
         this.permisos = permisos;
+        this.name = name;
+        this.surname = surname;
     }
 
     @Override
     public String toString() {
-        return "Usuario [password=" + password + ", permisos=" + permisos + ", username=" + username + "]";
+        return "Usuario [egresosConPresupuestos=" + egresosConPresupuestos + ", name=" + name + ", password=" + password
+                + ", permisos=" + permisos + ", surname=" + surname + ", username=" + username + "]";
     }
+
 }
