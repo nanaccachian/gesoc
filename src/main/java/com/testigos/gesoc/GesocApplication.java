@@ -4,9 +4,11 @@ import com.testigos.gesoc.model.services.budgetValidator.Calendarizacion;
 import org.quartz.SchedulerException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import javax.annotation.PostConstruct;
 
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @SpringBootApplication
 public class GesocApplication {
 
