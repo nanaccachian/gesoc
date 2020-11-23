@@ -1,42 +1,46 @@
 package com.testigos.gesoc.views.controllers;
 
-import java.util.List;
-
-import com.testigos.gesoc.model.domain.egresos.Egreso;
+import com.testigos.gesoc.model.domain.egresos.Item;
 import com.testigos.gesoc.model.domain.usuarios.Mensaje;
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
 import com.testigos.gesoc.model.services.EgresoService;
+import com.testigos.gesoc.model.services.ItemService;
 import com.testigos.gesoc.model.services.MensajeService;
 import com.testigos.gesoc.model.services.UsuarioService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/egresos*")
-public class EgresosController {
+@RequestMapping("/items")
+public class ItemsController {
 
     @Autowired
-    private UsuarioService usuarioService;
+    public ItemService itemService;
 
     @Autowired
-    private MensajeService mensajeService;
+    public UsuarioService usuarioService;
 
     @Autowired
-    private EgresoService egresoService;
+    public MensajeService mensajeService;
 
-    @GetMapping
-    public String egresos(Model model, Authentication auth) {
+    @Autowired
+    public EgresoService egresoService;
+
+    @GetMapping(path = "/{egreso_id}")
+    public String getItems(Model model, Authentication auth, @PathVariable int egreso) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        List<Egreso> egresos = egresoService.findAll();
+        List<Item> items = itemService.findItems(egresoService.find(egreso));
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
-        model.addAttribute("egresos", egresos);
-        return "egresos";
+        model.addAttribute("items", items);
+        return "items";
     }
-}
+ }

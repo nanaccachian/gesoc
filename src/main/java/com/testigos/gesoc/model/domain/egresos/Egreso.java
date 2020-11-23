@@ -31,29 +31,29 @@ public class Egreso extends EntidadPersistenteEgreso {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comprador_id")
-    protected @Setter Entidad comprador;
+    protected @Getter @Setter Entidad comprador;
 
     @Column
-    protected @Getter LocalDate fechaOperacion;
+    protected @Getter @Setter LocalDate fechaOperacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medio_de_pago_id")
-    protected MedioDePago medioPago;
+    protected @Getter @Setter MedioDePago medioPago;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ingreso_asociado_id")
     protected @Getter @Setter Ingreso ingresoAsociado;
 
     @OneToMany(mappedBy = "egreso", cascade = CascadeType.ALL)
-    protected @Getter List<Item> items;
+    protected @Getter @Setter List<Item> items;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vendedor_id")
-    protected @Getter Proveedor vendedor;
+    protected @Getter @Setter Proveedor vendedor;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "documento_comercial_id")
-    protected @Setter DocumentoComercial documento = null;
+    protected @Getter @Setter DocumentoComercial documento = null;
 
     public Egreso(Entidad comprador, LocalDate fechaOperacion, MedioDePago medioPago, List<Item> items,
             Proveedor vendedor) {

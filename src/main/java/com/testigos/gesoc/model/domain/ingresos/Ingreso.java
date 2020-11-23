@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class Ingreso extends EntidadPersistente {
 
     @Column
-    private String descripcion;
+    private @Getter String descripcion;
 
     @Column
     private @Getter double valorTotal;

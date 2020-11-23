@@ -9,9 +9,9 @@ public class UsuarioAspectTest {
 
     @Test
     public void persistUsuario() {
-        DAO<Usuario> dao = new DAO<>(Usuario.class);
+        DAO<Usuario> dao = new DAO<Usuario>(Usuario.class);
 
-        Usuario user = new Usuario("username", "password", "permisos", "name", "surname");
+        Usuario user = new Usuario("username17", "password", "permisos", "name", "surname");
 
         dao.persist(user);
     }
