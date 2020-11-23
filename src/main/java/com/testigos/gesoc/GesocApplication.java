@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 public class GesocApplication {
 
-    public static void main(String[] args) throws SchedulerException {
+    public static void main(String[] args) {
         SpringApplication.run(GesocApplication.class, args);
     }
 

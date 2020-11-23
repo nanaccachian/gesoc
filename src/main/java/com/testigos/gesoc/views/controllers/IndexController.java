@@ -1,30 +1,35 @@
-package com.testigos.gesoc.views;
+package com.testigos.gesoc.views.controllers;
 
+import java.util.List;
+
+import com.testigos.gesoc.model.domain.usuarios.Mensaje;
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
 import com.testigos.gesoc.model.services.MensajeService;
 import com.testigos.gesoc.model.services.UsuarioService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class Controllers {
+@RequestMapping("/index*")
+public class IndexController {
 
-    private UsuarioService usuarioService = new UsuarioService();
-    private MensajeService mensajeService = new MensajeService();
+    @Autowired
+    private UsuarioService usuarioService;
 
-    @GetMapping(path = { "/index", "/index*" })
+    @Autowired
+    private MensajeService mensajeService;
+
+    @GetMapping
     public String index(Model model, Authentication auth) {
         Usuario user = usuarioService.find(auth.getName());
+        List<Mensaje> mensajes = mensajeService.getMensajes(user);
         model.addAttribute("user", user);
-        model.addAttribute("mensajes", mensajeService.getMensajes(user));
+        model.addAttribute("mensajes", mensajes);
         return "index";
-    }
-
-    @GetMapping(path = { "/login", "/login*" })
-    public String loginView() {
-        return "login";
     }
 }

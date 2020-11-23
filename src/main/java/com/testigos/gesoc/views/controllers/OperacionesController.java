@@ -1,32 +1,40 @@
-package com.testigos.gesoc.views;
+package com.testigos.gesoc.views.controllers;
 
+import java.util.List;
+
+import com.testigos.gesoc.model.domain.usuarios.Mensaje;
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
 import com.testigos.gesoc.model.services.MensajeService;
 import com.testigos.gesoc.model.services.RegistroService;
 import com.testigos.gesoc.model.services.UsuarioService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
 @Controller
-public class RegistroController {
+@RequestMapping("/operaciones*")
+public class OperacionesController {
 
     @Autowired
-    private RegistroService service;
+    private RegistroService registroService;
 
-    private final UsuarioService usuarioService = new UsuarioService();
-    private final MensajeService mensajeService = new MensajeService();
+    @Autowired
+    private UsuarioService usuarioService;
 
-    @RequestMapping(method = GET, path = {"/registers", "/registers*"})
+    @Autowired
+    private MensajeService mensajeService;
+
+    @GetMapping
     public String registersView(Model model, Authentication auth) {
-        model.addAttribute("registros", service.findAll());
+        model.addAttribute("registros", registroService.findAll());
         Usuario user = usuarioService.find(auth.getName());
+        List<Mensaje> mensajes = mensajeService.getMensajes(user);
         model.addAttribute("user", user);
-        model.addAttribute("mensajes", mensajeService.getMensajes(user));
-        return "registers";
+        model.addAttribute("mensajes", mensajes);
+        return "operaciones";
     }
 }

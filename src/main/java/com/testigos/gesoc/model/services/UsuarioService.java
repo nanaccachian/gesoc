@@ -2,7 +2,6 @@ package com.testigos.gesoc.model.services;
 
 import java.util.List;
 
-import com.testigos.gesoc.model.domain.usuarios.Mensaje;
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
 import com.testigos.gesoc.persistence.DAO;
 

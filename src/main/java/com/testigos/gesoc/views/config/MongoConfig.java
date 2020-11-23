@@ -1,7 +1,4 @@
-package com.testigos.gesoc.views;
-
-import java.util.Collection;
-import java.util.Collections;
+package com.testigos.gesoc.views.config;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -27,10 +24,5 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
                 .build();
 
         return MongoClients.create(mongoClientSettings);
-    }
-
-    @Override
-    public Collection getMappingBasePackages() {
-        return Collections.singleton("com.testigos.gesoc.views");
     }
 }

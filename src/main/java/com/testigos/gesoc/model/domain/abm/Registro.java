@@ -24,6 +24,7 @@ public class Registro {
         this.descripcion = descripcion;
     }
 
+    @Override
     public String toString() {
         return "Registro{" + "id=" + id + ", descripcion='" + descripcion + '\'' + '}';
     }

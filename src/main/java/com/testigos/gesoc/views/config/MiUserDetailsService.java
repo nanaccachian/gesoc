@@ -1,4 +1,4 @@
-package com.testigos.gesoc.views;
+package com.testigos.gesoc.views.config;
 
 import static java.util.Arrays.asList;
 

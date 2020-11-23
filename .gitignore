@@ -1,5 +1,6 @@
 target/
 .idea/
+.vscode/
 dbtemp*
 *.iml
 .settings/
