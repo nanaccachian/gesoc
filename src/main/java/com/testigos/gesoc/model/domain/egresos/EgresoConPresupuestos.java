@@ -41,7 +41,7 @@ public class EgresoConPresupuestos extends Egreso {
     private @Getter final List<Usuario> revisores = new ArrayList<>();
 
     @Column
-    private @Getter @Setter boolean validez = false;
+    private @Getter @Setter boolean esValidoElPresupuesto = false;
 
     public EgresoConPresupuestos(Entidad comprador, LocalDate fechaOperacion, MedioDePago medioPago, List<Item> items,
             Proveedor vendedor, CriterioSeleccion criterio) {

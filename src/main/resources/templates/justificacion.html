@@ -216,11 +216,35 @@
   <!--main content start-->
   <section id="main-content">
     <section class="wrapper site-min-height">
-      <h3>
-        <i class="fa fa-angle-right"></i> Egresos
-        <button href="justificacion.html" th:href="@{/justificacion}" style="font-size: 2rem; padding: 2px 10px 2px 10px; border-color: transparent; border-radius: 5px; color: #22242a; background-color: #a6e1ec" class="css_right">Justificar egresos</button>
-      </h3>
+      <h3><i class="fa fa-angle-right"></i> Egresos justificados</h3>
+      <div class="row mb">
+        <!-- page start-->
+        <div class="content-panel">
+          <div class="adv-table">
+            <table
+                cellpadding="0"
+                cellspacing="0"
+                border="0"
+                class="display table table-bordered"
+                id="hidden-table-info"
+            >
+              <thead>
+              <tr>
+                <th class="text-center">Descripción</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="gradeC" th:each="egreso : ${egresos}">
 
+                <td th:text="${egreso.descripcion}"></td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- page end-->
+          </div>
+        </div>
+      </div>
+      <h3><i class="fa fa-angle-right"></i> Ingresos actualizados </h3>
       <div class="row mb">
         <!-- page start-->
         <div class="content-panel">
@@ -235,19 +259,14 @@
               <thead>
               <tr>
                 <th class="text-center">Descripcion</th>
-<!--                <th class="text-center">Justifica a</th>-->
-                <th class="text-center">Fecha</th>
-                <th class="text-center">Valor</th>
+                <th class="text-center">Valor actualizado</th>
               </tr>
               </thead>
               <tbody>
               <tr class="gradeC" th:each="i : ${ingresos}">
+
                 <td th:text="${i.descripcion}"></td>
-                <td th:text="${i.fechaIngreso}"></td>
-                <td th:text="${i.valorTotal}"></td>
-<!--                <td>-->
-<!--                  <a href="items.html" target="_blank" th:href="@{/items/{egreso}(egreso = ${egreso.id})}">Ver items</a>-->
-<!--                </td>-->
+                <td th:text="${i.valorDisponible()}"></td>
               </tr>
               </tbody>
             </table>

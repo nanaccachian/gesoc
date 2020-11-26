@@ -8,7 +8,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import javax.annotation.PostConstruct;
 
-@EnableAspectJAutoProxy(proxyTargetClass = true)
+
 @SpringBootApplication
 public class GesocApplication {
 

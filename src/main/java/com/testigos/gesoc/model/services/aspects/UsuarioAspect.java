@@ -7,20 +7,21 @@ import com.testigos.gesoc.persistence.MongoRepositories.RegistroRepository;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
-@Aspect
 @Component
+@Aspect
 public class UsuarioAspect {
 
     @Autowired
     private RegistroRepository repo;
 
-    @Pointcut("execution( * com.testigos.gesoc.persistence.DAO.persist(..))")
-    public void persist() {
-    }
+    @Pointcut("execution(* com.testigos.gesoc.persistence.DAO.persist(..))")
+    public void persist() { }
 
     @After("persist()")
     public void registerPersist(JoinPoint joinPoint) {

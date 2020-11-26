@@ -41,8 +41,7 @@ public class ValidadorPresupuestos implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        // Auto-generated method stub
-
+        // Auto-generated method stub TODO
     }
 
     // @Override
