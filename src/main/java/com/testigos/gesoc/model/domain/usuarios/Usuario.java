@@ -47,7 +47,7 @@ public class Usuario {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private @Getter @Setter List<EgresoConPresupuestos> egresosConPresupuestos = new ArrayList<>();
 
-    public Usuario(String username, String password, String permisos, String name, String surname, Entidad entidad) {
+    public Usuario(String username, String password, String permisos, Entidad entidad, String name, String surname) {
         this.username = username;
         this.password = password;
         this.permisos = permisos;

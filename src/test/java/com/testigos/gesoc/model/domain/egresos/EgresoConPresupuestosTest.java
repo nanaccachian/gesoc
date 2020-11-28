@@ -27,9 +27,8 @@ public class EgresoConPresupuestosTest {
     List<Item> productos2 = Arrays.asList(lapicera2, lapiz2, regla2);
     List<Item> productos3 = Arrays.asList(lapicera3, lapiz3, regla3);
 
-    EgresoConPresupuestos egresoConPresupuestos = new EgresoConPresupuestos(null, null,
-            new MedioDePago("id", "medio", "paymentID"), null, new PersonaProveedora("nombre", "apellido", 1, null),
-            mp);
+    EgresoConPresupuestos egresoConPresupuestos = new EgresoConPresupuestos(null, null, "new MedioDePago()", null,
+            new PersonaProveedora("nombre", "apellido", 1, null), mp);
 
     Presupuesto presupuestoUtiles1 = new Presupuesto(productos1, null, egresoConPresupuestos);
     Presupuesto presupuestoUtiles2 = new Presupuesto(productos2, null, egresoConPresupuestos);

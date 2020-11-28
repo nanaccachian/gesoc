@@ -4,16 +4,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.testigos.gesoc.model.domain.egresos.Egreso;
+import com.testigos.gesoc.model.domain.entidades.Entidad;
 import com.testigos.gesoc.model.domain.persistentes.EntidadPersistente;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Entity
@@ -21,24 +20,28 @@ import lombok.NoArgsConstructor;
 public class Ingreso extends EntidadPersistente {
 
     @Column
-    private @Getter String descripcion;
+    private @Getter @Setter String descripcion;
 
     @Column
-    private @Getter double valorTotal;
+    private @Getter @Setter double monto;
 
     @Column
-    private @Getter LocalDate fechaIngreso;
+    private @Getter @Setter LocalDate fechaIngreso;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "entidad_id")
+    private @Getter @Setter Entidad entidad;
 
     @OneToMany(mappedBy = "ingresoAsociado", cascade = CascadeType.ALL)
     private @Getter final List<Egreso> egresosAsociados = new ArrayList<>();
 
     public Ingreso(String descripcion, double valorTotal) {
         this.descripcion = descripcion;
-        this.valorTotal = valorTotal;
+        this.monto = valorTotal;
     }
 
     public double valorDisponible() {
-        return valorTotal - valorEgresosAsociados();
+        return monto - valorEgresosAsociados();
     }
 
     private double valorEgresosAsociados() {

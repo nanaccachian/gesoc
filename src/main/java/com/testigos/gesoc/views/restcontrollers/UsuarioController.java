@@ -2,6 +2,7 @@ package com.testigos.gesoc.views.restcontrollers;
 
 import java.util.List;
 
+import com.testigos.gesoc.model.domain.entidades.JuridicaIGJ;
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
 import com.testigos.gesoc.model.services.UsuarioService;
 import com.testigos.gesoc.model.services.passwordValidator.ValidadorContrasenia;
@@ -46,7 +47,7 @@ public class UsuarioController {
         if (service.find(username) != null)
             throw new RuntimeException("Nombre de usuario no disponible");
 
-        Usuario usuario = new Usuario(username, password, permisos, name, surname);
+        Usuario usuario = new Usuario(username, password, permisos, new JuridicaIGJ(), surname, name);
         service.persist(usuario);
     }
 }

@@ -24,7 +24,11 @@ public class EgresoService {
         return repo.findAll().stream().filter(eg -> eg.getIngresoAsociado() != null).collect(Collectors.toList());
     }
 
-    public void update(List<Egreso> egresos) {
+    public void persist(List<Egreso> egresos) {
         egresos.stream().forEach(e -> repo.persist(e));
+    }
+
+    public void persist(Egreso egreso) {
+        repo.persist(egreso);
     }
 }

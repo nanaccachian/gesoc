@@ -28,16 +28,16 @@ public class Item extends EntidadPersistente {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "presupuesto_id")
-    private @Setter Presupuesto presupuesto;
+    private @Setter @Getter Presupuesto presupuesto;
 
     @Column
-    private @Getter String producto;
+    private @Getter @Setter String producto;
 
     @Column
-    private @Getter double valorUnitario;
+    private @Getter @Setter double valorUnitario;
 
     @Column
-    private @Getter int cantidad;
+    private @Getter @Setter int cantidad;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private final List<Categoria> categorizacion = new ArrayList<>();

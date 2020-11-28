@@ -14,7 +14,7 @@ public class PrimeroEgreso extends EstrategiaEmpatadora {
 
         for (Ingreso ing : ingresos) {
             int i = 0;
-            double valor = ing.getValorTotal();
+            double valor = ing.getMonto();
             for (Egreso eg : egresos) {
                 if (valor > eg.valorTotal() && condiciones.stream().allMatch(cond -> cond.cumpleCondicion(ing, eg))) {
                     ing.getEgresosAsociados().add(eg);

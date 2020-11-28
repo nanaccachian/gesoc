@@ -43,8 +43,8 @@ public class EgresoConPresupuestos extends Egreso {
     @Column
     private @Getter @Setter boolean esValidoElPresupuesto = false;
 
-    public EgresoConPresupuestos(Entidad comprador, LocalDate fechaOperacion, MedioDePago medioPago, List<Item> items,
-            Proveedor vendedor, CriterioSeleccion criterio) {
+    public EgresoConPresupuestos(Entidad comprador, LocalDate fechaOperacion, String medioPago, List<Item> items,
+                                 Proveedor vendedor, CriterioSeleccion criterio) {
         super(comprador, fechaOperacion, medioPago, items, vendedor);
         this.criterio = criterio;
     }

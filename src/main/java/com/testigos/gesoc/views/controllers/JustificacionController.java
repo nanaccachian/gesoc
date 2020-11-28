@@ -40,9 +40,9 @@ public class JustificacionController {
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
         List<Ingreso> ingresos = ingresoService.getIngresosDisponibles();
         List<Egreso> egresos = egresoService.getEgresosNoJustificados();
-        Empatadora.empatar(ingresos,egresos);
-        ingresoService.update(ingresos);
-        egresoService.update(egresos);
+        Empatadora.empatar(ingresos, egresos);
+        ingresoService.persist(ingresos);
+        egresoService.persist(egresos);
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("ingresos", ingresos);

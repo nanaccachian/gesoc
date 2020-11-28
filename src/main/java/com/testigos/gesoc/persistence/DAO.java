@@ -1,7 +1,5 @@
 package com.testigos.gesoc.persistence;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,7 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-@Repository
 public class DAO<T> {
 
     private Class<T> type;

@@ -16,7 +16,9 @@ import javax.persistence.Table;
 
 import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.model.domain.entidades.tipoorg.TipoOrg;
+import com.testigos.gesoc.model.domain.ingresos.Ingreso;
 import com.testigos.gesoc.model.domain.persistentes.EntidadPersistente;
+
 import lombok.Getter;
 
 @Entity
@@ -27,13 +29,15 @@ public abstract class Entidad extends EntidadPersistente {
     @OneToMany(mappedBy = "comprador", cascade = CascadeType.ALL)
     protected List<Egreso> egresos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "entidad", cascade = CascadeType.ALL)
+    protected @Getter List<Ingreso> ingresos = new ArrayList<>();
+
     @Column
     protected @Getter String nombreFicticio;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_de_organizacion_id")
-    protected @Getter
-    TipoOrg tipo;
+    protected @Getter TipoOrg tipo;
 
     public void recategorizar() {
         tipo = tipo.recategorizar();

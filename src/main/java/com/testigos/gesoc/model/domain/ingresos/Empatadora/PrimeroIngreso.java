@@ -10,7 +10,7 @@ public class PrimeroIngreso extends EstrategiaEmpatadora {
 
     public void empatar(List<Condicion> condiciones, List<Ingreso> ingresos, List<Egreso> egresos) {
 
-        ingresos.sort(Comparator.comparing(Ingreso::getValorTotal));
+        ingresos.sort(Comparator.comparing(Ingreso::getMonto));
 
         for (Egreso eg : egresos) {
             for (Ingreso ing : ingresos) {

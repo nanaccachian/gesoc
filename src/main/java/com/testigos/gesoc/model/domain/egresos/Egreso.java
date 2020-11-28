@@ -36,9 +36,13 @@ public class Egreso extends EntidadPersistenteEgreso {
     @Column
     protected @Getter @Setter LocalDate fechaOperacion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medio_de_pago_id")
-    protected @Getter @Setter MedioDePago medioPago;
+    @Column
+    protected @Getter @Setter String descripcion;
+
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "medio_de_pago_id")
+    @Column
+    protected @Getter @Setter String medioPago;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ingreso_asociado_id")
@@ -55,8 +59,7 @@ public class Egreso extends EntidadPersistenteEgreso {
     @JoinColumn(name = "documento_comercial_id")
     protected @Getter @Setter DocumentoComercial documento = null;
 
-    public Egreso(Entidad comprador, LocalDate fechaOperacion, MedioDePago medioPago, List<Item> items,
-            Proveedor vendedor) {
+    public Egreso(Entidad comprador, LocalDate fechaOperacion, String medioPago, List<Item> items, Proveedor vendedor) {
         this.comprador = comprador;
         this.fechaOperacion = fechaOperacion;
         this.medioPago = medioPago;
