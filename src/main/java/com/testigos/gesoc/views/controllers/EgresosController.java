@@ -1,5 +1,6 @@
 package com.testigos.gesoc.views.controllers;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,13 +66,14 @@ public class EgresosController {
     public String egresosAddResult(Model model, Authentication auth, @ModelAttribute Egreso egreso) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
+        egreso.setFechaOperacion(LocalDate.now());
         egresoService.persist(egreso);
-        List<Egreso> egresos = egresoService.findAll();
+        //List<Egreso> egresos = egresoService.findAll();
         // user.getEntidad().getIngresos();
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
-        model.addAttribute("egresos", egresos);
-        ArrayList<Item> items = (ArrayList<Item>) model.getAttribute("items");
+        //model.addAttribute("egresos", egresos);
+        //ArrayList<Item> items = (ArrayList<Item>) model.getAttribute("items");
         return "egresos_add_result";
     }
 }

@@ -6,19 +6,20 @@ import java.util.stream.Collectors;
 import com.testigos.gesoc.model.domain.ingresos.Ingreso;
 import com.testigos.gesoc.persistence.DAO;
 
+import com.testigos.gesoc.persistence.DAOIngreso;
 import org.springframework.stereotype.Service;
 
 @Service
 public class IngresoService {
 
-    private DAO<Ingreso> dao = new DAO<>(Ingreso.class);
+    private DAOIngreso dao = new DAOIngreso();
 
     public List<Ingreso> getIngresos() {
         return dao.findAll();
     }
 
     public List<Ingreso> getIngresosDisponibles() {
-        return dao.findAll().stream().filter(i -> i.valorDisponible() > 0).collect(Collectors.toList());
+        return dao.findAllConEgresos().stream().filter(i -> i.valorDisponible() > 0).collect(Collectors.toList());
     }
 
     public void persist(List<Ingreso> ingresos) {
@@ -28,4 +29,5 @@ public class IngresoService {
     public void persist(Ingreso ingreso) {
         dao.persist(ingreso);
     }
+
 }

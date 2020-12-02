@@ -2,6 +2,7 @@ package com.testigos.gesoc.model.services;
 
 import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.persistence.DAO;
+import com.testigos.gesoc.persistence.DAOEgreso;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 @Service
 public class EgresoService {
 
-    private DAO<Egreso> repo = new DAO<>(Egreso.class);
+    private DAOEgreso repo = new DAOEgreso();
 
     public List<Egreso> findAll() {
         return repo.findAll();
@@ -30,5 +31,10 @@ public class EgresoService {
 
     public void persist(Egreso egreso) {
         repo.persist(egreso);
+    }
+
+    public void update(List<Egreso> egresos) {
+        for(Egreso e:egresos)
+            repo.update(e);
     }
 }

@@ -16,7 +16,10 @@ public abstract class Proveedor extends EntidadPersistente {
     @Column
     protected @Getter String nombre;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "direccPostal_id")
-    protected @Getter DireccionPostal direccPostal;
+    @Column
+    protected @Getter String direccPostal;
+
+    public String nombreClase() {
+        return this.getClass().getSimpleName();
+    }
 }

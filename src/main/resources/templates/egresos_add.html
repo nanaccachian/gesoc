@@ -200,25 +200,19 @@
               </a>
             </li>
             <li class="sub-menu">
-              <a class="" href="empatadora.html" th:href="@{/empatadora}">
-                <i class="fa fa-exchange"></i>
-                <span>Empatadora</span>
+              <a class="" href="presupuestos.html" th:href="@{/presupuestos}">
+                <i class="fa fa-briefcase"></i>
+                <span>Presupuestos</span>
               </a>
             </li>
             <li class="sub-menu">
               <a
-                class=""
-                href="financiamiento.html"
-                th:href="@{/financiamiento}"
+                  class=""
+                  href="financiamiento.html"
+                  th:href="@{/financiamiento}"
               >
                 <i class="fa fa-bank"></i>
                 <span>Financiamiento</span>
-              </a>
-            </li>
-            <li class="sub-menu">
-              <a class="" href="proyectos.html" th:href="@{/proyectos}">
-                <i class="fa fa-briefcase"></i>
-                <span>Proyectos</span>
               </a>
             </li>
           </ul>
@@ -244,10 +238,9 @@
                   th:object="${new_egreso}"
                 >
                   <br />
+<!--                  DESCRIPCIÓN-->
                   <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label"
-                      >Descripción</label
-                    >
+                    <label class="col-sm-2 col-sm-2 control-label">Descripción</label>
                     <div class="col-sm-10">
                       <input
                         type="text"
@@ -256,85 +249,24 @@
                       />
                     </div>
                   </div>
+<!--                  MEDIO DE PAGO-->
                   <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label"
-                      >Medio de pago</label
-                    >
+                    <label class="col-sm-2 col-sm-2 control-label">Medio de pago</label>
                     <div class="col-sm-10">
                       <select class="form-control" th:field="*{medioPago}">
-                        <option>Efectivo</option>
-                        <option>Tarjeta de crédito</option>
-                        <option>Tarjeta de débito</option>
-                        <option>MercadoPago</option>
+                        <option th:value="'Efectivo'" th:text="'Efectivo'"></option>
+                        <option th:value="'Tarjeta de credito'" th:text="'Tarjeta de credito'"></option>
+                        <option th:value="'Tarjeta de debito'" th:text="'Tarjeta de debito'"></option>
+                        <option th:value="'MercadoPago'" th:text="'MercadoPago'"></option>
                       </select>
                     </div>
                   </div>
+<!--                  PROVEEDORES-->
                   <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label"
-                      >Cantidad de items</label
-                    >
-                    <div th:with="cant_items" class="col-sm-10">
-                      <input
-                        type="number"
-                        class="form-control"
-                        th:field="${cant_items}"
-                      />
-                    </div>
-                  </div>
-                  <th:block th:each="i : ${#numbers.sequence(1, cant_items)}">
-                    <div class="form-group">
-                      <label
-                        class="col-sm-2 col-sm-2 control-label"
-                        th:text="${'Producto del item ' + i}"
-                        >Producto</label
-                      >
-                      <div class="col-sm-10">
-                        <input
-                          type="text"
-                          class="form-control"
-                          th:field="*{items[${i}].producto}"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label
-                        class="col-sm-2 col-sm-2 control-label"
-                        th:text="${'Valor unitario del item ' + i}"
-                        >Valor unitario</label
-                      >
-                      <div class="col-sm-10">
-                        <input
-                          type="number"
-                          class="form-control"
-                          th:field="*{items[${i}].valorUnitario}"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label
-                        class="col-sm-2 col-sm-2 control-label"
-                        th:text="${'Cantidad del item ' + i}"
-                        >Cantidad</label
-                      >
-                      <div class="col-sm-10">
-                        <input
-                          type="number"
-                          class="form-control"
-                          th:field="*{items[${i}].cantidad}"
-                        />
-                      </div>
-                    </div>
-                  </th:block>
-                  <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label"
-                      >Proveedor</label
-                    >
+                    <label class="col-sm-2 col-sm-2 control-label">Proveedor</label>
                     <div class="col-sm-10">
-                      <select class="form-control" th:field="*{vendedor}">
-                        <option
-                          th:each="p : ${proveedores}"
-                          th:text="${p.nombre}"
-                        ></option>
+                      <select class="form-control" id="vendedor" th:name="*{vendedor}">
+                        <option th:each="i : ${proveedores}" th:value="${i}" th:text="${i.nombreClase() + ' - ' + i.getNombre()}" th:selected="${i == new_egreso.vendedor}"></option>
                       </select>
                     </div>
                   </div>
@@ -343,6 +275,65 @@
                       <button class="btn btn-theme" type="submit">
                         Añadir egreso
                       </button>
+<!--                      <button class="btn btn-theme" type="submit">-->
+<!--                        Añadir items-->
+<!--                      </button>-->
+                      <!--                  <div class="form-group">-->
+                      <!--                    <label class="col-sm-2 col-sm-2 control-label"-->
+                      <!--                      >Cantidad de items</label-->
+                      <!--                    >-->
+                      <!--                    <div th:with="cant_items" class="col-sm-10">-->
+                      <!--                      <input-->
+                      <!--                        type="number"-->
+                      <!--                        class="form-control"-->
+                      <!--                        th:field="${cant_items}"-->
+                      <!--                      />-->
+                      <!--                    </div>-->
+                      <!--                  </div>-->
+                      <!--                  <th:block th:each="i : ${#numbers.sequence(1, cant_items)}">-->
+                      <!--                    <div class="form-group">-->
+                      <!--                      <label-->
+                      <!--                        class="col-sm-2 col-sm-2 control-label"-->
+                      <!--                        th:text="${'Producto del item ' + i}"-->
+                      <!--                        >Producto</label-->
+                      <!--                      >-->
+                      <!--                      <div class="col-sm-10">-->
+                      <!--                        <input-->
+                      <!--                          type="text"-->
+                      <!--                          class="form-control"-->
+                      <!--                          th:field="*{items[${i}].producto}"-->
+                      <!--                        />-->
+                      <!--                      </div>-->
+                      <!--                    </div>-->
+                      <!--                    <div class="form-group">-->
+                      <!--                      <label-->
+                      <!--                        class="col-sm-2 col-sm-2 control-label"-->
+                      <!--                        th:text="${'Valor unitario del item ' + i}"-->
+                      <!--                        >Valor unitario</label-->
+                      <!--                      >-->
+                      <!--                      <div class="col-sm-10">-->
+                      <!--                        <input-->
+                      <!--                          type="number"-->
+                      <!--                          class="form-control"-->
+                      <!--                          th:field="*{items[${i}].valorUnitario}"-->
+                      <!--                        />-->
+                      <!--                      </div>-->
+                      <!--                    </div>-->
+                      <!--                    <div class="form-group">-->
+                      <!--                      <label-->
+                      <!--                        class="col-sm-2 col-sm-2 control-label"-->
+                      <!--                        th:text="${'Cantidad del item ' + i}"-->
+                      <!--                        >Cantidad</label-->
+                      <!--                      >-->
+                      <!--                      <div class="col-sm-10">-->
+                      <!--                        <input-->
+                      <!--                          type="number"-->
+                      <!--                          class="form-control"-->
+                      <!--                          th:field="*{items[${i}].cantidad}"-->
+                      <!--                        />-->
+                      <!--                      </div>-->
+                      <!--                    </div>-->
+                      <!--                  </th:block>-->
                     </div>
                   </div>
                 </form>

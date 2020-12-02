@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/items")
+@RequestMapping("/items*")
 public class ItemsController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class ItemsController {
     public EgresoService egresoService;
 
     @GetMapping(path = "/{egreso_id}")
-    public String getItems(Model model, Authentication auth, @PathVariable int egreso) {
+    public String getItems(Model model, Authentication auth, @PathVariable("egreso_id") int egreso) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
         List<Item> items = itemService.findItems(egresoService.find(egreso));

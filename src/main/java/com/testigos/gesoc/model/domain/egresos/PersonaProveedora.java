@@ -16,7 +16,7 @@ public class PersonaProveedora extends Proveedor {
     @Column
     private Integer dni;
 
-    public PersonaProveedora(String nombre, String apellido, Integer dni, DireccionPostal direccPostal) {
+    public PersonaProveedora(String nombre, String apellido, Integer dni, String direccPostal) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;

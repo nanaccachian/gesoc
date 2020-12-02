@@ -4,21 +4,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import com.testigos.gesoc.model.domain.entidades.DireccionPostal;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Entity
 public class EntidadProveedora extends Proveedor {
 
     @Column
-    private Integer cuit;
+    private @Getter @Setter Integer cuit;
 
     @Column
-    private String razonSocial;
+    private @Getter @Setter String razonSocial;
 
-    public EntidadProveedora(Integer cuit, String razonSocial, DireccionPostal direccPostal) {
+    public EntidadProveedora(Integer cuit, String razonSocial, String direccPostal) {
         this.cuit = cuit;
         this.razonSocial = razonSocial;
         this.direccPostal = direccPostal;
+        this.nombre = razonSocial;
     }
 }

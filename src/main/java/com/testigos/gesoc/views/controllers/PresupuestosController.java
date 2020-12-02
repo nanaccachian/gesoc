@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/empatadora*")
-public class EmpatadoraController {
+@RequestMapping("/presupuestos*")
+public class PresupuestosController {
 
     @Autowired
     private UsuarioService usuarioService;
@@ -30,6 +30,6 @@ public class EmpatadoraController {
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
-        return "index";
+        return "presupuestos";
     }
 }

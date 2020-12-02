@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 
 public class DAO<T> {
 
-    private Class<T> type;
+    protected Class<T> type;
 
     public EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceUnit");
 
@@ -93,6 +93,7 @@ public class DAO<T> {
         List<T> tList = createQuery("From " + type.getSimpleName()).getResultList();
         if (tList != null)
             tList.size();
+
         commit();
         close();
         return tList;

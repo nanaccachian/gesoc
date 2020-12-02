@@ -155,6 +155,7 @@
   MAIN SIDEBAR MENU
   *********************************************************************************************************************************************************** -->
       <!--sidebar start-->
+      <!--sidebar start-->
       <aside>
         <div id="sidebar" class="nav-collapse">
           <!-- sidebar menu start-->
@@ -184,25 +185,19 @@
               </a>
             </li>
             <li class="sub-menu">
-              <a class="" href="empatadora.html" th:href="@{/empatadora}">
-                <i class="fa fa-exchange"></i>
-                <span>Empatadora</span>
+              <a class="" href="presupuestos.html" th:href="@{/presupuestos}">
+                <i class="fa fa-briefcase"></i>
+                <span>Presupuestos</span>
               </a>
             </li>
             <li class="sub-menu">
               <a
-                class=""
-                href="financiamiento.html"
-                th:href="@{/financiamiento}"
+                  class=""
+                  href="financiamiento.html"
+                  th:href="@{/financiamiento}"
               >
                 <i class="fa fa-bank"></i>
                 <span>Financiamiento</span>
-              </a>
-            </li>
-            <li class="sub-menu">
-              <a class="" href="proyectos.html" th:href="@{/proyectos}">
-                <i class="fa fa-briefcase"></i>
-                <span>Proyectos</span>
               </a>
             </li>
           </ul>
@@ -224,7 +219,7 @@
                 style="margin-left: 10px"
                 class="btn btn-theme02 css_right"
               >
-                <i class="fa fa-check">&nbsp</i> Justificar ingresos
+                <i class="fa fa-check">&nbsp</i> Justificar egresos
               </button>
             </a>
             <a
@@ -261,7 +256,7 @@
                     <tr class="gradeC" th:each="i : ${ingresos}">
                       <td th:text="${i.descripcion}"></td>
                       <td th:text="${i.fechaIngreso}"></td>
-                      <td th:text="${i.valorTotal}"></td>
+                      <td th:text="${i.monto}"></td>
                     </tr>
                   </tbody>
                 </table>

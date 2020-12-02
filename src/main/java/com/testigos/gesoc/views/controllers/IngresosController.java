@@ -37,7 +37,7 @@ public class IngresosController {
     public String ingresos(Model model, Authentication auth) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        List<Ingreso> ingresos = new ArrayList<>();
+        List<Ingreso> ingresos = ingresoService.getIngresos();
         // user.getEntidad().getIngresos();
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
