@@ -6,7 +6,7 @@ import com.testigos.gesoc.persistence.DAO;
 
 import org.junit.Test;
 
-public class UsuarioAspectTest {
+public class RegistroAspectTest {
 
     @Test
     public void persistUsuario() {

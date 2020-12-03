@@ -1,7 +1,6 @@
 package com.testigos.gesoc.views.controllers;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.testigos.gesoc.model.domain.ingresos.Ingreso;
