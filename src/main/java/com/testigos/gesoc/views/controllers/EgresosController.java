@@ -8,19 +8,15 @@ import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.model.domain.egresos.Item;
 import com.testigos.gesoc.model.domain.usuarios.Mensaje;
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
-import com.testigos.gesoc.model.services.EgresoService;
-import com.testigos.gesoc.model.services.MensajeService;
-import com.testigos.gesoc.model.services.ProveedorService;
-import com.testigos.gesoc.model.services.UsuarioService;
+import com.testigos.gesoc.model.services.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 @Controller
 @RequestMapping("/egresos*")
@@ -37,6 +33,11 @@ public class EgresosController {
 
     @Autowired
     private ProveedorService proveedorService;
+
+    @Autowired
+    private ItemService itemService;
+
+    Egreso egresoActual;
 
     @GetMapping
     public String egresos(Model model, Authentication auth) {
@@ -56,24 +57,35 @@ public class EgresosController {
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("new_egreso", new Egreso());
-        model.addAttribute("cant_items", null);
-        model.addAttribute("items", new ArrayList<Item>());
         model.addAttribute("proveedores", proveedorService.findAll());
         return "egresos_add";
     }
 
-    @PostMapping(path = "/add")
-    public String egresosAddResult(Model model, Authentication auth, @ModelAttribute Egreso egreso) {
+    @PostMapping(path = "/add/{egreso_id}")
+    public String addItems(Model model, Authentication auth, @PathVariable("egreso_id") String id, @ModelAttribute Egreso egreso) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
         egreso.setFechaOperacion(LocalDate.now());
         egresoService.persist(egreso);
-        //List<Egreso> egresos = egresoService.findAll();
-        // user.getEntidad().getIngresos();
+        egresoActual = egreso;
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
-        //model.addAttribute("egresos", egresos);
-        //ArrayList<Item> items = (ArrayList<Item>) model.getAttribute("items");
-        return "egresos_add_result";
+        model.addAttribute("egreso", egreso);
+        model.addAttribute("new_item", new Item());
+        return "item_add";
+    }
+
+    @PostMapping(path = "/item/add")
+    public String addSingleItem(Model model, Authentication auth, @ModelAttribute("new_item") Item item, @RequestParam(value="action") String action) {
+        Usuario user = usuarioService.find(auth.getName());
+        List<Mensaje> mensajes = mensajeService.getMensajes(user);
+        itemService.persist(item,egresoActual);
+        model.addAttribute("user", user);
+        model.addAttribute("mensajes", mensajes);
+        if (action.equals("continue")) {
+            model.addAttribute("new_item", new Item());
+            return "item_add";
+        } else
+            return "egresos_add_result";
     }
 }

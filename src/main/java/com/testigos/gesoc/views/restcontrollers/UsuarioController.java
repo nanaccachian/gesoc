@@ -30,10 +30,8 @@ public class UsuarioController {
     public Usuario usuarios(@PathVariable String username) {
         Usuario usuario = service.find(username);
 
-        if (usuario == null) {
+        if (usuario == null)
             throw new UsernameNotFoundException("No existe el usuario.");
-        }
-
         return usuario;
     }
 

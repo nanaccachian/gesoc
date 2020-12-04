@@ -3,6 +3,8 @@ package com.testigos.gesoc.model.services;
 import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.model.domain.egresos.Item;
 import com.testigos.gesoc.persistence.DAO;
+import com.testigos.gesoc.persistence.DAOItem;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +12,8 @@ import java.util.List;
 @Service
 public class ItemService {
 
-    private DAO<Item> repo = new DAO<>(Item.class);
+    @Autowired
+    private DAOItem repo;
 
     public List<Item> findItems(Egreso egreso) {
         repo.createEntityManager();
@@ -22,5 +25,13 @@ public class ItemService {
         repo.commit();
         repo.close();
         return items;
+    }
+
+    public void persist(Item item) {
+        repo.persist(item);
+    }
+
+    public void persist(Item item, Egreso egreso) {
+        repo.persistWithEgreso(item,egreso);
     }
 }

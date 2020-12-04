@@ -235,6 +235,7 @@
                     <tr>
                       <th class="text-center">Número factura</th>
                       <th class="text-center">Fecha de operacion</th>
+                      <th class="text-center">Descripcion</th>
                       <th class="text-center">Medio de pago</th>
                       <th class="text-center">Proveedor</th>
                       <th class="text-center">Items</th>
@@ -244,6 +245,7 @@
                     <tr class="gradeC" th:each="egreso : ${egresos}">
                       <td th:text="${egreso.documento} ? ${egreso.documento.tipo + ': ' +  egreso.documento.num} : 'No facturado'"></td>
                       <td th:text="${egreso.fechaOperacion} ? ${egreso.fechaOperacion} : 'Sin fecha'"></td>
+                      <td th:text="${egreso.descripcion} ? ${egreso.descripcion} : 'Sin descripcion'"></td>
                       <td th:text="${egreso.medioPago} ? ${egreso.medioPago} : 'Sin medio de pago'"></td>
                       <td th:text="${egreso.vendedor} ? ${egreso.vendedor.getNombre()} : 'Sin proveedor'"></td>
                       <td class="text-center">

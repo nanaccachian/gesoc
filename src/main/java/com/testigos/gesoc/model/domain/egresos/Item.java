@@ -22,9 +22,9 @@ import lombok.Setter;
 @Table(name = "items")
 public class Item extends EntidadPersistente {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "egreso_id")
-    private @Setter Egreso egreso;
+    private @Getter @Setter Egreso egreso;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "presupuesto_id")
