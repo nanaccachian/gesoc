@@ -22,4 +22,10 @@ public class IngresoAspect {
         Ingreso ingreso = (Ingreso) joinPoint.getArgs()[0];
         repo.save(new Registro(TipoRegistro.ALTA, Ingreso.class.getSimpleName(), "Se inserto un ingreso con id: " + ingreso.getId() + ", por el monto de: "+ ingreso.getMonto()));
     }
+
+    @AfterReturning("execution(* com.testigos.gesoc.model.services.IngresoService.update2(..))")
+    public void registerUpdate(JoinPoint joinPoint) {
+        Ingreso ingreso = (Ingreso) joinPoint.getArgs()[0];
+        repo.save(new Registro(TipoRegistro.MODIFICACION, Ingreso.class.getSimpleName(), "Se modifico el ingreso con id: " + ingreso.getId() + ", descripción: "+ ingreso.getDescripcion()));
+    }
 }

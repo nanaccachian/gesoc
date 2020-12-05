@@ -28,10 +28,4 @@ public class EgresoAspect {
         Egreso egreso = (Egreso) joinPoint.getArgs()[0];
         repo.save(new Registro(TipoRegistro.MODIFICACION, Egreso.class.getSimpleName(), "Se modifico el egreso con id: " + egreso.getId()));
     }
-
-//    @AfterReturning("execution(* com.testigos.gesoc.model.services.EgresoService.delete(..))")
-//    public void registerDelete(JoinPoint joinPoint) {
-//        Object[] args = joinPoint.getArgs();
-//        repo.save(new Registro(TipoRegistro.BAJA, args[0].getClass().getSimpleName(), "Se inserto " + args[0].toString()));
-//    }
 }

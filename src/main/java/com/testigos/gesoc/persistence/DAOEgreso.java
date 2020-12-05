@@ -24,12 +24,12 @@ public class DAOEgreso extends DAO<Egreso> {
         close();
     }
 
-    public void mergeItem(Egreso egreso, Item item) {
-        createEntityManager();
-        beginTransaction();
-        Egreso eg = em.merge(egreso);
-        item.setEgreso(egreso);
-        commit();
-        close();
-    }
+//    public void mergeItem(Egreso egreso, Item item) {
+//        createEntityManager();
+//        beginTransaction();
+//        Egreso eg = em.merge(egreso);
+//        item.setEgreso(egreso);
+//        commit();
+//        close();
+//    }
 }

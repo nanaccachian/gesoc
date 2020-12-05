@@ -209,16 +209,65 @@
       <!--main content start-->
       <section id="main-content">
         <section class="wrapper site-min-height">
-          <h3><i class="fa fa-angle-right"></i> Todavia no lo hicimos</h3>
-          <div class="row mt">
-            <div class="col-lg-12">
-              <p>
-                Pero mientras podes disfrutar de este pelado pasado de merca
-              </p>
-              <img
-                src="https://media1.tenor.com/images/c7be2a0c7cda32a25d16455f263c038f/tenor.gif?itemid=10226953"
-                alt=""
-              />
+          <h3>
+            <i class="fa fa-angle-right"></i> Proyectos de financiamiento
+            <a href="proyecto_add.html" th:href="@{/financiamiento/vinculacion}">
+              <button
+                  type="button"
+                  style="margin-left: 10px"
+                  class="btn btn-theme02 css_right"
+              >
+                <i class="fa fa-check">&nbsp</i> Vincular ingreso
+              </button>
+            </a>
+            <a
+                style="color: white"
+                href="vincular.html"
+                th:href="@{/financiamiento/add}"
+            >
+              <button type="button" class="btn btn-theme03 css_right">
+                <i class="fa fa-plus-circle">&nbsp</i> Agregar proyecto
+              </button>
+            </a>
+          </h3>
+
+          <div style="margin-top: 15px" class="row mb">
+            <!-- page start-->
+            <div class="content-panel">
+              <div class="adv-table">
+                <table
+                    cellpadding="0"
+                    cellspacing="0"
+                    border="0"
+                    class="display table table-bordered"
+                    id="hidden-table-info"
+                >
+                  <thead>
+                  <tr>
+                    <th class="text-center">Descripcion</th>
+                    <th class="text-center">Director</th>
+                    <th class="text-center">Monto total</th>
+                    <th class="text-center">Ingresos asociados</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="gradeC" th:each="i : ${proyectos}">
+                    <td th:text="${i.descripcion}"></td>
+                    <td th:text="${i.director.surname + ', ' + i.director.name}"></td>
+                    <td th:text="${i.montoTotal}"></td>
+                    <td class="text-center">
+                      <a
+                          href="ingresos_de_proyecto.html"
+                          target="_blank"
+                          th:href="@{/financiamiento/{nro_proyecto}/ingresos(nro_proyecto = ${i.id})}"
+                      >Ver ingresos asociados</a
+                      >
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+                <!-- page end-->
+              </div>
             </div>
           </div>
         </section>

@@ -87,7 +87,7 @@ public class DAO<T> {
         return t;
     }
 
-    /*
+    /**
      * Busca todos los objetos en la base de datos del tipo que le pases por
      * parametro
      */
@@ -101,6 +101,19 @@ public class DAO<T> {
         commit();
         close();
         return tList;
+    }
+
+    /**
+     * Updatea el objecto que le estas pasando
+     * @param object
+     */
+
+    public void update(Object object) {
+        createEntityManager();
+        beginTransaction();
+        em.merge(object);
+        commit();
+        close();
     }
 
     /**

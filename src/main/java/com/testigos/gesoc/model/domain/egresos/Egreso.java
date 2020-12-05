@@ -39,8 +39,6 @@ public class Egreso extends EntidadPersistenteEgreso {
     @Column
     protected @Getter @Setter String descripcion;
 
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "medio_de_pago_id")
     @Column
     protected @Getter @Setter String medioPago;
 
