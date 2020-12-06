@@ -18,4 +18,8 @@ public abstract class CriterioSeleccion extends EntidadPersistente {
     public Optional<Presupuesto> presupuestoElegido(List<Presupuesto> presupuestos) {
         return Optional.empty();
     }
+
+    public String nombreClase() {
+        return this.getClass().getSimpleName();
+    }
 }

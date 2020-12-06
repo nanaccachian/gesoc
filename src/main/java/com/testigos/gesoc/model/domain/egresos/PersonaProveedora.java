@@ -3,7 +3,6 @@ package com.testigos.gesoc.model.domain.egresos;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import com.testigos.gesoc.model.domain.entidades.DireccionPostal;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

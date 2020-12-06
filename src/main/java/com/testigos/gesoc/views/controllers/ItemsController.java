@@ -1,6 +1,7 @@
 package com.testigos.gesoc.views.controllers;
 
-import com.testigos.gesoc.model.domain.egresos.Egreso;
+import java.util.List;
+
 import com.testigos.gesoc.model.domain.egresos.Item;
 import com.testigos.gesoc.model.domain.usuarios.Mensaje;
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
@@ -8,13 +9,14 @@ import com.testigos.gesoc.model.services.EgresoService;
 import com.testigos.gesoc.model.services.ItemService;
 import com.testigos.gesoc.model.services.MensajeService;
 import com.testigos.gesoc.model.services.UsuarioService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/items*")
@@ -42,4 +44,4 @@ public class ItemsController {
         model.addAttribute("items", items);
         return "items";
     }
- }
+}

@@ -19,13 +19,11 @@ public class Empatadora {
     private List<Condicion> condiciones;
 
     public void empatar(List<Ingreso> ingresos, List<Egreso> egresos) {
-        if(ingresos != null && egresos != null)
+        if (ingresos != null && egresos != null)
             estrategiaEmpatadora.empatar(condiciones, ingresos, egresos);
     }
 
     public Empatadora(EstrategiaEmpatadora estrategiaEmpatadora) {
         this.estrategiaEmpatadora = estrategiaEmpatadora;
     }
-
-
 }

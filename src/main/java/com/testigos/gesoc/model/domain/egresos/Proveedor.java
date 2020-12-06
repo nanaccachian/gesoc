@@ -1,9 +1,13 @@
 package com.testigos.gesoc.model.domain.egresos;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 import com.testigos.gesoc.model.domain.persistentes.EntidadPersistente;
-import com.testigos.gesoc.model.domain.entidades.DireccionPostal;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

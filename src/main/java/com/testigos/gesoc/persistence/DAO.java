@@ -1,14 +1,13 @@
 package com.testigos.gesoc.persistence;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class DAO<T> {
@@ -105,6 +104,7 @@ public class DAO<T> {
 
     /**
      * Updatea el objecto que le estas pasando
+     * 
      * @param object
      */
 

@@ -1,402 +1,418 @@
 <!DOCTYPE html>
 <html
-    lang="en"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="https://www.thymeleaf.org"
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="https://www.thymeleaf.org"
 >
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="" />
-  <meta name="author" content="Dashboard" />
-  <meta
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="Dashboard" />
+    <meta
       name="keyword"
       content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina"
-  />
-  <title>GeSOC - El sistema preferido de tu vieja</title>
+    />
+    <title>GeSOC - El sistema preferido de tu vieja</title>
 
-  <!-- Favicons -->
-  <link href="../static/img/utn.png" rel="icon" />
-  <link href="../static/img/apple-touch-icon.png" rel="apple-touch-icon" />
+    <!-- Favicons -->
+    <link href="../static/img/utn.png" rel="icon" />
+    <link href="../static/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
-  <!-- Bootstrap core CSS -->
-  <link
+    <!-- Bootstrap core CSS -->
+    <link
       href="../static/lib/bootstrap/css/bootstrap.min.css"
       rel="stylesheet"
       th:href="@{/lib/bootstrap/css/bootstrap.min.css}"
-  />
-  <!--external css-->
-  <link
+    />
+    <!--external css-->
+    <link
       href="../static/lib/font-awesome/css/font-awesome.css"
       rel="stylesheet"
       th:href="@{/lib/font-awesome/css/font-awesome.css}"
-  />
-  <link
+    />
+    <link
       rel="stylesheet"
       href="../static/css/zabuto_calendar.css"
       th:href="@{/css/zabuto_calendar.css}"
-  />
-  <link
+    />
+    <link
       rel="stylesheet"
       href="../static/lib/bootstrap-fileupload/bootstrap-fileupload.css"
       th:href="@{/lib/bootstrap-fileupload/bootstrap-fileupload.css}"
-  />
-  <link
+    />
+    <link
       rel="stylesheet"
       href="../static/lib/gritter/css/jquery.gritter.css"
       th:href="@{/lib/gritter/css/jquery.gritter.css}"
-  />
-  <link
+    />
+    <link
       rel="stylesheet"
       href="../static/lib/bootstrap-datepicker/css/datepicker.css"
       th:href="@{/lib/bootstrap-datepicker/css/datepicker.css}"
-  />
-  <link
+    />
+    <link
       rel="stylesheet"
       href="../static/lib/bootstrap-daterangepicker/daterangepicker.css"
       th:href="@{/lib/bootstrap-daterangepicker/daterangepicker.css}"
-  />
-  <link
+    />
+    <link
       rel="stylesheet"
       href="../static/lib/bootstrap-timepicker/compiled/timepicker.css"
       th:href="@{/lib/bootstrap-timepicker/compiled/timepicker.css}"
-  />
-  <link
+    />
+    <link
       rel="stylesheet"
       href="../static/lib/bootstrap-datetimepicker/css/datetimepicker.css"
       th:href="@{/lib/bootstrap-datetimepicker/css/datetimepicker.css}"
-  />
-  <!-- Custom styles for this template -->
-  <link
+    />
+    <!-- Custom styles for this template -->
+    <link
       href="../static/css/style.css"
       rel="stylesheet"
       th:href="@{/css/style.css}"
-  />
-  <link
+    />
+    <link
       href="../static/css/style-responsive.css"
       rel="stylesheet"
       th:href="@{/css/style-responsive.css}"
-  />
-  <script
+    />
+    <script
       src="../static/lib/chart-master/Chart.js"
       th:src="@{/lib/chart-master/Chart.js}"
-  ></script>
+    ></script>
 
-  <!-- =======================================================
+    <!-- =======================================================
   Template Name: Dashio
   Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
   Author: TemplateMag.com
   License: https://templatemag.com/license/
 ======================================================= -->
-</head>
+  </head>
 
-<body>
-<section id="container">
-  <!-- **********************************************************************************************************************************************************
+  <body>
+    <section id="container">
+      <!-- **********************************************************************************************************************************************************
   TOP BAR CONTENT & NOTIFICATIONS
   *********************************************************************************************************************************************************** -->
-  <!--header start-->
-  <header class="header black-bg">
-    <div class="sidebar-toggle-box">
-      <div
-          class="fa fa-bars tooltips"
-          data-placement="right"
-          data-original-title="Toggle Navigation"
-      ></div>
-    </div>
-    <!--logo start-->
-    <a href="index.html" th:href="@{/index}" class="logo"
-    ><b>Ge<span>SOC</span></b></a
-    >
-    <!--logo end-->
-    <div class="nav notify-row" id="top_menu">
-      <!--  notification start -->
-      <ul class="nav top-menu">
-        <!-- notification dropdown start-->
-        <li id="header_notification_bar" class="dropdown">
-          <a
-              data-toggle="dropdown"
-              class="dropdown-toggle"
-              href="index.html"
-          >
-            <i class="fa fa-bell-o"></i>
-            <span
-                class="badge bg-warning"
-                th:text="${mensajes.size()}"
-            ></span>
-          </a>
-          <ul class="dropdown-menu extended notification">
-            <div class="notify-arrow notify-arrow-yellow"></div>
-            <li>
-              <p
-                  class="yellow"
-                  th:text="${'Tenés ' + mensajes.size() + ' nuevos mensajes'}"
-              ></p>
-            </li>
-            <th:block th:each="mensaje : ${mensajes}">
-              <li>
-                <a href="index.html" th:href="@{/index}">
+      <!--header start-->
+      <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+          <div
+            class="fa fa-bars tooltips"
+            data-placement="right"
+            data-original-title="Toggle Navigation"
+          ></div>
+        </div>
+        <!--logo start-->
+        <a href="index.html" th:href="@{/index}" class="logo"
+          ><b>Ge<span>SOC</span></b></a
+        >
+        <!--logo end-->
+        <div class="nav notify-row" id="top_menu">
+          <!--  notification start -->
+          <ul class="nav top-menu">
+            <!-- notification dropdown start-->
+            <li id="header_notification_bar" class="dropdown">
+              <a
+                data-toggle="dropdown"
+                class="dropdown-toggle"
+                href="index.html"
+              >
+                <i class="fa fa-bell-o"></i>
+                <span
+                  class="badge bg-warning"
+                  th:text="${mensajes.size()}"
+                ></span>
+              </a>
+              <ul class="dropdown-menu extended notification">
+                <div class="notify-arrow notify-arrow-yellow"></div>
+                <li>
+                  <p
+                    class="yellow"
+                    th:text="${'Tenés ' + mensajes.size() + ' nuevos mensajes'}"
+                  ></p>
+                </li>
+                <th:block th:each="mensaje : ${mensajes}">
+                  <li>
+                    <a href="index.html" th:href="@{/index}">
                       <span class="label label-danger"
-                      ><i class="fa fa-dollar"></i
+                        ><i class="fa fa-dollar"></i
                       ></span>
-                  <th:block th:text="${mensaje.getMensaje()}"></th:block>
-                </a>
-              </li>
-            </th:block>
+                      <th:block th:text="${mensaje.getMensaje()}"></th:block>
+                    </a>
+                  </li>
+                </th:block>
+              </ul>
+            </li>
+            <!-- notification dropdown end -->
           </ul>
-        </li>
-        <!-- notification dropdown end -->
-      </ul>
-      <!--  notification end -->
-    </div>
-    <div class="top-menu">
-      <ul class="nav pull-right top-menu">
-        <li><a class="logout" href="login.html?logout">Logout</a></li>
-      </ul>
-    </div>
-    <div class="top-menu">
-      <ul class="nav pull-right top-menu">
-        <li>
-          <a
-              class="lucho"
-              th:href="@{'/rest/usuarios/' + ${user.username}}"
-              th:text="${user.name + ' ' + user.surname}"
-          ></a>
-        </li>
-      </ul>
-    </div>
-  </header>
-  <!--header end-->
-  <!-- **********************************************************************************************************************************************************
+          <!--  notification end -->
+        </div>
+        <div class="top-menu">
+          <ul class="nav pull-right top-menu">
+            <li><a class="logout" href="login.html?logout">Logout</a></li>
+          </ul>
+        </div>
+        <div class="top-menu">
+          <ul class="nav pull-right top-menu">
+            <li>
+              <a
+                class="lucho"
+                th:href="@{'/rest/usuarios/' + ${user.username}}"
+                th:text="${user.name + ' ' + user.surname}"
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <!--header end-->
+      <!-- **********************************************************************************************************************************************************
   MAIN SIDEBAR MENU
   *********************************************************************************************************************************************************** -->
-  <!--sidebar start-->
-  <aside>
-    <div id="sidebar" class="nav-collapse">
-      <!-- sidebar menu start-->
-      <ul class="sidebar-menu" id="nav-accordion">
-        <li class="mt">
-          <a class="" href="index.html" th:href="@{/index}">
-            <i class="fa fa-home"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="sub-menu">
-          <a class="" href="operaciones.html" th:href="@{/operaciones}">
-            <i class="fa fa-gears"></i>
-            <span>Auditoría de operaciones</span>
-          </a>
-        </li>
-        <li class="sub-menu">
-          <a class="" href="egresos.html" th:href="@{/egresos}">
-            <i class="fa fa-cart-arrow-down"></i>
-            <span>Egresos</span>
-          </a>
-        </li>
-        <li class="sub-menu">
-          <a class="" href="ingresos.html" th:href="@{/ingresos}">
-            <i class="fa fa-plus-circle"></i>
-            <span>Ingresos</span>
-          </a>
-        </li>
-        <li class="sub-menu">
-          <a class="" href="presupuestos.html" th:href="@{/presupuestos}">
-            <i class="fa fa-briefcase"></i>
-            <span>Presupuestos</span>
-          </a>
-        </li>
-        <li class="sub-menu">
-          <a
-              class=""
-              href="financiamiento.html"
-              th:href="@{/financiamiento}"
-          >
-            <i class="fa fa-bank"></i>
-            <span>Financiamiento</span>
-          </a>
-        </li>
-      </ul>
-      <!-- sidebar menu end-->
-    </div>
-  </aside>
-  <!--sidebar end-->
-  <!-- **********************************************************************************************************************************************************
+      <!--sidebar start-->
+      <aside>
+        <div id="sidebar" class="nav-collapse">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu" id="nav-accordion">
+            <li class="mt">
+              <a class="" href="index.html" th:href="@{/index}">
+                <i class="fa fa-home"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="sub-menu">
+              <a class="" href="operaciones.html" th:href="@{/operaciones}">
+                <i class="fa fa-gears"></i>
+                <span>Auditoría de operaciones</span>
+              </a>
+            </li>
+            <li class="sub-menu">
+              <a class="" href="egresos.html" th:href="@{/egresos}">
+                <i class="fa fa-cart-arrow-down"></i>
+                <span>Egresos</span>
+              </a>
+            </li>
+            <li class="sub-menu">
+              <a class="" href="ingresos.html" th:href="@{/ingresos}">
+                <i class="fa fa-plus-circle"></i>
+                <span>Ingresos</span>
+              </a>
+            </li>
+            <li class="sub-menu">
+              <a class="" href="presupuestos.html" th:href="@{/presupuestos}">
+                <i class="fa fa-briefcase"></i>
+                <span>Presupuestos</span>
+              </a>
+            </li>
+            <li class="sub-menu">
+              <a
+                class=""
+                href="financiamiento.html"
+                th:href="@{/financiamiento}"
+              >
+                <i class="fa fa-bank"></i>
+                <span>Financiamiento</span>
+              </a>
+            </li>
+          </ul>
+          <!-- sidebar menu end-->
+        </div>
+      </aside>
+      <!--sidebar end-->
+      <!-- **********************************************************************************************************************************************************
   MAIN CONTENT
   *********************************************************************************************************************************************************** -->
-  <!--main content start-->
-  <section id="main-content">
-    <section class="wrapper site-min-height">
-      <h3><i class="fa fa-angle-right"></i> Añadir proyecto de financiamiento</h3>
-      <div class="row mt">
-        <div class="col-lg-12">
-          <div class="form-panel">
-            <form
-                action=""
-                class="form-horizontal style-form"
-                method="post"
-                th:action="@{/financiamiento/vinculacion}"
-            >
-              <br />
-              <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label">Director</label>
-                <div class="col-sm-10">
-                  <select class="form-control" th:id="proyecto_elegido" th:name="proyecto_elegido" >
-                    <option
-                        th:each="p : ${proyectos}"
-                        th:value="${p.id}"
-                        th:text="${p.descripcion + ' - $' + p.montoTotal}"></option>
-                  </select>
-                </div>
+      <!--main content start-->
+      <section id="main-content">
+        <section class="wrapper site-min-height">
+          <h3>
+            <i class="fa fa-angle-right"></i> Añadir proyecto de financiamiento
+          </h3>
+          <div class="row mt">
+            <div class="col-lg-12">
+              <div class="form-panel">
+                <form
+                  action=""
+                  class="form-horizontal style-form"
+                  method="post"
+                  th:action="@{/financiamiento/vinculacion}"
+                >
+                  <br />
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label"
+                      >Proyecto</label
+                    >
+                    <div class="col-sm-10">
+                      <select
+                        class="form-control"
+                        th:id="proyecto_elegido"
+                        th:name="proyecto_elegido"
+                      >
+                        <option
+                          th:each="p : ${proyectos}"
+                          th:value="${p.id}"
+                          th:text="${p.descripcion + ' - $' + p.montoTotal}"
+                        ></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label"
+                      >Ingreso</label
+                    >
+                    <div class="col-sm-10">
+                      <select
+                        class="form-control"
+                        th:id="ingreso_elegido"
+                        th:name="ingreso_elegido"
+                      >
+                        <option
+                          th:each="i : ${ingresos}"
+                          th:value="${i.id}"
+                          th:text="${i.descripcion + ' - $' + i.monto}"
+                        ></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <button class="btn btn-theme" type="submit">
+                        Vincular
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label">Director</label>
-                <div class="col-sm-10">
-                  <select class="form-control" th:id="ingreso_elegido" th:name="ingreso_elegido" >
-                    <option
-                        th:each="i : ${ingresos}"
-                        th:value="${i.id}"
-                        th:text="${i.descripcion + ' - $' + i.monto}"></option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-lg-offset-2 col-lg-10">
-                  <button class="btn btn-theme" type="submit">
-                    Vincular
-                  </button>
-                </div>
-              </div>
-            </form>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
-  </section>
-  <!--main content end-->
-  <!--footer start-->
-  <footer class="site-footer">
-    <div class="text-center">
-      <p>&copy; Copyrights <strong>Dashio</strong>. All Rights Reserved</p>
-      <div class="credits">
-        <!--
+        </section>
+      </section>
+      <!--main content end-->
+      <!--footer start-->
+      <footer class="site-footer">
+        <div class="text-center">
+          <p>&copy; Copyrights <strong>Dashio</strong>. All Rights Reserved</p>
+          <div class="credits">
+            <!--
             You are NOT allowed to delete the credit link to TemplateMag with free version.
             You can delete the credit link only if you bought the pro version.
             Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
             Licensing information: https://templatemag.com/license/
           -->
-        Created with Dashio template by
-        <a href="https://templatemag.com/">TemplateMag</a>
-      </div>
-      <a href="index.html" class="go-top">
-        <i class="fa fa-angle-up"></i>
-      </a>
-    </div>
-  </footer>
-  <!--footer end-->
-</section>
-<!-- js placed at the end of the document so the pages load faster -->
-<script
-    src="../static/lib/jquery/jquery.min.js"
-    th:src="@{/lib/jquery/jquery.min.js}"
-    type="text/javascript"
-></script>
-<script
-    src="../static/lib/bootstrap/js/bootstrap.min.js"
-    th:src="@{/lib/bootstrap/js/bootstrap.min.js}"
-    type="text/javascript"
-></script>
-<script
-    class="include"
-    src="../static/lib/jquery.dcjqaccordion.2.7.js"
-    th:src="@{/lib/jquery.dcjqaccordion.2.7.js}"
-    type="text/javascript"
-></script>
-<script
-    src="../static/lib/jquery.scrollTo.min.js"
-    th:src="@{/lib/jquery.scrollTo.min.js}"
-    type="text/javascript"
-></script>
-<script
-    src="../static/lib/jquery.nicescroll.js"
-    th:src="@{/lib/jquery.nicescroll.js}"
-    type="text/javascript"
-></script>
-<script
-    src="../static/lib/jquery.sparkline.js"
-    th:src="@{/lib/jquery.sparkline.js}"
-    type="text/javascript"
-></script>
-<!--common script for all pages-->
-<script
-    src="../static/lib/common-scripts.js"
-    th:src="@{/lib/common-scripts.js}"
-    type="text/javascript"
-></script>
-<script
-    src="../static/lib/gritter/js/jquery.gritter.js"
-    th:src="@{/lib/gritter/js/jquery.gritter.js}"
-    type="text/javascript"
-></script>
-<script
-    src="../static/lib/gritter-conf.js"
-    th:src="@{/lib/gritter-conf.js}"
-    type="text/javascript"
-></script>
-<!--script for this page-->
-<script
-    src="../static/lib/sparkline-chart.js"
-    th:src="@{/lib/sparkline-chart.js}"
-    type="text/javascript"
-></script>
-<script
-    src="../static/lib/zabuto_calendar.js"
-    th:src="@{/lib/zabuto_calendar.js}"
-    type="text/javascript"
-></script>
-<script
-    src="../static/lib/jquery-ui-1.9.2.custom.min.js"
-    th:src="@{/lib/jquery-ui-1.9.2.custom.min.js}"
-    type="text/javascript"
-></script>
-<script
-    th:src="@{/lib/bootstrap-fileupload/bootstrap-fileupload.js}"
-    src="../static/lib/bootstrap-fileupload/bootstrap-fileupload.js"
-    type="text/javascript"
-></script>
-<script
-    th:src="@{/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"
-    src="../static/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"
-    type="text/javascript"
-></script>
-<script
-    th:src="@{/lib/bootstrap-daterangepicker/date.js}"
-    src="../static/lib/bootstrap-daterangepicker/date.js"
-    type="text/javascript"
-></script>
-<script
-    th:src="@{/lib/bootstrap-daterangepicker/daterangepicker.js}"
-    src="../static/lib/bootstrap-daterangepicker/daterangepicker.js"
-    type="text/javascript"
-></script>
-<script
-    th:src="@{/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"
-    src="../static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"
-    type="text/javascript"
-></script>
-<script
-    th:src="@{/lib/bootstrap-daterangepicker/moment.min.js}"
-    src="../static/lib/bootstrap-daterangepicker/moment.min.js"
-    type="text/javascript"
-></script>
-<script
-    th:src="@{/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"
-    src="../static/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"
-    type="text/javascript"
-></script>
-<script
-    th:src="@{/lib/advanced-form-components.js}"
-    src="../static/lib/advanced-form-components.js"
-    type="text/javascript"
-></script>
-</body>
+            Created with Dashio template by
+            <a href="https://templatemag.com/">TemplateMag</a>
+          </div>
+          <a href="index.html" class="go-top">
+            <i class="fa fa-angle-up"></i>
+          </a>
+        </div>
+      </footer>
+      <!--footer end-->
+    </section>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script
+      src="../static/lib/jquery/jquery.min.js"
+      th:src="@{/lib/jquery/jquery.min.js}"
+      type="text/javascript"
+    ></script>
+    <script
+      src="../static/lib/bootstrap/js/bootstrap.min.js"
+      th:src="@{/lib/bootstrap/js/bootstrap.min.js}"
+      type="text/javascript"
+    ></script>
+    <script
+      class="include"
+      src="../static/lib/jquery.dcjqaccordion.2.7.js"
+      th:src="@{/lib/jquery.dcjqaccordion.2.7.js}"
+      type="text/javascript"
+    ></script>
+    <script
+      src="../static/lib/jquery.scrollTo.min.js"
+      th:src="@{/lib/jquery.scrollTo.min.js}"
+      type="text/javascript"
+    ></script>
+    <script
+      src="../static/lib/jquery.nicescroll.js"
+      th:src="@{/lib/jquery.nicescroll.js}"
+      type="text/javascript"
+    ></script>
+    <script
+      src="../static/lib/jquery.sparkline.js"
+      th:src="@{/lib/jquery.sparkline.js}"
+      type="text/javascript"
+    ></script>
+    <!--common script for all pages-->
+    <script
+      src="../static/lib/common-scripts.js"
+      th:src="@{/lib/common-scripts.js}"
+      type="text/javascript"
+    ></script>
+    <script
+      src="../static/lib/gritter/js/jquery.gritter.js"
+      th:src="@{/lib/gritter/js/jquery.gritter.js}"
+      type="text/javascript"
+    ></script>
+    <script
+      src="../static/lib/gritter-conf.js"
+      th:src="@{/lib/gritter-conf.js}"
+      type="text/javascript"
+    ></script>
+    <!--script for this page-->
+    <script
+      src="../static/lib/sparkline-chart.js"
+      th:src="@{/lib/sparkline-chart.js}"
+      type="text/javascript"
+    ></script>
+    <script
+      src="../static/lib/zabuto_calendar.js"
+      th:src="@{/lib/zabuto_calendar.js}"
+      type="text/javascript"
+    ></script>
+    <script
+      src="../static/lib/jquery-ui-1.9.2.custom.min.js"
+      th:src="@{/lib/jquery-ui-1.9.2.custom.min.js}"
+      type="text/javascript"
+    ></script>
+    <script
+      th:src="@{/lib/bootstrap-fileupload/bootstrap-fileupload.js}"
+      src="../static/lib/bootstrap-fileupload/bootstrap-fileupload.js"
+      type="text/javascript"
+    ></script>
+    <script
+      th:src="@{/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"
+      src="../static/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"
+      type="text/javascript"
+    ></script>
+    <script
+      th:src="@{/lib/bootstrap-daterangepicker/date.js}"
+      src="../static/lib/bootstrap-daterangepicker/date.js"
+      type="text/javascript"
+    ></script>
+    <script
+      th:src="@{/lib/bootstrap-daterangepicker/daterangepicker.js}"
+      src="../static/lib/bootstrap-daterangepicker/daterangepicker.js"
+      type="text/javascript"
+    ></script>
+    <script
+      th:src="@{/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"
+      src="../static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"
+      type="text/javascript"
+    ></script>
+    <script
+      th:src="@{/lib/bootstrap-daterangepicker/moment.min.js}"
+      src="../static/lib/bootstrap-daterangepicker/moment.min.js"
+      type="text/javascript"
+    ></script>
+    <script
+      th:src="@{/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"
+      src="../static/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"
+      type="text/javascript"
+    ></script>
+    <script
+      th:src="@{/lib/advanced-form-components.js}"
+      src="../static/lib/advanced-form-components.js"
+      type="text/javascript"
+    ></script>
+  </body>
 </html>

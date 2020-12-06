@@ -298,14 +298,70 @@
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label"
-                      >¿Tiene presupuestos?</label
+                      >Criterio de seleccion de presupuesto</label
                     >
                     <div class="col-sm-10">
-                      <input
-                        type="checkbox"
-                        name="tienePresupuesto"
-                        th:checked="${tienePresupuesto}"
-                      />
+                      <select class="form-control" th:field="*{criterio}">
+                        <option
+                          th:each="crit : ${criterios}"
+                          th:value="${crit}"
+                          th:text="${crit.nombreClase()}"
+                        ></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label"
+                      >Presupuesto elegido</label
+                    >
+                    <div class="col-sm-10">
+                      <select
+                        class="form-control"
+                        th:field="*{presupuestoElegido}"
+                      >
+                        <!--TODO-->
+                        <option
+                          th:each="crit : ${criterios}"
+                          th:value="${crit.getId()}"
+                          th:text="${crit.nombreClase()}"
+                        ></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label"
+                      >Todos los presupuestos evaluados</label
+                    >
+                    <div class="col-sm-10">
+                      <label class="checkbox-inline">
+                        <input
+                          th:field="*{presupuestoElegido}"
+                          type="checkbox"
+                          id="inlineCheckbox1"
+                          value="option1"
+                          th:each="presupuesto : ${presupuestos}"
+                          th:value="${presupuesto}"
+                          th:text="${presupuesto.descripcion}"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label"
+                      >Revisores</label
+                    >
+                    <div class="col-sm-10">
+                      <label class="checkbox-inline">
+                        <input
+                          th:field="*{revisores}"
+                          type="checkbox"
+                          id="inlineCheckbox1"
+                          value="option1"
+                          th:each="user : ${usuarios}"
+                          th:value="${user}"
+                          th:text="${user.name + ' - ' + user.surname}"
+                        />
+                      </label>
                     </div>
                   </div>
                   <div class="form-group">

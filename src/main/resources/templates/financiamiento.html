@@ -34,16 +34,22 @@
       th:href="@{/lib/font-awesome/css/font-awesome.css}"
     />
     <link
+      href="../static/lib/advanced-datatable/css/demo_page.css"
       rel="stylesheet"
       type="text/css"
-      href="../static/css/zabuto_calendar.css"
-      th:href="@{/css/zabuto_calendar.css}"
+      th:href="@{/lib/advanced-datatable/css/demo_page.css}"
+    />
+    <link
+      href="../static/lib/advanced-datatable/css/demo_table.css"
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/lib/advanced-datatable/css/demo_table.css}"
     />
     <link
       rel="stylesheet"
-      href="../static/lib/gritter/css/jquery.gritter.css"
+      href="../static/lib/advanced-datatable/css/DT_bootstrap.css"
       type="text/css"
-      th:href="@{/lib/gritter/css/jquery.gritter.css}"
+      th:href="@{/lib/advanced-datatable/css/DT_bootstrap.css}"
     />
     <!-- Custom styles for this template -->
     <link
@@ -58,11 +64,6 @@
       type="text/css"
       th:href="@{/css/style-responsive.css}"
     />
-    <script
-      src="../static/lib/chart-master/Chart.js"
-      type="text/javascript"
-      th:src="@{/lib/chart-master/Chart.js}"
-    ></script>
 
     <!-- =======================================================
     Template Name: Dashio
@@ -190,9 +191,9 @@
             </li>
             <li class="sub-menu">
               <a
-                  class=""
-                  href="financiamiento.html"
-                  th:href="@{/financiamiento}"
+                class=""
+                href="financiamiento.html"
+                th:href="@{/financiamiento}"
               >
                 <i class="fa fa-bank"></i>
                 <span>Financiamiento</span>
@@ -211,59 +212,63 @@
         <section class="wrapper site-min-height">
           <h3>
             <i class="fa fa-angle-right"></i> Proyectos de financiamiento
-            <a href="proyecto_add.html" th:href="@{/financiamiento/vinculacion}">
+            <a
+              href="proyecto_add.html"
+              th:href="@{/financiamiento/vinculacion}"
+            >
               <button
-                  type="button"
-                  style="margin-left: 10px"
-                  class="btn btn-theme02 css_right"
+                type="button"
+                style="margin-left: 10px"
+                class="btn btn-theme02 css_right"
               >
                 <i class="fa fa-check">&nbsp</i> Vincular ingreso
               </button>
             </a>
             <a
-                style="color: white"
-                href="vincular.html"
-                th:href="@{/financiamiento/add}"
+              style="color: white"
+              href="vincular.html"
+              th:href="@{/financiamiento/add}"
             >
               <button type="button" class="btn btn-theme03 css_right">
                 <i class="fa fa-plus-circle">&nbsp</i> Agregar proyecto
               </button>
             </a>
           </h3>
-
           <div style="margin-top: 15px" class="row mb">
             <!-- page start-->
             <div class="content-panel">
               <div class="adv-table">
                 <table
-                    cellpadding="0"
-                    cellspacing="0"
-                    border="0"
-                    class="display table table-bordered"
-                    id="hidden-table-info"
+                  cellpadding="0"
+                  cellspacing="0"
+                  border="0"
+                  class="display table table-bordered"
+                  id="hidden-table-info"
                 >
                   <thead>
-                  <tr>
-                    <th class="text-center">Descripcion</th>
-                    <th class="text-center">Director</th>
-                    <th class="text-center">Monto total</th>
-                    <th class="text-center">Ingresos asociados</th>
-                  </tr>
+                    <tr>
+                      <th class="text-center">Descripcion</th>
+                      <th class="text-center">Director</th>
+                      <th class="text-center">Monto total</th>
+                      <th class="text-center">Ingresos asociados</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <tr class="gradeC" th:each="i : ${proyectos}">
-                    <td th:text="${i.descripcion}"></td>
-                    <td th:text="${i.director.surname + ', ' + i.director.name}"></td>
-                    <td th:text="${i.montoTotal}"></td>
-                    <td class="text-center">
-                      <a
+                    <tr class="gradeC" th:each="i : ${proyectos}">
+                      <td th:text="${i.descripcion}"></td>
+                      <td
+                        th:text="${i.director.surname + ', ' + i.director.name}"
+                      ></td>
+                      <td th:text="${i.montoTotal}"></td>
+                      <td class="text-center">
+                        <a
                           href="ingresos_de_proyecto.html"
                           target="_blank"
                           th:href="@{/financiamiento/{nro_proyecto}/ingresos(nro_proyecto = ${i.id})}"
-                      >Ver ingresos asociados</a
-                      >
-                    </td>
-                  </tr>
+                          >Ver ingresos asociados</a
+                        >
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
                 <!-- page end-->
@@ -297,105 +302,46 @@
     <!-- js placed at the end of the document so the pages load faster -->
     <script
       src="../static/lib/jquery/jquery.min.js"
-      type="text/javascript"
       th:src="@{/lib/jquery/jquery.min.js}"
     ></script>
-
     <script
       src="../static/lib/bootstrap/js/bootstrap.min.js"
-      type="text/javascript"
       th:src="@{/lib/bootstrap/js/bootstrap.min.js}"
     ></script>
     <script
+      src="../static/lib/advanced-datatable/js/jquery.js"
+      th:src="@{lib/advanced-datatable/js/jquery.js}"
+    ></script>
+    <script
       class="include"
-      type="text/javascript"
       src="../static/lib/jquery.dcjqaccordion.2.7.js"
       th:src="@{/lib/jquery.dcjqaccordion.2.7.js}"
     ></script>
     <script
       src="../static/lib/jquery.scrollTo.min.js"
-      type="text/javascript"
       th:src="@{/lib/jquery.scrollTo.min.js}"
     ></script>
     <script
       src="../static/lib/jquery.nicescroll.js"
-      type="text/javascript"
       th:src="@{/lib/jquery.nicescroll.js}"
     ></script>
     <script
-      src="../static/lib/jquery.sparkline.js"
-      type="text/javascript"
-      th:src="@{/lib/jquery.sparkline.js}"
+      src="../static/lib/advanced-datatable/js/jquery.dataTables.js"
+      th:src="@{/lib/advanced-datatable/js/jquery.dataTables.js}"
+    ></script>
+    <script
+      src="../static/lib/advanced-datatable/js/DT_bootstrap.js"
+      th:src="@{/lib/advanced-datatable/js/DT_bootstrap.js}"
     ></script>
     <!--common script for all pages-->
     <script
       src="../static/lib/common-scripts.js"
-      type="text/javascript"
       th:src="@{/lib/common-scripts.js}"
-    ></script>
-    <script
-      type="text/javascript"
-      src="../static/lib/gritter/js/jquery.gritter.js"
-      th:src="@{/lib/gritter/js/jquery.gritter.js}"
-    ></script>
-    <script
-      type="text/javascript"
-      src="../static/lib/gritter-conf.js"
-      th:src="@{/lib/gritter-conf.js}"
     ></script>
     <!--script for this page-->
     <script
-      src="../static/lib/sparkline-chart.js"
-      type="text/javascript"
-      th:src="@{/lib/sparkline-chart.js}"
+      src="../static/js/datatable.js"
+      th:src="@{/js/datatable.js}"
     ></script>
-    <script
-      src="../static/lib/zabuto_calendar.js"
-      type="text/javascript"
-      th:src="@{/lib/zabuto_calendar.js}"
-    ></script>
-    <script type="application/javascript">
-      $(document).ready(function () {
-        $("#date-popover").popover({
-          html: true,
-          trigger: "manual",
-        })
-        $("#date-popover").hide()
-        $("#date-popover").click(function (e) {
-          $(this).hide()
-        })
-
-        $("#my-calendar").zabuto_calendar({
-          action: function () {
-            return myDateFunction(this.id, false)
-          },
-          action_nav: function () {
-            return myNavFunction(this.id)
-          },
-          ajax: {
-            url: "show_data.php?action=1",
-            modal: true,
-          },
-          legend: [
-            {
-              type: "text",
-              label: "Special event",
-              badge: "00",
-            },
-            {
-              type: "block",
-              label: "Regular event",
-            },
-          ],
-        })
-      })
-
-      function myNavFunction(id) {
-        $("#date-popover").hide()
-        var nav = $("#" + id).data("navigation")
-        var to = $("#" + id).data("to")
-        console.log("nav " + nav + " to: " + to.month + "/" + to.year)
-      }
-    </script>
   </body>
 </html>

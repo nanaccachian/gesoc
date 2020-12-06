@@ -16,7 +16,7 @@ import java.util.List;
 public class ProyectoDeFinanciamiento extends EntidadPersistente {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username")
+    @JoinColumn(name = "director_id")
     private @Getter @Setter Usuario director;
 
     @OneToMany(mappedBy = "proyectoAsociado", cascade = CascadeType.ALL)
@@ -35,11 +35,13 @@ public class ProyectoDeFinanciamiento extends EntidadPersistente {
     private @Getter @Setter int cantidadPresupuestos;
 
     public void asociarIngreso(Ingreso ingreso) {
-        if(ingresosAsociados.stream().mapToDouble( ingreso1 -> ingreso1.getMonto()).sum() + ingreso.getMonto() < montoTotal)
+        if (ingresosAsociados.stream().mapToDouble(ingreso1 -> ingreso1.getMonto()).sum()
+                + ingreso.getMonto() < montoTotal)
             ingresosAsociados.add(ingreso);
     }
 
     public boolean sePuedeAgregar(Ingreso ingreso) {
-        return ingresosAsociados.stream().mapToDouble( ingreso1 -> ingreso1.getMonto()).sum() + ingreso.getMonto() <= montoTotal;
+        return ingresosAsociados.stream().mapToDouble(ingreso1 -> ingreso1.getMonto()).sum()
+                + ingreso.getMonto() <= montoTotal;
     }
 }

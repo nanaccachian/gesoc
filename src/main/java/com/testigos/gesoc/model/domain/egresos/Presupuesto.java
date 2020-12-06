@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -15,11 +16,15 @@ import javax.persistence.Table;
 import com.testigos.gesoc.model.domain.persistentes.EntidadPersistente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Entity
 @Table(name = "presupuestos")
 public class Presupuesto extends EntidadPersistente {
+
+    @Column
+    private @Getter @Setter String descripcion;
 
     @OneToMany(mappedBy = "presupuesto", cascade = CascadeType.ALL)
     private @Getter List<Item> items;

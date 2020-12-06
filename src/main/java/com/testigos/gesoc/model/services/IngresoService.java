@@ -5,9 +5,8 @@ import java.util.stream.Collectors;
 
 import com.testigos.gesoc.model.domain.financiamiento.ProyectoDeFinanciamiento;
 import com.testigos.gesoc.model.domain.ingresos.Ingreso;
-import com.testigos.gesoc.persistence.DAO;
-
 import com.testigos.gesoc.persistence.DAOIngreso;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -39,17 +38,21 @@ public class IngresoService {
         dao.persist(ingreso);
     }
 
-    public void update2(Ingreso ingreso) {dao.update2(ingreso);}
+    public void update2(Ingreso ingreso) {
+        dao.update2(ingreso);
+    }
 
     public List<Ingreso> getIngresosSinProyecto() {
         return dao.findAllSinProyecto();
     }
 
-//    public void updateProyecto(Ingreso ingreso,ProyectoDeFinanciamiento proyectoDeFinanciamiento) {
-//        dao.updateProyecto(ingreso,proyectoDeFinanciamiento);
-//    }
+    // public void updateProyecto(Ingreso ingreso,ProyectoDeFinanciamiento
+    // proyectoDeFinanciamiento) {
+    // dao.updateProyecto(ingreso,proyectoDeFinanciamiento);
+    // }
 
     public List<Ingreso> findIngresosDeProyecto(ProyectoDeFinanciamiento proyectoDeFinanciamiento) {
-        return dao.findAllConProyecto().stream().filter(i -> i.getProyectoAsociado() == proyectoDeFinanciamiento).collect(Collectors.toList());
+        return dao.findAllConProyecto().stream().filter(i -> i.getProyectoAsociado() == proyectoDeFinanciamiento)
+                .collect(Collectors.toList());
     }
 }

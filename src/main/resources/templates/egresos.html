@@ -190,9 +190,9 @@
             </li>
             <li class="sub-menu">
               <a
-                  class=""
-                  href="financiamiento.html"
-                  th:href="@{/financiamiento}"
+                class=""
+                href="financiamiento.html"
+                th:href="@{/financiamiento}"
               >
                 <i class="fa fa-bank"></i>
                 <span>Financiamiento</span>
@@ -209,18 +209,19 @@
       <!--main content start-->
       <section id="main-content">
         <section class="wrapper site-min-height">
-          <h3><i class="fa fa-angle-right"></i> Egresos
+          <h3>
+            <i class="fa fa-angle-right"></i> Egresos
             <a
-                style="color: white; padding-top: 100px"
-                href="egresos_add.html"
-                th:href="@{/egresos/add}"
+              style="color: white; padding-top: 100px"
+              href="egresos_add.html"
+              th:href="@{/egresos/add}"
             >
               <button type="button" class="btn btn-theme03 css_right">
                 <i class="fa fa-plus-circle">&nbsp</i> Añadir egreso
               </button>
             </a>
           </h3>
-          <div class="row mb">
+          <div style="margin-top: 15px" class="row mb">
             <!-- page start-->
             <div class="content-panel">
               <div class="adv-table">
@@ -243,11 +244,21 @@
                   </thead>
                   <tbody>
                     <tr class="gradeC" th:each="egreso : ${egresos}">
-                      <td th:text="${egreso.documento} ? ${egreso.documento.tipo + ': ' +  egreso.documento.num} : 'No facturado'"></td>
-                      <td th:text="${egreso.fechaOperacion} ? ${egreso.fechaOperacion} : 'Sin fecha'"></td>
-                      <td th:text="${egreso.descripcion} ? ${egreso.descripcion} : 'Sin descripcion'"></td>
-                      <td th:text="${egreso.medioPago} ? ${egreso.medioPago} : 'Sin medio de pago'"></td>
-                      <td th:text="${egreso.vendedor} ? ${egreso.vendedor.getNombre()} : 'Sin proveedor'"></td>
+                      <td
+                        th:text="${egreso.documento} ? ${egreso.documento.tipo + ': ' +  egreso.documento.num} : 'No facturado'"
+                      ></td>
+                      <td
+                        th:text="${egreso.fechaOperacion} ? ${egreso.fechaOperacion} : 'Sin fecha'"
+                      ></td>
+                      <td
+                        th:text="${egreso.descripcion} ? ${egreso.descripcion} : 'Sin descripcion'"
+                      ></td>
+                      <td
+                        th:text="${egreso.medioPago} ? ${egreso.medioPago} : 'Sin medio de pago'"
+                      ></td>
+                      <td
+                        th:text="${egreso.vendedor} ? ${egreso.vendedor.getNombre()} : 'Sin proveedor'"
+                      ></td>
                       <td class="text-center">
                         <a
                           href="items.html"
