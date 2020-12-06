@@ -265,13 +265,11 @@
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Proveedor</label>
                     <div class="col-sm-10">
-                      <select class="form-control" id="vendedor" th:name="*{vendedor}">
+                      <select class="form-control" th:id="proveedor_elegido" th:name="proveedor_elegido">
                         <option
                             th:each="i : ${proveedores}"
-                            th:value="${i}"
-                            th:text="${i.nombreClase() + ' - ' + i.getNombre()}"
-                            th:selected="${i == new_egreso.vendedor}">
-
+                            th:value="${i.getId()}"
+                            th:text="${i.nombreClase() + ' - ' + i.getNombre()}">
                         </option>
                       </select>
                     </div>

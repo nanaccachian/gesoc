@@ -2,9 +2,12 @@ package com.testigos.gesoc.persistence;
 
 import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.model.domain.egresos.Item;
+import com.testigos.gesoc.model.domain.ingresos.Ingreso;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 public class DAOEgreso extends DAO<Egreso> {
@@ -22,6 +25,23 @@ public class DAOEgreso extends DAO<Egreso> {
         q.executeUpdate();
         em.getTransaction().commit();
         close();
+    }
+
+    public List<Egreso> findAllConProveedor() {
+        createEntityManager();
+        beginTransaction();
+        List<Egreso> tList = createQuery("From " + type.getSimpleName()).getResultList();
+        if (tList != null)
+            tList.size();
+        for(Egreso e: tList)
+            Hibernate.initialize(e.getVendedor());
+        commit();
+        close();
+        return tList;
+    }
+
+    public Double getTotalEgresos() {
+        return findAll().stream().mapToDouble(Egreso::valorTotal).sum();
     }
 
 //    public void mergeItem(Egreso egreso, Item item) {

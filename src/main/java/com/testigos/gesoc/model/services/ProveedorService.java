@@ -14,4 +14,8 @@ public class ProveedorService {
     public List<Proveedor> findAll() {
         return dao.findAll();
     }
+
+    public Proveedor find(int id) {
+        return dao.find(id);
+    }
 }

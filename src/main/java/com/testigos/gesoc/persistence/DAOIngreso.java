@@ -1,5 +1,6 @@
 package com.testigos.gesoc.persistence;
 
+import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.model.domain.ingresos.Ingreso;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
@@ -73,6 +74,10 @@ public class DAOIngreso extends DAO<Ingreso>{
         q.executeUpdate();
         em.getTransaction().commit();
         close();
+    }
+
+    public Double getTotalIngresos() {
+        return findAll().stream().mapToDouble(Ingreso::valorDisponible).sum();
     }
 
 //    public void mergeConProyecto(ProyectoDeFinanciamiento proyecto, Ingreso ingreso) {

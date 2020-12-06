@@ -38,4 +38,8 @@ public class EgresoService {
         for(Egreso e:egresos)
             repo.update(e);
     }
+
+    public List<Egreso> findAllConProveedor() {
+        return repo.findAllConProveedor();
+    }
 }
