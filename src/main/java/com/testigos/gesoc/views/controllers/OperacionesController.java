@@ -30,11 +30,11 @@ public class OperacionesController {
 
     @GetMapping
     public String registersView(Model model, Authentication auth) {
-        model.addAttribute("registros", registroService.findAll());
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
+        model.addAttribute("registros", registroService.findAll());
         return "operaciones";
     }
 }

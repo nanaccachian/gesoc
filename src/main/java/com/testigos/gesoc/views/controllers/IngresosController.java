@@ -33,8 +33,7 @@ public class IngresosController {
     public String ingresos(Model model, Authentication auth) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        List<Ingreso> ingresos = ingresoService.getIngresos();
-        // user.getEntidad().getIngresos();
+        List<Ingreso> ingresos = ingresoService.getIngresos(user.getEntidad());
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("ingresos", ingresos);
@@ -53,7 +52,7 @@ public class IngresosController {
 
     @PostMapping(path = "/add")
     public String ingresosAddResult(Model model, Authentication auth, @ModelAttribute Ingreso ingreso) {
-        Usuario user = usuarioService.find(auth.getName());
+        Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
         ingreso.setEntidad(user.getEntidad());
         ingreso.setFechaIngreso(LocalDate.now());

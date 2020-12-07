@@ -1,5 +1,6 @@
 package com.testigos.gesoc.model.domain.entidades;
 
+import javax.annotation.Nullable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,13 +19,13 @@ import lombok.NoArgsConstructor;
 @Table(name = "direcciones_postales")
 public class DireccionPostal extends EntidadPersistente {
 
-    @Column
+    @Column @Nullable
     private String calle;
 
-    @Column
+    @Column @Nullable
     private int altura;
 
-    @Column
+    @Column @Nullable
     private int piso;
 
     @ManyToOne(fetch = FetchType.LAZY)

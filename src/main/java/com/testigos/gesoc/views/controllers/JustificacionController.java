@@ -37,10 +37,10 @@ public class JustificacionController {
 
     @GetMapping
     public String proyectos(Model model, Authentication auth) {
-        Usuario user = usuarioService.find(auth.getName());
+        Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        List<Ingreso> ingresos = ingresoService.getIngresosDisponibles();
-        List<Egreso> egresos = egresoService.getEgresosNoJustificados();
+        List<Ingreso> ingresos = ingresoService.getIngresosDisponibles(user.getEntidad());
+        List<Egreso> egresos = egresoService.getEgresosNoJustificados(user.getEntidad());
         new Empatadora(new PrimeroEgreso()).empatar(ingresos, egresos);
         egresoService.update(egresos);
         model.addAttribute("user", user);

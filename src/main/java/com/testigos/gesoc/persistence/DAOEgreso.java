@@ -1,5 +1,6 @@
 package com.testigos.gesoc.persistence;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -40,8 +41,32 @@ public class DAOEgreso extends DAO<Egreso> {
         return tList;
     }
 
-    public Double getTotalEgresos() {
-        return findAll().stream().mapToDouble(Egreso::valorTotal).sum();
+    public List<Egreso> findAllConItems() {
+        createEntityManager();
+        beginTransaction();
+        List<Egreso> tList = createQuery("From " + type.getSimpleName()).getResultList();
+        if (tList != null)
+            tList.size();
+        for (Egreso e : tList)
+            Hibernate.initialize(e.getItems());
+        commit();
+        close();
+        return tList;
+    }
+
+    public List<Egreso> findAllConProveedoreItems() {
+        createEntityManager();
+        beginTransaction();
+        List<Egreso> tList = createQuery("From " + type.getSimpleName()).getResultList();
+        if (tList != null)
+            tList.size();
+        for (Egreso e : tList) {
+            Hibernate.initialize(e.getItems());
+            Hibernate.initialize(e.getVendedor());
+        }
+        commit();
+        close();
+        return tList;
     }
 
     // public void mergeItem(Egreso egreso, Item item) {

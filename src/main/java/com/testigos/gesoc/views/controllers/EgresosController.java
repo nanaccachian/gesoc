@@ -47,9 +47,9 @@ public class EgresosController {
 
     @GetMapping
     public String egresos(Model model, Authentication auth) {
-        Usuario user = usuarioService.find(auth.getName());
+        Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        List<Egreso> egresos = egresoService.findAllConProveedor();
+        List<Egreso> egresos = egresoService.findAllConProveedor(user.getEntidad());
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("egresos", egresos);
@@ -70,8 +70,9 @@ public class EgresosController {
     @PostMapping(path = "/add/{egreso_id}")
     public String addItems(Model model, Authentication auth, @PathVariable("egreso_id") String id,
             @ModelAttribute Egreso egreso, @RequestParam("proveedor_elegido") String prov) {
-        Usuario user = usuarioService.find(auth.getName());
+        Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
+        egreso.setComprador(user.getEntidad());
         egreso.setVendedor(proveedorService.find(Integer.parseInt(prov)));
         egreso.setFechaOperacion(LocalDate.now());
         egresoService.persist(egreso);
