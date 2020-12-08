@@ -15,11 +15,11 @@ import com.testigos.gesoc.model.domain.persistentes.EntidadPersistente;
 @Table(name = "criterios_seleccion")
 public abstract class CriterioSeleccion extends EntidadPersistente {
 
-    public Optional<Presupuesto> presupuestoElegido(List<Presupuesto> presupuestos) {
+    public static Optional<Presupuesto> presupuestoElegido(List<Presupuesto> presupuestos) {
         return Optional.empty();
     }
 
-    public String nombreClase() {
-        return this.getClass().getSimpleName();
+    public static String nombreClase() {
+        return CriterioSeleccion.class.getSimpleName();
     }
 }

@@ -12,8 +12,7 @@ public class MenorPresupuesto extends CriterioSeleccion {
     @Transient
     private static MenorPresupuesto instancia = null;
 
-    @Override
-    public Optional<Presupuesto> presupuestoElegido(List<Presupuesto> presupuestos) {
+    public static Optional<Presupuesto> presupuestoElegido(List<Presupuesto> presupuestos) {
         return presupuestos.stream().min(MenorPresupuesto::comparar);
     }
 
@@ -21,13 +20,7 @@ public class MenorPresupuesto extends CriterioSeleccion {
         return Double.compare(p1.valorTotal(), p2.valorTotal());
     }
 
-    private MenorPresupuesto() {
-    }
-
-    public static MenorPresupuesto getInstance() {
-        if (instancia == null) {
-            instancia = new MenorPresupuesto();
-        }
-        return instancia;
+    public static String nombreClase() {
+        return MenorPresupuesto.class.getSimpleName();
     }
 }

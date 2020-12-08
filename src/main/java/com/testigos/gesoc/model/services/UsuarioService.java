@@ -1,9 +1,10 @@
 package com.testigos.gesoc.model.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.testigos.gesoc.model.domain.entidades.Entidad;
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
-import com.testigos.gesoc.persistence.DAO;
 
 import com.testigos.gesoc.persistence.DAOUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,22 +13,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsuarioService {
 
-//    @Autowired
-    private DAOUsuario dao = new DAOUsuario();
+    @Autowired
+    private DAOUsuario repository;
 
     public List<Usuario> findAll() {
-        return dao.findAll();
+        return repository.findAll();
+    }
+
+    public List<Usuario> findAll(Entidad entidad) {
+        return repository.findAllConEntidad().stream().filter(u -> u.getEntidad().getId() == entidad.getId()).collect(Collectors.toList());
     }
 
     public Usuario find(String id) {
-        return dao.find(id);
+        return repository.find(id);
     }
 
     public Usuario findConEntidad(String id) {
-        return dao.findConEntidad(id);
+        return repository.findConEntidad(id);
     }
 
     public void persist(Usuario usuario) {
-        dao.persist(usuario);
+        repository.persist(usuario);
     }
 }

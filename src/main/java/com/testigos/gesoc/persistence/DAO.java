@@ -2,12 +2,10 @@ package com.testigos.gesoc.persistence;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class DAO<T> {
@@ -18,6 +16,7 @@ public class DAO<T> {
 
     // Para métodos que no haya pasado a esta clase hacer
     // instancia.em.<metodo>, hay una banda pero pase los mas importantes
+//    @PersistenceContext(unitName = "persistenceUnit")
     public EntityManager em;
 
     /**
@@ -107,7 +106,6 @@ public class DAO<T> {
      * 
      * @param object
      */
-
     public void update(Object object) {
         createEntityManager();
         beginTransaction();

@@ -1,18 +1,17 @@
 package com.testigos.gesoc.model.domain.entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.testigos.gesoc.model.domain.entidades.tipoorg.TipoOrg;
+import lombok.NoArgsConstructor;
 
 @Entity
+@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Base extends Entidad {
 
     @Column
-    private final String descripcion;
+    private String descripcion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "juridica_id", referencedColumnName = "id")

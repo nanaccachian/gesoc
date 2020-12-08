@@ -13,7 +13,7 @@
       name="keyword"
       content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina"
     />
-    <title>GeSOC - El sistema preferido de tu vieja</title>
+    <title>GeSOC - Egresos</title>
 
     <!-- Favicons -->
     <link href="../static/img/utn.png" rel="icon" />
@@ -183,16 +183,10 @@
               </a>
             </li>
             <li class="sub-menu">
-              <a class="" href="presupuestos.html" th:href="@{/presupuestos}">
-                <i class="fa fa-briefcase"></i>
-                <span>Presupuestos</span>
-              </a>
-            </li>
-            <li class="sub-menu">
               <a
-                class=""
-                href="financiamiento.html"
-                th:href="@{/financiamiento}"
+                  class=""
+                  href="financiamiento.html"
+                  th:href="@{/financiamiento}"
               >
                 <i class="fa fa-bank"></i>
                 <span>Financiamiento</span>
@@ -213,11 +207,30 @@
             <i class="fa fa-angle-right"></i> Egresos
             <a
               style="color: white; padding-top: 100px"
+
               href="egresos_add.html"
               th:href="@{/egresos/add}"
             >
               <button type="button" class="btn btn-theme03 css_right">
                 <i class="fa fa-plus-circle">&nbsp</i> Añadir egreso
+              </button>
+            </a>
+            &nbsp<a
+                style="color: white; padding-top: 100px"
+                href="doc_comercial_add.html"
+                th:href="@{/egresos/doc_comercial/add}"
+            >
+              <button type="button" class="btn btn-theme02 css_right">
+                <i class="fa fa-plus-circle">&nbsp</i> Añadir documento comercial
+              </button>
+            </a>
+            &nbsp<a
+                style="color: white; padding-top: 100px"
+                href="egresos_cp_add.html"
+                th:href="@{/egresos/cp/add}"
+            >
+              <button type="button" class="btn btn-theme04 css_right">
+                <i class="fa fa-plus-circle">&nbsp</i> Añadir egreso presupuestado
               </button>
             </a>
           </h3>
@@ -237,9 +250,9 @@
                       <th class="text-center">Número factura</th>
                       <th class="text-center">Fecha de operacion</th>
                       <th class="text-center">Descripcion</th>
-                      <th class="text-center">Medio de pago</th>
                       <th class="text-center">Proveedor</th>
                       <th class="text-center">Items</th>
+                      <th class="text-center">Presupuestos</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -254,9 +267,6 @@
                         th:text="${egreso.descripcion} ? ${egreso.descripcion} : 'Sin descripcion'"
                       ></td>
                       <td
-                        th:text="${egreso.medioPago} ? ${egreso.medioPago} : 'Sin medio de pago'"
-                      ></td>
-                      <td
                         th:text="${egreso.vendedor} ? ${egreso.vendedor.getNombre()} : 'Sin proveedor'"
                       ></td>
                       <td class="text-center">
@@ -265,6 +275,14 @@
                           target="_blank"
                           th:href="@{/items/{egreso}(egreso = ${egreso.id})}"
                           >Ver items</a
+                        >
+                      </td>
+                      <td class="text-center">
+                        <a
+                            href="egreso_presupuestos.html"
+                            target="_blank"
+                            th:href="@{/egresos/presupuestos/{egreso}(egreso = ${egreso.id})}"
+                        >Ver presupuestación</a
                         >
                       </td>
                     </tr>

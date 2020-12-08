@@ -20,6 +20,7 @@ import com.testigos.gesoc.model.domain.ingresos.Ingreso;
 import com.testigos.gesoc.model.domain.persistentes.EntidadPersistente;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -33,7 +34,10 @@ public abstract class Entidad extends EntidadPersistente {
     protected @Getter List<Ingreso> ingresos = new ArrayList<>();
 
     @Column
-    protected @Getter String nombreFicticio;
+    protected @Getter @Setter String nombreFicticio;
+
+    @Column
+    protected @Getter @Setter int cantidadPresupuestosRequeridos;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_de_organizacion_id")

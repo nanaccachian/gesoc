@@ -3,15 +3,7 @@ package com.testigos.gesoc.model.domain.usuarios;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.testigos.gesoc.model.domain.egresos.EgresoConPresupuestos;
 import com.testigos.gesoc.model.domain.entidades.Entidad;
@@ -44,7 +36,7 @@ public class Usuario {
     @Column
     private @Getter @Setter String surname;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "revisor", cascade = CascadeType.ALL)
     private @Getter @Setter List<EgresoConPresupuestos> egresosConPresupuestos = new ArrayList<>();
 
     public Usuario(String username, String password, String permisos, Entidad entidad, String name, String surname) {

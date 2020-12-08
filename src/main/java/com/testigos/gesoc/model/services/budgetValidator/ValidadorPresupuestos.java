@@ -13,8 +13,6 @@ import com.testigos.gesoc.model.domain.egresos.Presupuesto;
 @NoArgsConstructor
 public class ValidadorPresupuestos implements Job {
 
-    // private final DAO<EgresoConPresupuestos> dao = new DAO<>();
-
     public static boolean validar(EgresoConPresupuestos egresoConPresupuestos) {
         return validarCantPresupuestos(egresoConPresupuestos) && validarCompraEnBaseAPresupuestos(egresoConPresupuestos)
                 && validarCriterioCorrecto(egresoConPresupuestos);

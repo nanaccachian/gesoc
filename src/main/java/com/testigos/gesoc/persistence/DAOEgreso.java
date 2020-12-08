@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.testigos.gesoc.model.domain.egresos.CriterioSeleccion;
 import com.testigos.gesoc.model.domain.egresos.Egreso;
 
 import org.hibernate.Hibernate;
@@ -64,6 +65,19 @@ public class DAOEgreso extends DAO<Egreso> {
             Hibernate.initialize(e.getItems());
             Hibernate.initialize(e.getVendedor());
         }
+        commit();
+        close();
+        return tList;
+    }
+
+    public List<Egreso> findAllConDocumentoComercial() {
+        createEntityManager();
+        beginTransaction();
+        List<Egreso> tList = createQuery("From " + type.getSimpleName()).getResultList();
+        if (tList != null)
+            tList.size();
+        for (Egreso e : tList)
+            Hibernate.initialize(e.getDocumento());
         commit();
         close();
         return tList;

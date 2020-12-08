@@ -13,7 +13,7 @@
       name="keyword"
       content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina"
     />
-    <title>GeSOC - El sistema preferido de tu vieja</title>
+    <title>GeSOC - Egresos</title>
 
     <!-- Favicons -->
     <link href="../static/img/utn.png" rel="icon" />
@@ -200,12 +200,6 @@
               </a>
             </li>
             <li class="sub-menu">
-              <a class="" href="presupuestos.html" th:href="@{/presupuestos}">
-                <i class="fa fa-briefcase"></i>
-                <span>Presupuestos</span>
-              </a>
-            </li>
-            <li class="sub-menu">
               <a
                 class=""
                 href="financiamiento.html"
@@ -234,7 +228,7 @@
                   action=""
                   class="form-horizontal style-form"
                   method="post"
-                  th:action="@{/egresos/add/${new_egreso.id}}"
+                  th:action="@{/egresos/cp/add/{egreso_id}(egreso_id = ${new_egreso.id})}"
                   th:object="${new_egreso}"
                 >
                   <br />
@@ -298,70 +292,38 @@
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label"
-                      >Criterio de seleccion de presupuesto</label
-                    >
-                    <div class="col-sm-10">
-                      <select class="form-control" th:field="*{criterio}">
-                        <option
-                          th:each="crit : ${criterios}"
-                          th:value="${crit}"
-                          th:text="${crit.nombreClase()}"
-                        ></option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label"
-                      >Presupuesto elegido</label
+                    >Criterio de seleccion de presupuesto</label
                     >
                     <div class="col-sm-10">
                       <select
-                        class="form-control"
-                        th:field="*{presupuestoElegido}"
+                          class="form-control"
+                          th:id="criterio_elegido"
+                          th:name="criterio_elegido"
                       >
-                        <!--TODO-->
                         <option
-                          th:each="crit : ${criterios}"
-                          th:value="${crit.getId()}"
-                          th:text="${crit.nombreClase()}"
+                            th:each="crit : ${criterios}"
+                            th:value="${crit.getId()}"
+                            th:text="${crit.nombreClase()}"
                         ></option>
                       </select>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label"
-                      >Todos los presupuestos evaluados</label
+                    >Revisor</label
                     >
                     <div class="col-sm-10">
-                      <label class="checkbox-inline">
-                        <input
-                          th:field="*{presupuestoElegido}"
-                          type="checkbox"
-                          id="inlineCheckbox1"
-                          value="option1"
-                          th:each="presupuesto : ${presupuestos}"
-                          th:value="${presupuesto}"
-                          th:text="${presupuesto.descripcion}"
-                        />
-                      </label>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label"
-                      >Revisores</label
-                    >
-                    <div class="col-sm-10">
-                      <label class="checkbox-inline">
-                        <input
-                          th:field="*{revisores}"
-                          type="checkbox"
-                          id="inlineCheckbox1"
-                          value="option1"
-                          th:each="user : ${usuarios}"
-                          th:value="${user}"
-                          th:text="${user.name + ' - ' + user.surname}"
-                        />
-                      </label>
+                      <select
+                          class="form-control"
+                          th:id="revisor_elegido"
+                          th:name="revisor_elegido"
+                      >
+                        <option
+                            th:each="user : ${revisores}"
+                            th:value="${user.username}"
+                            th:text="${user.name + ' - ' + user.surname}"
+                        ></option>
+                      </select>
                     </div>
                   </div>
                   <div class="form-group">

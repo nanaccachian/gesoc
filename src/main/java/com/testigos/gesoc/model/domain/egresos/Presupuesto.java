@@ -27,14 +27,14 @@ public class Presupuesto extends EntidadPersistente {
     private @Getter @Setter String descripcion;
 
     @OneToMany(mappedBy = "presupuesto", cascade = CascadeType.ALL)
-    private @Getter List<Item> items;
+    private @Getter List<Item> items = new ArrayList<>();
 
     @OneToMany(mappedBy = "presupuesto", cascade = CascadeType.ALL)
     private List<DocumentoComercial> documentosAsociados = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "egreso_con_presupuestos_id")
-    private @Getter EgresoConPresupuestos egresoConPresupuestos;
+    private @Getter @Setter EgresoConPresupuestos egresoConPresupuestos;
 
     public Presupuesto(List<Item> items, List<DocumentoComercial> documentosAsociados,
             EgresoConPresupuestos egresoConPresupuestos) {

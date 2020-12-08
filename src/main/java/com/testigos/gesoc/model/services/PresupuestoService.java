@@ -14,4 +14,15 @@ public class PresupuestoService {
     public List<Presupuesto> findAll() {
         return repo.findAll();
     }
+
+    public void persist(Presupuesto presupuesto) {
+        repo.persist(presupuesto);
+    }
+
+    public Presupuesto find(int id) {
+        return repo.find(id);
+    }
+
+    public void findConItems(Presupuesto p) {
+    }
 }

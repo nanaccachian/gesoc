@@ -4,15 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
 import com.testigos.gesoc.model.services.budgetValidator.ValidadorPresupuestos;
@@ -26,9 +18,9 @@ import lombok.Setter;
 @Table(name = "egresos_con_presupuestos")
 public class EgresoConPresupuestos extends Egreso {
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "criterio_id")
-    private @Getter CriterioSeleccion criterio;
+    private @Getter @Setter CriterioSeleccion criterio;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "presupuesto_elegido_id")
@@ -37,8 +29,9 @@ public class EgresoConPresupuestos extends Egreso {
     @OneToMany(mappedBy = "egresoConPresupuestos", cascade = CascadeType.ALL)
     private @Getter @Setter List<Presupuesto> todosLosPresupuestos = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private @Getter final List<Usuario> revisores = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "revisor")
+    private @Getter @Setter Usuario revisor;
 
     @Column
     private @Getter @Setter boolean esValidoElPresupuesto = false;
@@ -55,13 +48,5 @@ public class EgresoConPresupuestos extends Egreso {
 
     public void addPresupuesto(Presupuesto presupuesto) {
         todosLosPresupuestos.add(presupuesto);
-    }
-
-    public void addRevisor(Usuario usuario) {
-        revisores.add(usuario);
-    }
-
-    public boolean esRevisor(Usuario usuario) {
-        return revisores.contains(usuario);
     }
 }

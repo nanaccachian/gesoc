@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.model.domain.egresos.Item;
+import com.testigos.gesoc.model.domain.egresos.Presupuesto;
 import com.testigos.gesoc.persistence.DAOItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,9 @@ public class ItemService {
 
     public void persist(Item item, Egreso egreso) {
         repo.persistWithEgreso(item, egreso);
+    }
+
+    public void persist(Item item, Presupuesto presupuesto) {
+        repo.persistWithPresupuesto(item, presupuesto);
     }
 }

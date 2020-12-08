@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.testigos.gesoc.model.domain.egresos.CriterioSeleccion;
 import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.model.domain.entidades.Entidad;
 import com.testigos.gesoc.persistence.DAOEgreso;
@@ -35,12 +36,8 @@ public class EgresoService {
         return repo.findAll().stream().filter(e -> e.getComprador().getId() == entidad.getId()).collect(Collectors.toList());
     }
 
-//    public List<Egreso> getEgresosNoJustificados() {
-//        return repo.findAll().stream().filter(eg -> eg.getIngresoAsociado() != null).collect(Collectors.toList());
-//    }
-
     public List<Egreso> getEgresosNoJustificados(Entidad entidad) {
-        return findAll(entidad).stream().filter(eg -> eg.getIngresoAsociado() != null).collect(Collectors.toList());
+        return findAllConProveedoreItems(entidad).stream().filter(eg -> eg.getIngresoAsociado() == null).collect(Collectors.toList());
     }
 
     public void update(List<Egreso> egresos) {
@@ -99,7 +96,11 @@ public class EgresoService {
                 .orElse(null);
     }
 
-    //    public Double montoMesAnterior() {
-//        return repo.findAllConItems().stream().filter(e -> e.getFechaOperacion().getMonthValue() == LocalDate.now().getMonthValue() - 1).mapToDouble(Egreso::valorTotal).sum();
-//    }
+    public List<Egreso> findAllSinDocumentoComercial(Entidad entidad) {
+        return repo
+                .findAllConDocumentoComercial()
+                .stream()
+                .filter(e -> e.getComprador().getId() == entidad.getId() && e.getDocumento() == null )
+                .collect(Collectors.toList());
+    }
 }
