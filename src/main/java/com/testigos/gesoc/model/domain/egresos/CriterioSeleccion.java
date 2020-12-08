@@ -15,7 +15,7 @@ import com.testigos.gesoc.model.domain.persistentes.EntidadPersistente;
 @Table(name = "criterios_seleccion")
 public abstract class CriterioSeleccion extends EntidadPersistente {
 
-    public static Optional<Presupuesto> presupuestoElegido(List<Presupuesto> presupuestos) {
+    public Optional<Presupuesto> presupuestoElegido(List<Presupuesto> presupuestos) {
         return Optional.empty();
     }
 

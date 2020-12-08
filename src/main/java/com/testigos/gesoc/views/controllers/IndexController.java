@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import com.testigos.gesoc.model.domain.ingresos.Ingreso;
 import com.testigos.gesoc.model.domain.usuarios.Mensaje;
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
 import com.testigos.gesoc.model.services.EgresoService;
@@ -40,7 +39,8 @@ public class IndexController {
     public String index(Model model, Authentication auth) {
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        Double balance = ingresoService.getTotalIngresos(user.getEntidad()) - egresoService.montoActual(user.getEntidad());
+        Double balance = ingresoService.getTotalIngresos(user.getEntidad())
+                - egresoService.montoActual(user.getEntidad());
 
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);

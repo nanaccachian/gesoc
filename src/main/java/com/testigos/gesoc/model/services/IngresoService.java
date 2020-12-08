@@ -11,8 +11,6 @@ import com.testigos.gesoc.persistence.DAOIngreso;
 
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Query;
-
 @Service
 public class IngresoService {
 
@@ -55,36 +53,42 @@ public class IngresoService {
                 .collect(Collectors.toList());
     }
 
-
     public Double getTotalIngresos(Entidad entidad) {
-        return dao.findAllConEgresos().stream().filter(i -> i.getEntidad().getId() == entidad.getId()).mapToDouble(Ingreso::valorDisponible).sum();
+        return dao.findAllConEgresos().stream().filter(i -> i.getEntidad().getId() == entidad.getId())
+                .mapToDouble(Ingreso::valorDisponible).sum();
     }
 
     public Double getTotalIngresosEsteMes(Entidad entidad) {
-        return dao.findAllConEgresos().stream().filter(i -> i.getFechaIngreso().getMonthValue() == LocalDate.now().getMonthValue() && i.getEntidad().getId() == entidad.getId()).mapToDouble(Ingreso::valorDisponible).sum();
+        return dao.findAllConEgresos().stream()
+                .filter(i -> i.getFechaIngreso().getMonthValue() == LocalDate.now().getMonthValue()
+                        && i.getEntidad().getId() == entidad.getId())
+                .mapToDouble(Ingreso::valorDisponible).sum();
     }
 
     public Double getTotalIngresosMesAnterior() {
-        return dao.findAllConEgresos().stream().filter(e -> e.getFechaIngreso().getMonthValue() == LocalDate.now().getMonthValue() - 1).mapToDouble(Ingreso::valorDisponible).sum();
+        return dao.findAllConEgresos().stream()
+                .filter(e -> e.getFechaIngreso().getMonthValue() == LocalDate.now().getMonthValue() - 1)
+                .mapToDouble(Ingreso::valorDisponible).sum();
     }
 
     public Double getTotalIngresosAnio(Entidad entidad) {
-        return dao.findAllConEgresos().stream().filter(i -> i.getFechaIngreso().getYear() == LocalDate.now().getYear() && i.getEntidad().getId() == entidad.getId()).mapToDouble(Ingreso::valorDisponible).sum();
+        return dao.findAllConEgresos().stream().filter(i -> i.getFechaIngreso().getYear() == LocalDate.now().getYear()
+                && i.getEntidad().getId() == entidad.getId()).mapToDouble(Ingreso::valorDisponible).sum();
     }
 
     public Ingreso findUltimoIngreso(Entidad entidad) {
-        return dao.findAllConEgresos().stream().reduce((first, second) -> second).filter(i -> i.getEntidad().getId() == entidad.getId()).orElse(null);
+        return dao.findAllConEgresos().stream().reduce((first, second) -> second)
+                .filter(i -> i.getEntidad().getId() == entidad.getId()).orElse(null);
     }
 
     public List<Ingreso> getIngresosDisponibles(Entidad entidad) {
-        return dao.findAllConEgresos().stream().filter(i -> i.valorDisponible() > 0 && i.getEntidad().getId() == entidad.getId()).collect(Collectors.toList());
+        return dao.findAllConEgresos().stream()
+                .filter(i -> i.valorDisponible() > 0 && i.getEntidad().getId() == entidad.getId())
+                .collect(Collectors.toList());
     }
 
     public List<Ingreso> getIngresos(Entidad entidad) {
-        return dao
-                .findAll()
-                .stream()
-                .filter(i -> i.getEntidad().getId() == entidad.getId())
+        return dao.findAll().stream().filter(i -> i.getEntidad().getId() == entidad.getId())
                 .collect(Collectors.toList());
     }
 }

@@ -1,11 +1,9 @@
 package com.testigos.gesoc.persistence;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Query;
 
-import com.testigos.gesoc.model.domain.egresos.CriterioSeleccion;
 import com.testigos.gesoc.model.domain.egresos.Egreso;
 
 import org.hibernate.Hibernate;

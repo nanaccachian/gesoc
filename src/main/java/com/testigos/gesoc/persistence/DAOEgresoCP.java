@@ -1,14 +1,15 @@
 package com.testigos.gesoc.persistence;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.model.domain.egresos.EgresoConPresupuestos;
 import com.testigos.gesoc.model.domain.egresos.Presupuesto;
+
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.Query;
-import java.util.Collection;
-import java.util.List;
 
 @Repository
 public class DAOEgresoCP extends DAO<EgresoConPresupuestos> {
@@ -24,7 +25,7 @@ public class DAOEgresoCP extends DAO<EgresoConPresupuestos> {
         if (eg != null) {
             Hibernate.initialize(eg.getTodosLosPresupuestos());
             List<Presupuesto> ps = eg.getTodosLosPresupuestos();
-            for(Presupuesto p:ps)
+            for (Presupuesto p : ps)
                 Hibernate.initialize(p.getItems());
             Hibernate.initialize(eg.getPresupuestoElegido());
             Hibernate.initialize(eg.getPresupuestoElegido().getItems());

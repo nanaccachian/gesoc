@@ -1,15 +1,14 @@
 package com.testigos.gesoc.persistence;
 
-import com.testigos.gesoc.model.domain.entidades.Entidad;
-import com.testigos.gesoc.model.domain.ingresos.Ingreso;
+import java.util.List;
+
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
+
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public class DAOUsuario extends DAO<Usuario>{
+public class DAOUsuario extends DAO<Usuario> {
 
     public DAOUsuario() {
         super(Usuario.class);

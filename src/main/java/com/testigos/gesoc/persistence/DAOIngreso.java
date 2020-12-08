@@ -1,12 +1,10 @@
 package com.testigos.gesoc.persistence;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.Query;
 
-import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.model.domain.ingresos.Ingreso;
 
 import org.hibernate.Hibernate;
@@ -69,33 +67,32 @@ public class DAOIngreso extends DAO<Ingreso> {
         close();
     }
 
-        // public void updateProyecto(Ingreso i,ProyectoDeFinanciamiento proyecto) {
-        // createEntityManager();
-        // beginTransaction();
-        // ProyectoDeFinanciamiento p =
-        // em.find(ProyectoDeFinanciamiento.class,proyecto.getId());
-        // i.setProyectoAsociado(p);
-        // em.merge(i);
-        // commit();
-        // close();
-        // }
+    // public void updateProyecto(Ingreso i,ProyectoDeFinanciamiento proyecto) {
+    // createEntityManager();
+    // beginTransaction();
+    // ProyectoDeFinanciamiento p =
+    // em.find(ProyectoDeFinanciamiento.class,proyecto.getId());
+    // i.setProyectoAsociado(p);
+    // em.merge(i);
+    // commit();
+    // close();
+    // }
 
-        // public void mergeConProyecto(ProyectoDeFinanciamiento proyecto, Ingreso
-        // ingreso) {
-        // createEntityManager();
-        // beginTransaction();
-        // Egreso eg = em.merge(egreso);
-        // item.setEgreso(egreso);
-        // commit();
-        // close();
-        // }
+    // public void mergeConProyecto(ProyectoDeFinanciamiento proyecto, Ingreso
+    // ingreso) {
+    // createEntityManager();
+    // beginTransaction();
+    // Egreso eg = em.merge(egreso);
+    // item.setEgreso(egreso);
+    // commit();
+    // close();
+    // }
 
-        // public void update(Ingreso ingreso) {
-        // createEntityManager();
-        // beginTransaction();
-        // em.createQuery("UPDATE Ingreso i set where ");
-        // commit();
-        // close();
-        // }
+    // public void update(Ingreso ingreso) {
+    // createEntityManager();
+    // beginTransaction();
+    // em.createQuery("UPDATE Ingreso i set where ");
+    // commit();
+    // close();
+    // }
 }
-

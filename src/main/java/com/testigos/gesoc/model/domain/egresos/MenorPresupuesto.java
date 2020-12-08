@@ -12,7 +12,7 @@ public class MenorPresupuesto extends CriterioSeleccion {
     @Transient
     private static MenorPresupuesto instancia = null;
 
-    public static Optional<Presupuesto> presupuestoElegido(List<Presupuesto> presupuestos) {
+    public Optional<Presupuesto> presupuestoElegido(List<Presupuesto> presupuestos) {
         return presupuestos.stream().min(MenorPresupuesto::comparar);
     }
 
