@@ -7,6 +7,5 @@ import com.testigos.gesoc.model.domain.ingresos.Ingreso;
 
 public abstract class EstrategiaEmpatadora {
 
-    public void empatar(List<Condicion> condiciones, List<Ingreso> ingresos, List<Egreso> egresos) {
-    }
+    public abstract List<Egreso> empatar(List<Condicion> condiciones, List<Ingreso> ingresos, List<Egreso> egresos);
 }

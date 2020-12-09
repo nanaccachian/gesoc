@@ -1,6 +1,7 @@
 package com.testigos.gesoc.model.domain.egresos;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,7 +48,7 @@ public class Egreso extends EntidadPersistenteEgreso {
     protected @Getter @Setter Ingreso ingresoAsociado;
 
     @OneToMany(mappedBy = "egreso", cascade = CascadeType.ALL)
-    protected @Getter @Setter List<Item> items;
+    protected @Getter @Setter List<Item> items = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vendedor_id")
@@ -70,7 +71,10 @@ public class Egreso extends EntidadPersistenteEgreso {
     }
 
     public double valorTotal() {
-        return items.stream().mapToDouble(Item::valorTotal).sum();
+        if (items == null || items.isEmpty())
+            return 0;
+        else
+            return items.stream().mapToDouble(Item::valorTotal).sum();
     }
 
 }

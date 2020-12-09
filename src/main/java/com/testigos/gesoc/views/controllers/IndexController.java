@@ -33,14 +33,16 @@ public class IndexController {
     private EgresoService egresoService;
 
     @Autowired
+    private EgresoService egresoCPService;
+
+    @Autowired
     private IngresoService ingresoService;
 
     @GetMapping
     public String index(Model model, Authentication auth) {
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        Double balance = ingresoService.getTotalIngresos(user.getEntidad())
-                - egresoService.montoActual(user.getEntidad());
+        Double balance = ingresoService.getTotalIngresos(user.getEntidad()) - egresoService.montoActual(user.getEntidad()) - egresoCPService.montoMes(user.getEntidad());
 
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
