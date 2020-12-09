@@ -38,7 +38,7 @@ public class ItemsController {
     public String getItems(Model model, Authentication auth, @PathVariable("egreso_id") int egreso) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        List<Item> items = itemService.findItems(egresoService.find(egreso));
+        List<Item> items = itemService.findItems(egresoService.findEgreso(egreso));
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("items", items);

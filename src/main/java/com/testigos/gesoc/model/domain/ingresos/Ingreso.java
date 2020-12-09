@@ -27,6 +27,9 @@ public class Ingreso extends EntidadPersistente {
     private @Getter @Setter double monto;
 
     @Column
+    private @Getter @Setter double erogado = 0;
+
+    @Column
     private @Getter @Setter LocalDate fechaIngreso;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,8 +48,13 @@ public class Ingreso extends EntidadPersistente {
         this.monto = valorTotal;
     }
 
+    public void addEgreso(Egreso egreso) {
+        erogado+=egreso.valorTotal();
+        egresosAsociados.add(egreso);
+    }
+
     public double valorDisponible() {
-        return monto - valorEgresosAsociados();
+        return monto - erogado;
     }
 
     private double valorEgresosAsociados() {

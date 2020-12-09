@@ -22,4 +22,8 @@ public class MensajeService {
         dao.close();
         return mensajes;
     }
+
+    public void persist(Mensaje mensaje) {
+        dao.persist(mensaje);
+    }
 }

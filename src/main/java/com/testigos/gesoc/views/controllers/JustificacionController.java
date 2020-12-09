@@ -51,20 +51,25 @@ public class JustificacionController {
         return "elegir_criterio";
     }
 
+//  TODO SACAR LA CONFIGURACION DE LA EMPATADORA DE ACA
     @PostMapping(path = "/justificacion")
     public String justificar(Model model, Authentication auth, @RequestParam("criterio") String criterio ) {
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
         List<Ingreso> ingresos = ingresoService.getIngresosDisponibles(user.getEntidad());
         List<Egreso> egresos = egresoService.getEgresosNoJustificados(user.getEntidad());
+
         Empatadora empatadora = Empatadora.getInstance();
         empatadora.setEstrategiaElegida(empatadora.getEstrategia(criterio));
-        empatadora.empatar(ingresos, egresos);
-        egresoService.update(egresos);
+        List<Egreso> egresosActualizados = empatadora.empatar(ingresos, egresos);
+
+        egresoService.update(egresosActualizados);
+        ingresoService.update(ingresos);
+
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("ingresos", ingresos);
-        model.addAttribute("egresos", egresos);
+        model.addAttribute("egresos", egresosActualizados);
         return "justificacion";
     }
 }

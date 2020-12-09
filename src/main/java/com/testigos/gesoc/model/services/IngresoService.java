@@ -24,14 +24,6 @@ public class IngresoService {
         return dao.find(ingreso_id);
     }
 
-    public List<Ingreso> getIngresosDisponibles() {
-        return dao.findAllConEgresos().stream().filter(i -> i.valorDisponible() > 0).collect(Collectors.toList());
-    }
-
-    public List<Ingreso> getIngresosConProyecto() {
-        return dao.findAllConProyecto();
-    }
-
     public void persist(List<Ingreso> ingresos) {
         ingresos.stream().forEach(i -> dao.persist(i));
     }
@@ -40,8 +32,17 @@ public class IngresoService {
         dao.persist(ingreso);
     }
 
-    public void update2(Ingreso ingreso) {
-        dao.update2(ingreso);
+    public void updateDoc(Ingreso ingreso) {
+        dao.updateDoc(ingreso);
+    }
+
+    public void updateSingle(Ingreso ingreso) {
+        dao.update(ingreso);
+    }
+
+    public void update(List<Ingreso> ingresos) {
+        for(Ingreso i: ingresos)
+            updateSingle(i);
     }
 
     public List<Ingreso> getIngresosSinProyecto() {
@@ -65,16 +66,16 @@ public class IngresoService {
                 .mapToDouble(Ingreso::getMonto).sum();
     }
 
-    public Double getTotalIngresosMesAnterior() {
-        return dao.findAllConEgresos().stream()
-                .filter(e -> e.getFechaIngreso().getMonthValue() == LocalDate.now().getMonthValue() - 1)
-                .mapToDouble(Ingreso::getMonto).sum();
-    }
-
-    public Double getTotalIngresosAnio(Entidad entidad) {
-        return dao.findAllConEgresos().stream().filter(i -> i.getFechaIngreso().getYear() == LocalDate.now().getYear()
-                && i.getEntidad().getId() == entidad.getId()).mapToDouble(Ingreso::getMonto).sum();
-    }
+//    public Double getTotalIngresosMesAnterior() {
+//        return dao.findAllConEgresos().stream()
+//                .filter(e -> e.getFechaIngreso().getMonthValue() == LocalDate.now().getMonthValue() - 1)
+//                .mapToDouble(Ingreso::getMonto).sum();
+//    }
+//
+//    public Double getTotalIngresosAnio(Entidad entidad) {
+//        return dao.findAllConEgresos().stream().filter(i -> i.getFechaIngreso().getYear() == LocalDate.now().getYear()
+//                && i.getEntidad().getId() == entidad.getId()).mapToDouble(Ingreso::getMonto).sum();
+//    }
 
     public Ingreso findUltimoIngreso(Entidad entidad) {
         return dao.findAllConEgresos().stream().reduce((first, second) -> second)

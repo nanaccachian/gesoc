@@ -57,7 +57,7 @@
 // do {
 // System.out.println("Ingrese el nombre del usuario");
 // usuario = Scaneador.scanearString();
-// existeUsuario = database.find(Usuario.class, usuario) != null;
+// existeUsuario = database.findEgreso(Usuario.class, usuario) != null;
 // if (existeUsuario)
 // System.out.println("Nombre de usuario ya encontrado, elija otro nombre");
 // } while (existeUsuario);
@@ -142,7 +142,7 @@
 // do {
 // System.out.println("Ingrese el nombre del usuario");
 // String nombre = Scaneador.scanearString();
-// usuario = database.find(Usuario.class, nombre);
+// usuario = database.findEgreso(Usuario.class, nombre);
 // if (usuario == null) {
 // System.out.println("Usuario inexistente");
 // }

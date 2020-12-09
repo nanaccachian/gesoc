@@ -11,26 +11,22 @@ public class PorFecha extends EstrategiaEmpatadora {
 
     public List<Egreso> empatar(List<Condicion> condiciones, List<Ingreso> ingresos, List<Egreso> egresos) {
 
-        List<Egreso> egresosADevolver = new ArrayList<>();
-
         egresos.sort(Comparator.comparing(Egreso::getFechaOperacion));
 
+        List<Egreso> egresosADevolver = new ArrayList<>();
+        List<Egreso> aEliminar = new ArrayList<>();
+
         for (Ingreso ing : ingresos) {
-//            int i = 0;
-            double valor = ing.getMonto();
             for (Egreso eg : egresos) {
-                if (valor > eg.valorTotal() && condiciones.stream().allMatch(cond -> cond.cumpleCondicion(ing, eg))) {
-                    ing.getEgresosAsociados().add(eg);
+                if (ing.valorDisponible() >= eg.valorTotal() && (condiciones == null || condiciones.stream().allMatch(cond -> cond.cumpleCondicion(ing, eg)))) {
+                    ing.addEgreso(eg);
                     eg.setIngresoAsociado(ing);
-                    valor -= eg.valorTotal();
                     egresosADevolver.add(eg);
-//                    egresos.remove(eg);
-//                    i++;
-                } else
-                    break;
+                    aEliminar.add(eg);
+                } else break;
             }
-//            for (int j = 0; j < i; j++)
-//                egresos.remove(j);
+            egresos.removeAll(aEliminar);
+            aEliminar.clear();
         }
 
         return egresosADevolver;

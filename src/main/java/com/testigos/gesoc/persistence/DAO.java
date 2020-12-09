@@ -112,6 +112,7 @@ public class DAO<T> {
         createEntityManager();
         beginTransaction();
         em.merge(object);
+        em.flush();
         commit();
         close();
     }

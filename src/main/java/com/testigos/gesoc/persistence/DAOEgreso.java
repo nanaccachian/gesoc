@@ -69,6 +69,22 @@ public class DAOEgreso extends DAO<Egreso> {
         return tList;
     }
 
+    public List<Egreso> findAllConIngreso() {
+        createEntityManager();
+        beginTransaction();
+        List<Egreso> tList = createQuery("From " + type.getSimpleName()).getResultList();
+        if (tList != null)
+            tList.size();
+        for (Egreso e : tList) {
+            Hibernate.initialize(e.getItems());
+            Hibernate.initialize(e.getVendedor());
+            Hibernate.initialize(e.getIngresoAsociado());
+        }
+        commit();
+        close();
+        return tList;
+    }
+
     public List<Egreso> findAllConDocumentoComercial() {
         createEntityManager();
         beginTransaction();

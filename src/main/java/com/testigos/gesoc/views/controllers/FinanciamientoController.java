@@ -61,8 +61,7 @@ public class FinanciamientoController {
     public String addProyecto(Model model, Authentication auth, @ModelAttribute ProyectoDeFinanciamiento proyecto, @RequestParam("usuario_proyecto") String usuario) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-//        String username = (String) model.getAttribute("usuario_proyecto");
-        Usuario u = usuarioService.find(usuario);
+        Usuario u = usuarioService.findConEntidad(usuario);
         proyecto.setDirector(u);
         proyectosService.persist(proyecto);
         model.addAttribute("user", user);
@@ -91,7 +90,7 @@ public class FinanciamientoController {
         Ingreso ingreso = ingresosService.find(Integer.parseInt(ingreso_id));
         if (proyecto.sePuedeAgregar(ingreso)) { //TODO PASAR AL SERVICE
             ingreso.setProyectoAsociado(proyecto);
-            ingresosService.update2(ingreso);
+            ingresosService.updateDoc(ingreso);
             model.addAttribute("user", user);
             model.addAttribute("mensajes", mensajes);
             return "vinculacion_result";

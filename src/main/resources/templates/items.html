@@ -107,7 +107,7 @@
         <li>
           <a
               class="lucho"
-              th:href="@{'/rest/usuarios/' + ${user.username}}"
+              th:href="@{index/user}"
               th:text="${user.name + ' ' + user.surname}"
           ></a>
         </li>
@@ -187,8 +187,8 @@
               </thead>
               <tbody>
               <tr th:each="i : ${items}">
-                <td th:text="${i.cantidad}"></td>
                 <td th:text="${i.producto}"></td>
+                <td th:text="${i.cantidad}"></td>
                 <td th:text="${i.valorUnitario}"></td>
                 <td th:text="${i.valorTotal()}"></td>
               </tr>

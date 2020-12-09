@@ -142,9 +142,9 @@
           <ul class="nav pull-right top-menu">
             <li>
               <a
-                class="lucho"
-                th:href="@{'/rest/usuarios/' + ${user.username}}"
-                th:text="${user.name + ' ' + user.surname}"
+                  class="lucho"
+                  th:href="@{index/user}"
+                  th:text="${user.name + ' ' + user.surname}"
               ></a>
             </li>
           </ul>
@@ -242,7 +242,8 @@
                     <tr>
                       <th class="text-center">Descripcion</th>
                       <th class="text-center">Fecha</th>
-                      <th class="text-center">Valor</th>
+                      <th class="text-center">Valor Total</th>
+                      <th class="text-center">Valor Disponible</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -250,6 +251,7 @@
                       <td th:text="${i.descripcion}"></td>
                       <td th:text="${i.fechaIngreso}"></td>
                       <td th:text="${i.monto}"></td>
+                      <td th:text="${i.valorDisponible()}"></td>
                     </tr>
                   </tbody>
                 </table>

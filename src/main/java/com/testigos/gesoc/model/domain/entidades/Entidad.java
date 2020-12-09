@@ -54,4 +54,8 @@ public abstract class Entidad extends EntidadPersistente {
     protected Integer getCuit() {
         return null;
     }
+
+    public String nombreClase() {
+        return this.getClass().getSimpleName();
+    }
 }

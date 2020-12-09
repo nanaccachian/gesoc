@@ -1,5 +1,6 @@
 package com.testigos.gesoc.model.domain.ingresos.Empatadora;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,9 +23,10 @@ public class Empatadora {
 
     private List<Condicion> condiciones;
 
-    public void empatar(List<Ingreso> ingresos, List<Egreso> egresos) {
+    public List<Egreso> empatar(List<Ingreso> ingresos, List<Egreso> egresos) {
         if (ingresos != null && egresos != null)
-            estrategiaElegida.empatar(condiciones, ingresos, egresos);
+            return estrategiaElegida.empatar(condiciones, ingresos, egresos);
+        else return new ArrayList<>();
     }
 
     public static Empatadora getInstance() {

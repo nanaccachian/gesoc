@@ -143,7 +143,7 @@
 
 // boolean bl = false;
 
-// ManejadorDeCategorias sist = dbManager.find(ManejadorDeCategorias.class,
+// ManejadorDeCategorias sist = dbManager.findEgreso(ManejadorDeCategorias.class,
 // nombreIngresado);
 
 // if (sist == null) {
@@ -602,7 +602,7 @@
 // revisor de la compra");
 // String usuario = Scaneador.scanearString();
 
-// user = dbManager.find(Usuario.class, usuario);
+// user = dbManager.findEgreso(Usuario.class, usuario);
 
 // if (user == null)
 // System.out.println("No existe ese usuario");
@@ -657,7 +657,7 @@
 // String sistema_ingresado = Scaneador.scanearString();
 
 // ManejadorDeCategorias manejadorDeCategorias =
-// dbManager.find(ManejadorDeCategorias.class,
+// dbManager.findEgreso(ManejadorDeCategorias.class,
 // sistema_ingresado);
 
 // System.out.println("Ingrese nombre de la categoria");
@@ -797,7 +797,7 @@
 // dbManager.createEntityManager();
 // dbManager.beginTransaction();
 
-// ManejadorDeCategorias manej = dbManager.find(ManejadorDeCategorias.class,
+// ManejadorDeCategorias manej = dbManager.findEgreso(ManejadorDeCategorias.class,
 // sistema);
 
 // System.out.println("Ingrese el nombre del criterio padre");
@@ -847,7 +847,7 @@
 // System.out.println("Intenta de nuevo");
 // }
 
-// Country country = dbManager.find(Country.class, country_id);
+// Country country = dbManager.findEgreso(Country.class, country_id);
 
 // if (country == null) {
 // country = APIManager.getCountry(country_id);
@@ -873,7 +873,7 @@
 // System.out.println("Intenta de nuevo");
 // }
 
-// State state = dbManager.find(State.class, state_id);
+// State state = dbManager.findEgreso(State.class, state_id);
 
 // if (state == null) {
 // state = APIManager.getState(state_id);
@@ -903,7 +903,7 @@
 // System.out.println("Intenta de nuevo");
 // }
 
-// City city = dbManager.find(City.class, city_id);
+// City city = dbManager.findEgreso(City.class, city_id);
 
 // // RESTO DE LA INFO
 // System.out.println("Ingrese calle del domicilio");

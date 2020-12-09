@@ -26,7 +26,7 @@ public class DireccionPostal extends EntidadPersistente {
     private int altura;
 
     @Column @Nullable
-    private int piso;
+    private int piso = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ciudad_id")

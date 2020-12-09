@@ -14,7 +14,6 @@ import com.testigos.gesoc.model.domain.usuarios.Mensaje;
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
 import com.testigos.gesoc.model.services.CriteriosService;
 import com.testigos.gesoc.model.services.DocumentoComercialService;
-import com.testigos.gesoc.model.services.EgresoCPService;
 import com.testigos.gesoc.model.services.EgresoService;
 import com.testigos.gesoc.model.services.ItemService;
 import com.testigos.gesoc.model.services.MensajeService;
@@ -47,9 +46,6 @@ public class EgresosController {
     private EgresoService egresoService;
 
     @Autowired
-    private EgresoCPService egresoCPService;
-
-    @Autowired
     private ProveedorService proveedorService;
 
     @Autowired
@@ -70,8 +66,7 @@ public class EgresosController {
     public String egresos(Model model, Authentication auth) {
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        List<Egreso> egresos = egresoService.findAllConProveedor(user.getEntidad());
-        egresos.addAll(egresoCPService.findAllConProveedor(user.getEntidad()));
+        List<Egreso> egresos = egresoService.findEgresosConProveedor(user.getEntidad());
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("egresos", egresos);
@@ -125,7 +120,7 @@ public class EgresosController {
     public String docComercialAdd(Model model, Authentication auth) {
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        List<Egreso> egresos = egresoService.findAllSinDocumentoComercial(user.getEntidad());
+        List<Egreso> egresos = egresoService.findEgresosSinDocumentoComercial(user.getEntidad());
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("egresos", egresos);
@@ -136,10 +131,9 @@ public class EgresosController {
     @PostMapping(path = "/doc_comercial/add")
     public String persistDocComercial(Model model, Authentication auth,
             @ModelAttribute("new_doc") DocumentoComercial documentoComercial, @RequestParam("egreso_id") String egr) {
-
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        Egreso egreso = egresoService.find(Integer.parseInt(egr));
+        Egreso egreso = egresoService.findEgresoGeneral(Integer.parseInt(egr));
         documentoComercialService.persist(documentoComercial, egreso);
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
@@ -173,7 +167,7 @@ public class EgresosController {
         egresoConPresupuestos.setComprador(user.getEntidad());
         egresoConPresupuestos.setVendedor(proveedorService.find(Integer.parseInt(prov)));
         egresoConPresupuestos.setFechaOperacion(LocalDate.now());
-        egresoCPService.persist(egresoConPresupuestos);
+        egresoService.persist(egresoConPresupuestos);
         egresoActual = egresoConPresupuestos;
         model.addAttribute("egreso", egresoConPresupuestos);
         model.addAttribute("user", user);
@@ -232,7 +226,7 @@ public class EgresosController {
             model.addAttribute("new_presupuesto", new Presupuesto());
             return "presupuesto_add";
         } else {
-            List<Presupuesto> presupuestos = egresoCPService.findConPresupuestos(egresoActual.getId())
+            List<Presupuesto> presupuestos = egresoService.findConPresupuestos(egresoActual.getId())
                     .getTodosLosPresupuestos();
             model.addAttribute("presupuestos", presupuestos);
             return "presupuesto_eleccion";
@@ -244,10 +238,10 @@ public class EgresosController {
             @RequestParam("presupuesto_elegido") String presupuesto) {
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        EgresoConPresupuestos egreso = egresoCPService.findConPresupuestos(egresoActual.getId());
+        EgresoConPresupuestos egreso = egresoService.findConPresupuestos(egresoActual.getId());
         egreso.setPresupuestoElegido(egreso.getTodosLosPresupuestos().stream()
                 .filter(p -> p.getId() == Integer.parseInt(presupuesto)).findFirst().get());
-        egresoCPService.updatePresupuesto(egreso);
+        egresoService.updatePresupuesto(egreso);
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         return "egresos_add_result";
@@ -257,7 +251,7 @@ public class EgresosController {
     public String getPresupuestos(Model model, Authentication auth, @PathVariable("egreso_id") int egreso) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        EgresoConPresupuestos eg = egresoCPService.findConPresupuestos(egreso);
+        EgresoConPresupuestos eg = egresoService.findConPresupuestos(egreso);
         List<Presupuesto> presupuestos = new ArrayList<>();
         Presupuesto presupuesto = null;
         if (eg != null) {

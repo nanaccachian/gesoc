@@ -1,6 +1,7 @@
 package com.testigos.gesoc.persistence;
 
 import com.testigos.gesoc.model.domain.egresos.Egreso;
+import com.testigos.gesoc.model.domain.egresos.EgresoConPresupuestos;
 import com.testigos.gesoc.model.domain.egresos.Item;
 import com.testigos.gesoc.model.domain.egresos.Presupuesto;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,8 @@ public class DAOItem extends DAO<Item>{
         createEntityManager();
         beginTransaction();
         Egreso egreso1 = em.find(Egreso.class,egreso.getId());
+        if(egreso1 == null)
+            egreso1 = em.find(EgresoConPresupuestos.class,egreso.getId());
         item.setEgreso(egreso1);
         em.persist(item);
         commit();

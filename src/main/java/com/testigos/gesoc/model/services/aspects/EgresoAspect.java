@@ -7,6 +7,7 @@ import com.testigos.gesoc.persistence.MongoRepositories.RegistroRepository;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,7 @@ public class EgresoAspect {
                 "Se inserto un egreso con id: " + egreso.getId() + ", referido a " + egreso.getDescripcion()));
     }
 
-    @AfterReturning("execution(* com.testigos.gesoc.model.services.EgresoService.updateEgreso(..))")
+    @AfterReturning("execution(* com.testigos.gesoc.model.services.EgresoService.updateEgreso(..)) || execution(* com.testigos.gesoc.model.services.EgresoService.updatePresupuesto(..))")
     public void registerUpdate(JoinPoint joinPoint) {
         Egreso egreso = (Egreso) joinPoint.getArgs()[0];
         repo.save(new Registro(TipoRegistro.MODIFICACION, Egreso.class.getSimpleName(),

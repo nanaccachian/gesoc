@@ -56,7 +56,7 @@ public class DAOIngreso extends DAO<Ingreso> {
         return tList.stream().filter(i -> i.getProyectoAsociado() == null).collect(Collectors.toList());
     }
 
-    public void update2(Ingreso i) {
+    public void updateDoc(Ingreso i) {
         createEntityManager();
         beginTransaction();
         Query q = em.createQuery("UPDATE Ingreso i set i.proyectoAsociado = :proy where i.id = :id");
@@ -71,7 +71,7 @@ public class DAOIngreso extends DAO<Ingreso> {
     // createEntityManager();
     // beginTransaction();
     // ProyectoDeFinanciamiento p =
-    // em.find(ProyectoDeFinanciamiento.class,proyecto.getId());
+    // em.findEgreso(ProyectoDeFinanciamiento.class,proyecto.getId());
     // i.setProyectoAsociado(p);
     // em.merge(i);
     // commit();

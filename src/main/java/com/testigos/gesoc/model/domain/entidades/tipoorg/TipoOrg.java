@@ -15,4 +15,8 @@ public abstract class TipoOrg extends EntidadPersistente {
     public TipoOrg recategorizar() {
         return null;
     }
+
+    public String nombreClase() {
+        return this.getClass().getSimpleName();
+    }
 }

@@ -22,6 +22,7 @@ public class DAOUsuario extends DAO<Usuario> {
         if (t != null) {
             t.getClass();
             Hibernate.initialize(t.getEntidad());
+            Hibernate.initialize(t.getEntidad().getTipo());
         }
         commit();
         close();

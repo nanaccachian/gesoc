@@ -57,9 +57,8 @@ public class IngresosController {
         ingreso.setEntidad(user.getEntidad());
         ingreso.setFechaIngreso(LocalDate.now());
         ingresoService.persist(ingreso);
-        List<Ingreso> ingresos = ingresoService.getIngresos();
+        List<Ingreso> ingresos = ingresoService.getIngresos(user.getEntidad());
         ingresos.add(ingreso);
-        // user.getEntidad().getIngresos();
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("ingresos", ingresos);

@@ -10,16 +10,15 @@ import com.testigos.gesoc.model.domain.ingresos.Ingreso;
 public class PrimeroIngreso extends EstrategiaEmpatadora {
 
     public List<Egreso> empatar(List<Condicion> condiciones, List<Ingreso> ingresos, List<Egreso> egresos) {
+        ingresos.sort(Comparator.comparing(Ingreso::getMonto));
 
         List<Egreso> egresosADevolver = new ArrayList<>();
-        ingresos.sort(Comparator.comparing(Ingreso::getMonto));
 
         for (Egreso eg : egresos) {
             for (Ingreso ing : ingresos) {
-                if (eg.valorTotal() < ing.valorDisponible()
-                        && condiciones.stream().allMatch(cond -> cond.cumpleCondicion(ing, eg))) {
+                if (eg.valorTotal() <= ing.valorDisponible() && (condiciones == null ||  condiciones.stream().allMatch(cond -> cond.cumpleCondicion(ing, eg)))) {
                     eg.setIngresoAsociado(ing);
-                    ing.getEgresosAsociados().add(eg);
+                    ing.addEgreso(eg);
                     egresosADevolver.add(eg);
                     break;
                 }
