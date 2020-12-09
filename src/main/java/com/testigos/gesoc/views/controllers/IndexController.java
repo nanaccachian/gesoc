@@ -42,7 +42,7 @@ public class IndexController {
     public String index(Model model, Authentication auth) {
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        Double balance = ingresoService.getTotalIngresos(user.getEntidad()) - egresoService.montoActual(user.getEntidad()) - egresoCPService.montoMes(user.getEntidad());
+        Double balance = ingresoService.getTotalIngresos(user.getEntidad()) - egresoService.montoActual(user.getEntidad()) - egresoCPService.montoActual(user.getEntidad());
 
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);

@@ -27,8 +27,11 @@ public class DAOEgresoCP extends DAO<EgresoConPresupuestos> {
             List<Presupuesto> ps = eg.getTodosLosPresupuestos();
             for (Presupuesto p : ps)
                 Hibernate.initialize(p.getItems());
-            Hibernate.initialize(eg.getPresupuestoElegido());
-            Hibernate.initialize(eg.getPresupuestoElegido().getItems());
+
+            if (eg.getPresupuestoElegido() != null) {
+                Hibernate.initialize(eg.getPresupuestoElegido());
+                Hibernate.initialize(eg.getPresupuestoElegido().getItems());
+            }
         }
         commit();
         close();

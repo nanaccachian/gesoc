@@ -55,25 +55,25 @@ public class IngresoService {
 
     public Double getTotalIngresos(Entidad entidad) {
         return dao.findAllConEgresos().stream().filter(i -> i.getEntidad().getId() == entidad.getId())
-                .mapToDouble(Ingreso::valorDisponible).sum();
+                .mapToDouble(Ingreso::getMonto).sum();
     }
 
     public Double getTotalIngresosEsteMes(Entidad entidad) {
         return dao.findAllConEgresos().stream()
                 .filter(i -> i.getFechaIngreso().getMonthValue() == LocalDate.now().getMonthValue()
                         && i.getEntidad().getId() == entidad.getId())
-                .mapToDouble(Ingreso::valorDisponible).sum();
+                .mapToDouble(Ingreso::getMonto).sum();
     }
 
     public Double getTotalIngresosMesAnterior() {
         return dao.findAllConEgresos().stream()
                 .filter(e -> e.getFechaIngreso().getMonthValue() == LocalDate.now().getMonthValue() - 1)
-                .mapToDouble(Ingreso::valorDisponible).sum();
+                .mapToDouble(Ingreso::getMonto).sum();
     }
 
     public Double getTotalIngresosAnio(Entidad entidad) {
         return dao.findAllConEgresos().stream().filter(i -> i.getFechaIngreso().getYear() == LocalDate.now().getYear()
-                && i.getEntidad().getId() == entidad.getId()).mapToDouble(Ingreso::valorDisponible).sum();
+                && i.getEntidad().getId() == entidad.getId()).mapToDouble(Ingreso::getMonto).sum();
     }
 
     public Ingreso findUltimoIngreso(Entidad entidad) {

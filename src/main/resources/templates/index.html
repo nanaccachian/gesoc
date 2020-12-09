@@ -241,7 +241,7 @@
             </div>
           </div>
 <!--          EGRESOS-->
-          <div class="row" style="margin-bottom: 25px">
+          <div class="row" style="margin-bottom: 25px" th:if="${ultimo_egreso != null}">
 <!--            EGRESOS: ANUAL-->
             <div class=" col-lg-3 col-md-3 col-sm-3 ">
               <div class="green-panel">
@@ -251,7 +251,7 @@
                 <div class="panel-body">
                   <i class="fa fa-bar-chart fa-5x"></i>
                   <h4 th:text="'Egresos anuales: ' + ${egresos_anio}"></h4>
-                  <p style="text-align: left">&nbsp</p>
+                  <p style="text-align: left">&nbsp;</p>
                 </div>
               </div>
             </div>
@@ -279,18 +279,18 @@
                   <h5 style="text-align: left" th:text="'Descripcion: ' + ${ultimo_egreso.descripcion}"></h5>
                   <h5 style="text-align: left" th:text="'Monto : ' + ${ultimo_egreso.valorTotal()}"></h5>
                   <h5 style="text-align: left" th:text="'Proveedor : ' + ${ultimo_egreso.vendedor.getNombre()}"></h5>
-                  <p style="text-align: left">&nbsp</p>
+                  <p style="text-align: left">&nbsp;</p>
                 </footer>
               </div>
             </div>
           </div>
 <!--          INGRESOS-->
-          <div class="row">
+          <div class="row" th:if="${ultimo_ingreso != null}">
             <!--INGRESOS: MENSUAL-->
             <div class="col-lg-3 col-md-3 col-sm-3">
               <div class="grey-panel">
                 <div class="grey-header">
-                  <h5><i class="fa fa-angle-right"></i>Ingresos mensual</h5>
+                  <h5><i class="fa fa-angle-right"></i> Ingresos mensual</h5>
                 </div>
                 <div class="panel-body">
                   <i class="fa fa-calendar-check-o fa-5x"></i>
@@ -322,7 +322,7 @@
                 <div class="panel-body">
                   <i class="fa fa-level-up fa-5x"></i>
                   <h5 style="text-align: left" th:text="'Descripcion: ' + ${ultimo_ingreso.descripcion}"></h5>
-                  <h5 style="text-align: left" th:text="'Valor disponible: ' + ${ultimo_ingreso.valorDisponible()}"></h5>
+                  <h5 style="text-align: left" th:text="'Monto: ' + ${ultimo_ingreso.getMonto()}"></h5>
                 </div>
               </div>
             </div>

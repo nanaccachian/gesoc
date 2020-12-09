@@ -42,6 +42,7 @@ public class ItemsController {
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("items", items);
+        model.addAttribute("egreso",egreso);
         return "items";
     }
 }

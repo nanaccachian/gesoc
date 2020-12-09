@@ -23,7 +23,7 @@ public class DAOEgreso extends DAO<Egreso> {
         q.setParameter("i", e.getIngresoAsociado());
         q.setParameter("id", e.getId());
         q.executeUpdate();
-        em.getTransaction().commit();
+        commit();
         close();
     }
 
@@ -44,12 +44,11 @@ public class DAOEgreso extends DAO<Egreso> {
         createEntityManager();
         beginTransaction();
         List<Egreso> tList = createQuery("From " + type.getSimpleName()).getResultList();
-        if (tList != null) {
+        if (tList != null)
             tList.size();
-            for (Egreso e : tList)
-                Hibernate.initialize(e.getItems());
 
-        }
+        for (Egreso e : tList)
+            Hibernate.initialize(e.getItems());
         commit();
         close();
         return tList;

@@ -24,7 +24,7 @@ public class EgresoAspect {
                 "Se inserto un egreso con id: " + egreso.getId() + ", referido a " + egreso.getDescripcion()));
     }
 
-    @AfterReturning("execution(* com.testigos.gesoc.model.services.EgresoService.update(..))")
+    @AfterReturning("execution(* com.testigos.gesoc.model.services.EgresoService.updateEgreso(..))")
     public void registerUpdate(JoinPoint joinPoint) {
         Egreso egreso = (Egreso) joinPoint.getArgs()[0];
         repo.save(new Registro(TipoRegistro.MODIFICACION, Egreso.class.getSimpleName(),

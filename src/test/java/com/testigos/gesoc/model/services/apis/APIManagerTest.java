@@ -1,8 +1,10 @@
 package com.testigos.gesoc.model.services.apis;
 
 import com.testigos.gesoc.model.services.apis.domain.City;
+import com.testigos.gesoc.model.services.apis.domain.Country;
 import com.testigos.gesoc.model.services.apis.domain.Currency;
 import com.testigos.gesoc.model.services.apis.domain.State;
+import com.testigos.gesoc.persistence.DAO;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -51,5 +53,17 @@ public class APIManagerTest {
         System.out.println(city.getId());
 
         Assert.assertEquals("VVktUk8xOCBEZSBKdWxpbw", city.getId());
+    }
+
+    @Test
+    public void testPersistir() {
+
+        DAO<State> dao = new DAO<>(State.class);
+
+        Country ar = APIManager.getCountry("AR");
+
+        System.out.println(ar);
+
+        dao.persist(ar);
     }
 }

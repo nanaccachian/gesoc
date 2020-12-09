@@ -43,7 +43,11 @@ public class EgresoService {
 
     public void update(List<Egreso> egresos) {
         for (Egreso e : egresos)
-            repo.update(e);
+            updateEgreso(e);
+    }
+
+    public void updateEgreso(Egreso e) {
+        repo.update(e);
     }
 
     // public List<Egreso> findAllConProveedor() {

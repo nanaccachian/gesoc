@@ -268,6 +268,7 @@ public class EgresosController {
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("presupuestos", presupuestos);
         model.addAttribute("presupuesto", presupuesto);
+        model.addAttribute("egreso", egreso);
         return "egreso_presupuestos";
     }
 }
