@@ -5,6 +5,7 @@
     <groupId>com.testigos</groupId>
     <artifactId>gesoc</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>GeSOC</name>
     <description>TU VIEJA</description>
 
