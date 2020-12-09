@@ -49,15 +49,11 @@ public class Ingreso extends EntidadPersistente {
     }
 
     public void addEgreso(Egreso egreso) {
-        erogado+=egreso.valorTotal();
+        erogado += egreso.valorTotal();
         egresosAsociados.add(egreso);
     }
 
     public double valorDisponible() {
         return monto - erogado;
-    }
-
-    private double valorEgresosAsociados() {
-        return egresosAsociados.stream().mapToDouble(Egreso::valorTotal).sum();
     }
 }

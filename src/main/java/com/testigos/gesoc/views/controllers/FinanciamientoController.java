@@ -58,7 +58,8 @@ public class FinanciamientoController {
     }
 
     @PostMapping(path = "/add")
-    public String addProyecto(Model model, Authentication auth, @ModelAttribute ProyectoDeFinanciamiento proyecto, @RequestParam("usuario_proyecto") String usuario) {
+    public String addProyecto(Model model, Authentication auth, @ModelAttribute ProyectoDeFinanciamiento proyecto,
+            @RequestParam("usuario_proyecto") String usuario) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
         Usuario u = usuarioService.findConEntidad(usuario);
@@ -83,12 +84,13 @@ public class FinanciamientoController {
     }
 
     @PostMapping(path = "/vinculacion")
-    public String vincular(Model model, Authentication auth, @RequestParam("ingreso_elegido") String ingreso_id, @RequestParam("proyecto_elegido") String proyecto_id) {
+    public String vincular(Model model, Authentication auth, @RequestParam("ingreso_elegido") String ingreso_id,
+            @RequestParam("proyecto_elegido") String proyecto_id) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
         ProyectoDeFinanciamiento proyecto = proyectosService.find(Integer.parseInt(proyecto_id));
         Ingreso ingreso = ingresosService.find(Integer.parseInt(ingreso_id));
-        if (proyecto.sePuedeAgregar(ingreso)) { //TODO PASAR AL SERVICE
+        if (proyecto.sePuedeAgregar(ingreso)) {
             ingreso.setProyectoAsociado(proyecto);
             ingresosService.updateDoc(ingreso);
             model.addAttribute("user", user);
@@ -102,7 +104,8 @@ public class FinanciamientoController {
     }
 
     @GetMapping(path = "/{proyecto_id}/ingresos")
-    public String ingresosDeProyecto(Model model, Authentication auth, @PathVariable("proyecto_id") String proyecto_id) {
+    public String ingresosDeProyecto(Model model, Authentication auth,
+            @PathVariable("proyecto_id") String proyecto_id) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
         List<Ingreso> ingresos = proyectosService.find(Integer.parseInt(proyecto_id)).getIngresosAsociados();

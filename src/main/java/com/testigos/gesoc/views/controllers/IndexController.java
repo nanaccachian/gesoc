@@ -3,8 +3,6 @@ package com.testigos.gesoc.views.controllers;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 import com.testigos.gesoc.model.domain.egresos.Egreso;
@@ -43,7 +41,8 @@ public class IndexController {
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
 
-        Double balance = ingresoService.getTotalIngresos(user.getEntidad()) - egresoService.montoActual(user.getEntidad());
+        Double balance = ingresoService.getTotalIngresos(user.getEntidad())
+                - egresoService.montoActual(user.getEntidad());
         Double egresos_mes = egresoService.montoMes(user.getEntidad());
         Double egresos_anio = egresoService.montoAnio(user.getEntidad());
         Egreso ultimo_egreso = egresoService.findUltimoEgreso(user.getEntidad());

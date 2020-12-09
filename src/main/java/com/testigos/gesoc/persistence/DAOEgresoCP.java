@@ -1,6 +1,5 @@
 package com.testigos.gesoc.persistence;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -77,7 +76,6 @@ public class DAOEgresoCP extends DAO<EgresoConPresupuestos> {
         close();
         return tList;
     }
-
 
     public List<EgresoConPresupuestos> findAllConUsuario() {
 
