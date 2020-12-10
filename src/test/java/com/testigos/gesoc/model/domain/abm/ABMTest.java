@@ -32,7 +32,7 @@ public class ABMTest {
     }
     @Test
     public void update(){
-        /*Test update*/
+        /*Test updateIngreso*/
         Registro userB = repo.findByDescripcion("Se modifico el campo a1");
         userB.setDescripcion("He sido modificado");
         repo.save(userB);
@@ -43,7 +43,7 @@ public class ABMTest {
 
     @Test
     public void findByTipoRegistro(){
-        /*Test update*/
+        /*Test updateIngreso*/
         List<Registro> reg = repo.findAllByTipoRegistro(TipoRegistro.ALTA);
         Assert.assertNotNull(reg);
         Assert.assertEquals(1, reg.size());

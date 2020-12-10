@@ -21,10 +21,14 @@ public class Mensaje extends EntidadPersistente {
     private Usuario user;
 
     @Column
+    private @Getter String fecha;
+
+    @Column
     private @Getter String mensaje;
 
-    public Mensaje(Usuario user, String mensaje) {
+    public Mensaje(Usuario user, String mensaje, String fecha) {
         this.user = user;
         this.mensaje = mensaje;
+        this.fecha = fecha;
     }
 }

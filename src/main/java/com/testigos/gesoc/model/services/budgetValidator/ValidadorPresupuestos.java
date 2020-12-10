@@ -1,5 +1,9 @@
 package com.testigos.gesoc.model.services.budgetValidator;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 import com.testigos.gesoc.model.domain.egresos.EgresoConPresupuestos;
@@ -8,20 +12,16 @@ import com.testigos.gesoc.model.domain.usuarios.Mensaje;
 import com.testigos.gesoc.model.services.EgresoService;
 import com.testigos.gesoc.model.services.MensajeService;
 
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 @Component
-public class ValidadorPresupuestos implements Job {
+public class ValidadorPresupuestos {
 
     @Autowired
-    private EgresoService egresoCPService;
+    private EgresoService egresoService;
 
     @Autowired
     private MensajeService mensajeService;
@@ -50,14 +50,17 @@ public class ValidadorPresupuestos implements Job {
         return presupuesto.getEgresoConPresupuestos().listaItems().containsAll(presupuesto.listaItems());
     }
 
-    @Override
-    public void execute(JobExecutionContext jobExecutionContext) {
-        for (EgresoConPresupuestos eg : egresoCPService.getEgresosInvalidosConUsuario()) {
+    @Async
+    @Scheduled(cron = "0 44 17 * * *")
+    public void execute() {
+        List<EgresoConPresupuestos> egs =  egresoService.getEgresosInvalidosConUsuario();
+
+        for (EgresoConPresupuestos eg : egs) {
             if (eg.esValido()) {
                 eg.setEsValidoElPresupuesto(true);
-                egresoCPService.persist(eg);
+                egresoService.updateEgreso(eg);
             } else
-                mensajeService.persist(new Mensaje(eg.getRevisor(), "El egreso no es válido: " + eg.toString()));
+                mensajeService.persist(new Mensaje(eg.getRevisor(), "El egreso: " + eg.getId() +  " no es válido", ZonedDateTime.now(ZoneId.of("America/Argentina/Buenos_Aires")).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
         }
     }
 }

@@ -114,7 +114,7 @@ TOP BAR CONTENT & NOTIFICATIONS
                       <span class="label label-danger"
                       ><i class="fa fa-dollar"></i
                       ></span>
-                  <th:block th:text="${mensaje.getMensaje()}"></th:block>
+                  <th:block th:text="${mensaje.getFecha()} + ': ' +${mensaje.getMensaje()}"></th:block>
                 </a>
               </li>
             </th:block>

@@ -16,7 +16,7 @@ public class DAOEgreso extends DAO<Egreso> {
         super(Egreso.class);
     }
 
-    public void update(Egreso e) {
+    public void updateIngreso(Egreso e) {
         createEntityManager();
         beginTransaction();
         Query q = em.createQuery("UPDATE Egreso e set e.ingresoAsociado = :i where e.id = :id");

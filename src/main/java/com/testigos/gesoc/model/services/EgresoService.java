@@ -87,7 +87,7 @@ public class EgresoService {
         if (e instanceof EgresoConPresupuestos)
             repoEgresosCP.update(e);
         else
-            repoEgresos.update(e);
+            repoEgresos.updateIngreso(e);
     }
 
     public void updatePresupuesto(EgresoConPresupuestos egresoActual) {
@@ -108,7 +108,7 @@ public class EgresoService {
     }
 
     public List<EgresoConPresupuestos> getEgresosInvalidosConUsuario() {
-        return repoEgresosCP.findAllConUsuario().stream().filter(i -> !i.esValido()).collect(Collectors.toList());
+        return repoEgresosCP.findAllConUsuario().stream().filter(i -> !i.isEsValidoElPresupuesto()).collect(Collectors.toList());
     }
 
     // METODOS HOME
