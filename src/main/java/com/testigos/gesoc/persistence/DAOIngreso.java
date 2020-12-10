@@ -67,32 +67,4 @@ public class DAOIngreso extends DAO<Ingreso> {
         close();
     }
 
-    // public void updateProyecto(Ingreso i,ProyectoDeFinanciamiento proyecto) {
-    // createEntityManager();
-    // beginTransaction();
-    // ProyectoDeFinanciamiento p =
-    // em.findEgreso(ProyectoDeFinanciamiento.class,proyecto.getId());
-    // i.setProyectoAsociado(p);
-    // em.merge(i);
-    // commit();
-    // close();
-    // }
-
-    // public void mergeConProyecto(ProyectoDeFinanciamiento proyecto, Ingreso
-    // ingreso) {
-    // createEntityManager();
-    // beginTransaction();
-    // Egreso eg = em.merge(egreso);
-    // item.setEgreso(egreso);
-    // commit();
-    // close();
-    // }
-
-    // public void update(Ingreso ingreso) {
-    // createEntityManager();
-    // beginTransaction();
-    // em.createQuery("UPDATE Ingreso i set where ");
-    // commit();
-    // close();
-    // }
 }

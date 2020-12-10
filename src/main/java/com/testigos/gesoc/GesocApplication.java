@@ -9,13 +9,14 @@ import com.testigos.gesoc.model.services.budgetValidator.Calendarizacion;
 import org.quartz.SchedulerException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class GesocApplication {
+public class GesocApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication gesoc = new SpringApplication(GesocApplication.class);
-        gesoc.setDefaultProperties(Collections.singletonMap("server.port", "5000"));
+        gesoc.setDefaultProperties(Collections.singletonMap("server.port", "8080"));
         gesoc.run(args);
     }
 

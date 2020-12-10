@@ -10,7 +10,7 @@ public class RegistroAspectTest {
 
     @Test
     public void persistUsuario() {
-        DAO<Usuario> dao = new DAO<Usuario>(Usuario.class);
+        DAO<Usuario> dao = new DAO<>(Usuario.class);
 
         Usuario user = new Usuario("username17", "password", "permisos", new JuridicaIGJ(), "name", "surname");
 

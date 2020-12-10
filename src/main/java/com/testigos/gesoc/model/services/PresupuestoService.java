@@ -23,6 +23,4 @@ public class PresupuestoService {
         return repo.find(id);
     }
 
-    public void findConItems(Presupuesto p) {
-    }
 }

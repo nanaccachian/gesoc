@@ -15,9 +15,10 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class Empatadora {
 
-    private static Empatadora empatadora = new Empatadora();
+    private static final Empatadora empatadora = new Empatadora();
 
-    private static @Getter List<EstrategiaEmpatadora> estrategias = Arrays.asList(new PrimeroEgreso(),
+    private static @Getter
+    final List<EstrategiaEmpatadora> estrategias = Arrays.asList(new PrimeroEgreso(),
             new PrimeroIngreso(), new PorFecha());
 
     private static @Getter @Setter EstrategiaEmpatadora estrategiaElegida;

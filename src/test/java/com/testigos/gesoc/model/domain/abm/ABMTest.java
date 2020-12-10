@@ -50,7 +50,7 @@ public class ABMTest {
     }
 
     @Test
-    public void tearDown() throws Exception {
+    public void tearDown() {
         this.repo.deleteAll();
     }
 }

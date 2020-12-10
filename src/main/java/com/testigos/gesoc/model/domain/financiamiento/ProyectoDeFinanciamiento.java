@@ -35,13 +35,13 @@ public class ProyectoDeFinanciamiento extends EntidadPersistente {
     private @Getter @Setter int cantidadPresupuestos;
 
     public void asociarIngreso(Ingreso ingreso) {
-        if (ingresosAsociados.stream().mapToDouble(ingreso1 -> ingreso1.getMonto()).sum()
+        if (ingresosAsociados.stream().mapToDouble(Ingreso::getMonto).sum()
                 + ingreso.getMonto() < montoTotal)
             ingresosAsociados.add(ingreso);
     }
 
     public boolean sePuedeAgregar(Ingreso ingreso) {
-        return ingresosAsociados.stream().mapToDouble(ingreso1 -> ingreso1.getMonto()).sum()
+        return ingresosAsociados.stream().mapToDouble(Ingreso::getMonto).sum()
                 + ingreso.getMonto() <= montoTotal;
     }
 }

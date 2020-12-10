@@ -16,8 +16,5 @@ public interface RegistroRepository extends MongoRepository<Registro, MongoId> {
 
     List<Registro> findAllByTipoRegistro(TipoRegistro bob);
 
-    // List<Registro> findAllByTipoRegistroAlta();
-    // List<Registro> findAllByTipoRegistroBaja();
-    // List<Registro> findAllByTipoRegistroModificacion();
     List<Registro> findAllByEntidad(Object entidad);
 }

@@ -18,12 +18,11 @@ import lombok.NoArgsConstructor;
 public abstract class Proveedor extends EntidadPersistente {
 
     @Column
-    protected @Getter String nombre;
-
-    @Column
     protected @Getter String direccPostal;
 
     public String nombreClase() {
         return this.getClass().getSimpleName();
     }
+
+    public abstract String getNombre();
 }

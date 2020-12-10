@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class CriteriosService {
 
-    DAO<CriterioSeleccion> dao = new DAO<>(CriterioSeleccion.class);
+    final DAO<CriterioSeleccion> dao = new DAO<>(CriterioSeleccion.class);
 
     public List<CriterioSeleccion> findAll() {
         return dao.findAll();

@@ -97,17 +97,12 @@
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.2.Final</version>
         </dependency>
-        <!-- C3P0-->
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-c3p0</artifactId>-->
-<!--            <version>5.4.25.Final</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>c3p0</groupId>-->
-<!--            <artifactId>c3p0</artifactId>-->
-<!--            <version>0.9.1.2</version>-->
-<!--        </dependency>-->
+        <!-- TOMCAT-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <!--Modulo Web / MVC-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

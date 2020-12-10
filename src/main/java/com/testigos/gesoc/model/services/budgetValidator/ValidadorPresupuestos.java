@@ -32,7 +32,7 @@ public class ValidadorPresupuestos implements Job {
     }
 
     public static boolean validarCantPresupuestos(EgresoConPresupuestos egresoConPresupuestos) {
-        return (egresoConPresupuestos.getTodosLosPresupuestos().size() == 3);
+        return (egresoConPresupuestos.getTodosLosPresupuestos().size() == egresoConPresupuestos.getComprador().getCantidadPresupuestosRequeridos());
     }
 
     public static boolean validarCompraEnBaseAPresupuestos(EgresoConPresupuestos egresoConPresupuestos) {
@@ -51,7 +51,7 @@ public class ValidadorPresupuestos implements Job {
     }
 
     @Override
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    public void execute(JobExecutionContext jobExecutionContext) {
         for (EgresoConPresupuestos eg : egresoCPService.getEgresosInvalidosConUsuario()) {
             if (eg.esValido()) {
                 eg.setEsValidoElPresupuesto(true);

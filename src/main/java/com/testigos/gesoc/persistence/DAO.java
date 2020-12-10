@@ -3,18 +3,15 @@ package com.testigos.gesoc.persistence;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import com.testigos.gesoc.persistence.EntityManagerFactory.MyEntitiyManagerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class DAO<T> {
 
     protected Class<T> type;
-
-    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceUnit");
 
     // Para métodos que no haya pasado a esta clase hacer
     // instancia.em.<metodo>, hay una banda pero pase los mas importantes
@@ -47,7 +44,7 @@ public class DAO<T> {
      * Crea el entityManager
      */
     public void createEntityManager() {
-        em = emf.createEntityManager();
+        em = MyEntitiyManagerFactory.emf.createEntityManager();
     }
 
     /**
@@ -97,7 +94,6 @@ public class DAO<T> {
         List<T> tList = createQuery("From " + type.getSimpleName()).getResultList();
         if (tList != null)
             tList.size();
-
         commit();
         close();
         return tList;

@@ -86,6 +86,7 @@ public class DAOEgresoCP extends DAO<EgresoConPresupuestos> {
             tList.size();
         for (EgresoConPresupuestos eg : tList) {
             Hibernate.initialize(eg.getRevisor());
+            Hibernate.initialize(eg.getComprador());
 
             Hibernate.initialize(eg.getTodosLosPresupuestos());
 
@@ -101,6 +102,7 @@ public class DAOEgresoCP extends DAO<EgresoConPresupuestos> {
                 Hibernate.initialize(eg.getPresupuestoElegido().getItems());
                 Hibernate.initialize(eg.getPresupuestoElegido().getEgresoConPresupuestos());
                 Hibernate.initialize(eg.getPresupuestoElegido().getEgresoConPresupuestos().getItems());
+
             }
         }
 

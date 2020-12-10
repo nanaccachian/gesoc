@@ -60,8 +60,6 @@ public class EgresosController {
     @Autowired
     private PresupuestoService presupuestoService;
 
-    private Egreso egresoActual;
-
     @GetMapping
     public String egresos(Model model, Authentication auth) {
         Usuario user = usuarioService.findConEntidad(auth.getName());
@@ -84,8 +82,8 @@ public class EgresosController {
         return "egresos_add";
     }
 
-    @PostMapping(path = "/add/{egreso_id}")
-    public String addItems(Model model, Authentication auth, @PathVariable("egreso_id") String id,
+    @PostMapping(path = "/add")
+    public String addItems(Model model, Authentication auth,
             @ModelAttribute Egreso egreso, @RequestParam("proveedor_elegido") String prov) {
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
@@ -93,7 +91,6 @@ public class EgresosController {
         egreso.setVendedor(proveedorService.find(Integer.parseInt(prov)));
         egreso.setFechaOperacion(LocalDate.now());
         egresoService.persist(egreso);
-        egresoActual = egreso;
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("egreso", egreso);
@@ -101,15 +98,17 @@ public class EgresosController {
         return "item_add";
     }
 
-    @PostMapping(path = "/item/add")
+    @PostMapping(path = "/{egreso_id}/item/add")
     public String addSingleItem(Model model, Authentication auth, @ModelAttribute("new_item") Item item,
-            @RequestParam(value = "action") String action) {
+            @RequestParam(value = "action") String action, @PathVariable("egreso_id") int egreso_id) {
         Usuario user = usuarioService.find(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        itemService.persist(item, egresoActual);
+        Egreso egreso = egresoService.findEgresoGeneral(egreso_id);
+        itemService.persist(item, egreso);
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         if (action.equals("continue")) {
+            model.addAttribute("egreso", egreso);
             model.addAttribute("new_item", new Item());
             return "item_add";
         } else
@@ -155,35 +154,44 @@ public class EgresosController {
         return "egresos_add_cp";
     }
 
-    @PostMapping(path = "/cp/add/{egreso_id}")
+    @PostMapping(path = "/cp/add")
     public String persistEgresoCP(Model model, Authentication auth,
             @ModelAttribute EgresoConPresupuestos egresoConPresupuestos, @RequestParam("proveedor_elegido") String prov,
-            @PathVariable("egreso_id") String id, @RequestParam("revisor_elegido") String rev,
+            @RequestParam("revisor_elegido") String rev,
             @RequestParam("criterio_elegido") String crit) {
+
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
+
         egresoConPresupuestos.setRevisor(usuarioService.findConEntidad(rev));
         egresoConPresupuestos.setCriterio(criteriosService.find(Integer.parseInt(crit)));
         egresoConPresupuestos.setComprador(user.getEntidad());
         egresoConPresupuestos.setVendedor(proveedorService.find(Integer.parseInt(prov)));
         egresoConPresupuestos.setFechaOperacion(LocalDate.now());
         egresoService.persist(egresoConPresupuestos);
-        egresoActual = egresoConPresupuestos;
-        model.addAttribute("egreso", egresoConPresupuestos);
+
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
+        model.addAttribute("egreso", egresoConPresupuestos);
         model.addAttribute("new_item", new Item());
         return "item_cp_add";
     }
 
-    @PostMapping(path = "/cp/add/item")
+    @PostMapping(path = "/{egreso_id}/cp/add/item")
     public String addItemCP(Model model, Authentication auth, @ModelAttribute("new_item") Item item,
-            @RequestParam(value = "action") String action) {
+            @RequestParam(value = "action") String action,
+            @PathVariable("egreso_id") int egreso_id) {
+
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        itemService.persist(item, egresoActual);
+
+        EgresoConPresupuestos egreso = egresoService.findEgresoCP(egreso_id);
+        itemService.persist(item, egreso);
+
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
+        model.addAttribute("egreso", egreso);
+
         if (action.equals("continue")) {
             model.addAttribute("new_item", new Item());
             return "item_cp_add";
@@ -193,31 +201,41 @@ public class EgresosController {
         }
     }
 
-    @PostMapping(path = "/cp/add/presupuesto")
+    @PostMapping(path = "/{egreso_id}/cp/add/presupuesto")
     public String addPresupuesto(Model model, Authentication auth,
-            @ModelAttribute("new_presupuesto") Presupuesto presupuesto) {
+            @ModelAttribute("new_presupuesto") Presupuesto presupuesto, @PathVariable("egreso_id") int egreso_id) {
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        presupuesto.setEgresoConPresupuestos((EgresoConPresupuestos) egresoActual);
+
+        EgresoConPresupuestos egreso = egresoService.findEgresoCP(egreso_id);
+        presupuesto.setEgresoConPresupuestos(egreso);
         presupuestoService.persist(presupuesto);
+
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
-        model.addAttribute("new_item", new Item());
+        model.addAttribute("egreso", egreso);
         model.addAttribute("presupuesto", presupuesto);
+        model.addAttribute("new_item", new Item());
+
         return "item_presupuesto_add";
     }
 
-    @PostMapping(path = "/cp/add/item/presupuesto/{presupuesto_id}")
+    @PostMapping(path = "/{egreso_id}/cp/add/item/presupuesto/{presupuesto_id}")
     public String addItemPresupuesto(Model model, Authentication auth, @ModelAttribute("new_item") Item item,
-            @RequestParam(value = "action") String action, @PathVariable("presupuesto_id") String presu) {
+            @RequestParam(value = "action") String action, @PathVariable("presupuesto_id") String presu, @PathVariable("egreso_id") int egreso_id) {
+
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
         Presupuesto presupuesto = presupuestoService.find(Integer.parseInt(presu));
+        EgresoConPresupuestos egreso = egresoService.findEgresoCP(egreso_id);
+
         item.setPresupuesto(presupuesto);
         itemService.persist(item);
+
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
-        model.addAttribute("egreso", egresoActual);
+        model.addAttribute("egreso", egreso);
+
         if (action.equals("add_item")) {
             model.addAttribute("new_item", new Item());
             model.addAttribute("presupuesto", presupuesto);
@@ -226,22 +244,24 @@ public class EgresosController {
             model.addAttribute("new_presupuesto", new Presupuesto());
             return "presupuesto_add";
         } else {
-            List<Presupuesto> presupuestos = egresoService.findConPresupuestos(egresoActual.getId())
+            List<Presupuesto> presupuestos = egresoService.findConPresupuestos(egreso.getId())
                     .getTodosLosPresupuestos();
             model.addAttribute("presupuestos", presupuestos);
             return "presupuesto_eleccion";
         }
     }
 
-    @PostMapping(path = "/cp/add/result")
+    @PostMapping(path = "/{egreso_id}/cp/add/result")
     public String addFinalPresupuesto(Model model, Authentication auth,
-            @RequestParam("presupuesto_elegido") String presupuesto) {
+            @RequestParam("presupuesto_elegido") String presupuesto, @PathVariable("egreso_id") int egreso_id) {
         Usuario user = usuarioService.findConEntidad(auth.getName());
         List<Mensaje> mensajes = mensajeService.getMensajes(user);
-        EgresoConPresupuestos egreso = egresoService.findConPresupuestos(egresoActual.getId());
+        EgresoConPresupuestos egreso = egresoService.findConPresupuestos(egreso_id);
+
         egreso.setPresupuestoElegido(egreso.getTodosLosPresupuestos().stream()
                 .filter(p -> p.getId() == Integer.parseInt(presupuesto)).findFirst().get());
         egresoService.updatePresupuesto(egreso);
+
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
         return "egresos_add_result";

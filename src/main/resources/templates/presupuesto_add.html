@@ -228,7 +228,7 @@
                 action=""
                 class="form-horizontal style-form"
                 method="post"
-                th:action="@{/egresos/cp/add/presupuesto}"
+                th:action="@{/egresos/{egreso_id}/cp/add/presupuesto(egreso_id = ${egreso.id})}"
                 th:object="${new_presupuesto}"
             >
               <br />

@@ -45,7 +45,7 @@ public class JustificacionController {
         Empatadora empatadora = Empatadora.getInstance();
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
-        model.addAttribute("estrategias", empatadora.getEstrategias().stream().map(e -> e.getClass().getSimpleName())
+        model.addAttribute("estrategias", Empatadora.getEstrategias().stream().map(e -> e.getClass().getSimpleName())
                 .collect(Collectors.toList()));
         return "elegir_criterio";
     }
@@ -58,7 +58,7 @@ public class JustificacionController {
         List<Egreso> egresos = egresoService.getEgresosNoJustificados(user.getEntidad());
 
         Empatadora empatadora = Empatadora.getInstance();
-        empatadora.setEstrategiaElegida(empatadora.getEstrategia(criterio));
+        Empatadora.setEstrategiaElegida(empatadora.getEstrategia(criterio));
         List<Egreso> egresosActualizados = empatadora.empatar(ingresos, egresos);
 
         egresoService.update(egresosActualizados);

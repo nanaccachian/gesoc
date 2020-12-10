@@ -9,12 +9,14 @@ import com.testigos.gesoc.model.domain.financiamiento.ProyectoDeFinanciamiento;
 import com.testigos.gesoc.model.domain.ingresos.Ingreso;
 import com.testigos.gesoc.persistence.DAOIngreso;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class IngresoService {
 
-    private DAOIngreso dao = new DAOIngreso();
+    @Autowired
+    private DAOIngreso dao;
 
     public List<Ingreso> getIngresos() {
         return dao.findAll();
@@ -65,17 +67,6 @@ public class IngresoService {
                         && i.getEntidad().getId() == entidad.getId())
                 .mapToDouble(Ingreso::getMonto).sum();
     }
-
-//    public Double getTotalIngresosMesAnterior() {
-//        return dao.findAllConEgresos().stream()
-//                .filter(e -> e.getFechaIngreso().getMonthValue() == LocalDate.now().getMonthValue() - 1)
-//                .mapToDouble(Ingreso::getMonto).sum();
-//    }
-//
-//    public Double getTotalIngresosAnio(Entidad entidad) {
-//        return dao.findAllConEgresos().stream().filter(i -> i.getFechaIngreso().getYear() == LocalDate.now().getYear()
-//                && i.getEntidad().getId() == entidad.getId()).mapToDouble(Ingreso::getMonto).sum();
-//    }
 
     public Ingreso findUltimoIngreso(Entidad entidad) {
         return dao.findAllConEgresos().stream().reduce((first, second) -> second)

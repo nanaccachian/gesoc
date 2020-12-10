@@ -1,7 +1,7 @@
 package com.testigos.gesoc.views.controllers;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -49,8 +49,8 @@ public class IndexController {
 
         model.addAttribute("user", user);
         model.addAttribute("mensajes", mensajes);
-        model.addAttribute("hora", LocalTime.now().format(DateTimeFormatter.ofPattern("h:mm a")));
-        model.addAttribute("dia", LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        model.addAttribute("hora", ZonedDateTime.now(ZoneId.of("America/Argentina/Buenos_Aires")).format(DateTimeFormatter.ofPattern("h:mm a")));
+        model.addAttribute("dia", ZonedDateTime.now(ZoneId.of("America/Argentina/Buenos_Aires")).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         model.addAttribute("balance", balance);
         model.addAttribute("egresos_mes", egresos_mes);
         model.addAttribute("ingresos_mes", ingresoService.getTotalIngresosEsteMes(user.getEntidad()));

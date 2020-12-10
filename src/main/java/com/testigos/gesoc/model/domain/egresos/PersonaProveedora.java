@@ -3,11 +3,16 @@ package com.testigos.gesoc.model.domain.egresos;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Entity
 public class PersonaProveedora extends Proveedor {
+
+    @Column
+    protected @Getter
+    String nombre;
 
     @Column
     private String apellido;

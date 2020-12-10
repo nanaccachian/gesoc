@@ -21,6 +21,10 @@ public class EntidadProveedora extends Proveedor {
         this.cuit = cuit;
         this.razonSocial = razonSocial;
         this.direccPostal = direccPostal;
-        this.nombre = razonSocial;
+        this.razonSocial = razonSocial;
+    }
+
+    public String getNombre() {
+        return razonSocial;
     }
 }
