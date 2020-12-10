@@ -16,7 +16,7 @@ public class GesocApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication gesoc = new SpringApplication(GesocApplication.class);
-        gesoc.setDefaultProperties(Collections.singletonMap("server.port", "8080"));
+        gesoc.setDefaultProperties(Collections.singletonMap("server.port", "5000"));
         gesoc.run(args);
     }
 
