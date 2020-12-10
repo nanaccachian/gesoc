@@ -7,6 +7,7 @@ import com.testigos.gesoc.model.domain.egresos.Item;
 import com.testigos.gesoc.model.domain.egresos.Presupuesto;
 import com.testigos.gesoc.persistence.DAOItem;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +18,7 @@ public class ItemService {
     private DAOItem repo;
 
     public List<Item> findItems(Egreso egreso) {
-        repo.createEntityManager();
-        repo.beginTransaction();
-        List<Item> items = repo.createQuery("from Item m where m.egreso = :egreso").setParameter("egreso", egreso)
-                .getResultList();
-        if (items != null)
-            items.size();
-        repo.commit();
-        repo.close();
-        return items;
+        return repo.findItems(egreso);
     }
 
     public void persist(Item item) {

@@ -179,6 +179,7 @@
               <hr>
               <thead>
               <tr>
+                <th>Categorias</th>
                 <th>Producto</th>
                 <th>Cantidad</th>
                 <th>Valor unitario</th>
@@ -187,6 +188,7 @@
               </thead>
               <tbody>
               <tr th:each="i : ${items}">
+                <td th:text="${!i.categorizacion.isEmpty()} ? ${i.criterios()} : 'No tiene categorias' "></td>
                 <td th:text="${i.producto}"></td>
                 <td th:text="${i.cantidad}"></td>
                 <td th:text="${i.valorUnitario}"></td>

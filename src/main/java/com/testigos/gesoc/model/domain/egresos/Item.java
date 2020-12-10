@@ -2,6 +2,8 @@ package com.testigos.gesoc.model.domain.egresos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,7 +42,7 @@ public class Item extends EntidadPersistente {
     private @Getter @Setter int cantidad;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private final List<Categoria> categorizacion = new ArrayList<>();
+    private final @Getter List<Categoria> categorizacion = new ArrayList<>();
 
     public Item(String producto, double valorUnitario, int cantidad) {
         this.producto = producto;
@@ -55,11 +57,13 @@ public class Item extends EntidadPersistente {
     public void categorizar(Categoria cat) {
         if (noTieneCriterio(cat))
             categorizacion.add(cat);
-        else
-            System.out.println("Ya estas categorizado segun ese criterio");
     }
 
     private boolean noTieneCriterio(Categoria cat) {
         return categorizacion.stream().anyMatch(cate -> cat.perteneceACriterio(cate.getCriterio()));
+    }
+
+    public String criterios() {
+        return categorizacion.stream().map(c -> c.getNombre()).reduce((s1,s2) -> s1.concat(", " + s2)).get().concat(".");
     }
 }

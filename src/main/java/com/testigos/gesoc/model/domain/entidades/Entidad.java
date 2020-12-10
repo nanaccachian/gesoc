@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.testigos.gesoc.model.domain.egresos.Egreso;
+import com.testigos.gesoc.model.domain.egresos.ManejadorDeCategorias;
 import com.testigos.gesoc.model.domain.entidades.tipoorg.TipoOrg;
 import com.testigos.gesoc.model.domain.ingresos.Ingreso;
 import com.testigos.gesoc.model.domain.persistentes.EntidadPersistente;
@@ -42,6 +43,10 @@ public abstract class Entidad extends EntidadPersistente {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_de_organizacion_id")
     protected @Getter TipoOrg tipo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manejadores_de_categorias_id")
+    protected @Getter ManejadorDeCategorias manejadorDeCategorias;
 
     public void recategorizar() {
         tipo = tipo.recategorizar();

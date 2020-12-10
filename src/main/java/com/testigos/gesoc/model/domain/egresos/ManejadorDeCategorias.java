@@ -2,11 +2,7 @@ package com.testigos.gesoc.model.domain.egresos;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +13,11 @@ import lombok.NoArgsConstructor;
 public class ManejadorDeCategorias {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private @Getter String id;
+
+    @Column
+    private @Getter String descripcion;
 
     @OneToMany(mappedBy = "manejadorDeCategorias", cascade = CascadeType.ALL)
     private List<CriterioDeCategorizacion> categorizacionesAplicables;

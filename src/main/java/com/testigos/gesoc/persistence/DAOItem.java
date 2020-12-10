@@ -4,7 +4,12 @@ import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.model.domain.egresos.EgresoConPresupuestos;
 import com.testigos.gesoc.model.domain.egresos.Item;
 import com.testigos.gesoc.model.domain.egresos.Presupuesto;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class DAOItem extends DAO<Item>{
@@ -34,4 +39,23 @@ public class DAOItem extends DAO<Item>{
         commit();
         close();
     }
+
+    public List<Item> findItems(Egreso egreso) {
+        createEntityManager();
+        beginTransaction();
+        List<Item> tList = em.createQuery("From " + type.getSimpleName()).getResultList();
+        if (tList != null) {
+            tList.size();
+            for (Item i : tList) {
+                Hibernate.initialize(i.getEgreso());
+                Hibernate.initialize(i.getCategorizacion());
+            }
+            tList = tList.stream().filter(i -> i.getEgreso() != null && i.getEgreso().getId() == egreso.getId()).collect(Collectors.toList());
+        }
+        commit();
+        close();
+        return tList;
+    }
+
+
 }
