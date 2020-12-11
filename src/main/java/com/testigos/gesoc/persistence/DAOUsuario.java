@@ -41,4 +41,21 @@ public class DAOUsuario extends DAO<Usuario> {
         close();
         return tList;
     }
+
+    public Usuario findConEntidadYManejador(String username) {
+        createEntityManager();
+        beginTransaction();
+        Usuario t = em.find(type, username);
+        if (t != null) {
+            t.getClass();
+            Hibernate.initialize(t.getEntidad());
+            Hibernate.initialize(t.getEntidad().getTipo());
+            Hibernate.initialize(t.getEntidad().getManejadorDeCategorias());
+            Hibernate.initialize(t.getEntidad().getManejadorDeCategorias());
+            Hibernate.initialize(t.getEntidad().getManejadorDeCategorias().getCategorizacionesAplicables());
+        }
+        commit();
+        close();
+        return t;
+    }
 }

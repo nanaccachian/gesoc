@@ -1,9 +1,6 @@
 package com.testigos.gesoc.persistence;
 
-import com.testigos.gesoc.model.domain.egresos.Egreso;
-import com.testigos.gesoc.model.domain.egresos.EgresoConPresupuestos;
-import com.testigos.gesoc.model.domain.egresos.Item;
-import com.testigos.gesoc.model.domain.egresos.Presupuesto;
+import com.testigos.gesoc.model.domain.egresos.*;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
@@ -57,5 +54,18 @@ public class DAOItem extends DAO<Item>{
         return tList;
     }
 
-
+    public Item findConCategorias(int item_id) {
+        createEntityManager();
+        beginTransaction();
+        Item item = em.find(Item.class,item_id);
+        if (item != null) {
+            item.getClass();
+            Hibernate.initialize(item.getCategorizacion());
+            for (Categoria i: item.getCategorizacion())
+                Hibernate.initialize(i.getCriterio());
+        }
+        commit();
+        close();
+        return item;
+    }
 }

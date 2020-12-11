@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DAODocumentoComercial extends DAO<DocumentoComercial> {
 
+    public DAODocumentoComercial() {
+        super(DocumentoComercial.class);
+    }
+
     public void persistConEgreso(DocumentoComercial documentoComercial, Egreso egreso) {
         createEntityManager();
         beginTransaction();

@@ -20,7 +20,7 @@ public class ManejadorDeCategorias {
     private @Getter String descripcion;
 
     @OneToMany(mappedBy = "manejadorDeCategorias", cascade = CascadeType.ALL)
-    private List<CriterioDeCategorizacion> categorizacionesAplicables;
+    private @Getter List<CriterioDeCategorizacion> categorizacionesAplicables;
 
     public ManejadorDeCategorias(String nombre, List<CriterioDeCategorizacion> categorizacionesAplicables) {
         this.id = nombre;

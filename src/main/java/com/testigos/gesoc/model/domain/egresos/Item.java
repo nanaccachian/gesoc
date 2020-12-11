@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.sun.el.parser.BooleanNode;
 import com.testigos.gesoc.model.domain.persistentes.EntidadPersistente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,7 +42,7 @@ public class Item extends EntidadPersistente {
     @Column
     private @Getter @Setter int cantidad;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private final @Getter List<Categoria> categorizacion = new ArrayList<>();
 
     public Item(String producto, double valorUnitario, int cantidad) {
@@ -54,12 +55,14 @@ public class Item extends EntidadPersistente {
         return cantidad * valorUnitario;
     }
 
-    public void categorizar(Categoria cat) {
-        if (noTieneCriterio(cat))
+    public Boolean categorizar(Categoria cat) {
+        if (!tieneCriterio(cat)) {
             categorizacion.add(cat);
+            return true;
+        } else return false;
     }
 
-    private boolean noTieneCriterio(Categoria cat) {
+    private boolean tieneCriterio(Categoria cat) {
         return categorizacion.stream().anyMatch(cate -> cat.perteneceACriterio(cate.getCriterio()));
     }
 

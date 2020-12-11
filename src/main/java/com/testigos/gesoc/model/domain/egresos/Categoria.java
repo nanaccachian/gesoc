@@ -30,6 +30,6 @@ public class Categoria extends EntidadPersistente {
     }
 
     boolean perteneceACriterio(CriterioDeCategorizacion crit) {
-        return criterio.equals(crit);
+        return criterio.getNombre().equals(crit.getNombre());
     }
 }

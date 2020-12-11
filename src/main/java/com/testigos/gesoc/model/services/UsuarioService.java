@@ -35,4 +35,8 @@ public class UsuarioService {
     public void persist(Usuario usuario) {
         repository.persist(usuario);
     }
+
+    public Usuario findConEntidadYManejador(String name) {
+        return repository.findConEntidadYManejador(name);
+    }
 }

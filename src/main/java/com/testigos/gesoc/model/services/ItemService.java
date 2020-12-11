@@ -2,6 +2,7 @@ package com.testigos.gesoc.model.services;
 
 import java.util.List;
 
+import com.testigos.gesoc.model.domain.egresos.Categoria;
 import com.testigos.gesoc.model.domain.egresos.Egreso;
 import com.testigos.gesoc.model.domain.egresos.Item;
 import com.testigos.gesoc.model.domain.egresos.Presupuesto;
@@ -31,5 +32,17 @@ public class ItemService {
 
     public void persist(Item item, Presupuesto presupuesto) {
         repo.persistWithPresupuesto(item, presupuesto);
+    }
+
+    public Item find(int item_elegido) {
+        return repo.find(item_elegido);
+    }
+
+    public Item findConCategorias(int item_id) {
+        return repo.findConCategorias(item_id);
+    }
+
+    public void update(Item item) {
+        repo.update(item);
     }
 }
