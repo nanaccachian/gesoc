@@ -51,7 +51,7 @@ public class ValidadorPresupuestos {
     }
 
     @Async
-    @Scheduled(cron = "0 44 17 * * *")
+    @Scheduled(cron = "0 0 9 * * *")
     public void execute() {
         List<EgresoConPresupuestos> egs =  egresoService.getEgresosInvalidosConUsuario();
 
