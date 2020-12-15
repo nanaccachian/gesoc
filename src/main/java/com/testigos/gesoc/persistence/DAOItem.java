@@ -68,4 +68,13 @@ public class DAOItem extends DAO<Item>{
         close();
         return item;
     }
+
+    public List<Item> findItemsSegunCategoria(int categoria_elegida) {
+        createEntityManager();
+        beginTransaction();
+        List<Item> tList = em.createQuery("SELECT i FROM Item i JOIN FETCH i.categorizacion").getResultList();
+        commit();
+        close();
+        return tList.stream().distinct().filter( i -> i.getCategorizacion().stream().anyMatch( cat -> cat.getId() == categoria_elegida)).collect(Collectors.toList());
+    }
 }

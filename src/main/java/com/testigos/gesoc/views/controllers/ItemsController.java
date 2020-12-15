@@ -47,6 +47,7 @@ public class ItemsController {
         model.addAttribute("mensajes", mensajes);
         model.addAttribute("items", items);
         model.addAttribute("egreso",egreso);
+        model.addAttribute("total", items.stream().mapToDouble(i -> i.valorTotal()).sum());
         return "items";
     }
 
@@ -101,6 +102,35 @@ public class ItemsController {
             return "categorizacion_success";
         }
         else return "categorizacion_failure";
+    }
 
+    @GetMapping(path = "/cat")
+    public String getCategorias(Model model, Authentication auth) {
+        Usuario user = usuarioService.findConEntidadYManejador(auth.getName());
+        List<Mensaje> mensajes = mensajeService.getMensajes(user);
+
+        List<Categoria> categorias = categoriaService.findCategoriasDeManejador(user.getEntidad().getManejadorDeCategorias());
+
+        model.addAttribute("user", user);
+        model.addAttribute("mensajes", mensajes);
+        model.addAttribute("categorias",categorias);
+        return "categoria_elegir";
+    }
+
+    @PostMapping(path = "/cat")
+    public String showCategorias(Model model, Authentication auth,
+                                @RequestParam("categoria_elegida") int categoria_elegida) {
+        Usuario user = usuarioService.find(auth.getName());
+        List<Mensaje> mensajes = mensajeService.getMensajes(user);
+
+        List<Item> items = itemService.findItemsSegunCategoria(categoria_elegida);
+        Categoria categoria = categoriaService.findConCriterio(categoria_elegida);
+
+        model.addAttribute("user", user);
+        model.addAttribute("mensajes", mensajes);
+        model.addAttribute("items", items);
+        model.addAttribute("categoria", categoria);
+        model.addAttribute("total_categoria", items.stream().mapToDouble(i -> i.valorTotal()).sum());
+        return "items_filtro_categorias";
     }
 }

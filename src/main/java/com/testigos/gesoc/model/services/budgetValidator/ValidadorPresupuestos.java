@@ -50,7 +50,6 @@ public class ValidadorPresupuestos {
         return presupuesto.getEgresoConPresupuestos().listaItems().containsAll(presupuesto.listaItems());
     }
 
-    @Async
     @Scheduled(cron = "0 0 9 * * *")
     public void execute() {
         List<EgresoConPresupuestos> egs =  egresoService.getEgresosInvalidosConUsuario();

@@ -2,6 +2,7 @@ package com.testigos.gesoc.views.config;
 
 import static java.util.Arrays.asList;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.testigos.gesoc.model.domain.usuarios.Usuario;
@@ -16,7 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MiUserDetailsService implements UserDetailsService {
+public class MiUserDetailsService implements UserDetailsService, Serializable {
 
     @Autowired
     private DAOUsuario daoUsuario;

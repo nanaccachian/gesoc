@@ -11,10 +11,6 @@ public class CriterioDeCategorizacionService {
 
     @Autowired
     public DAOCriterioDeCategorizacion repo;
-//
-//    public List<CriterioDeCategorizacion> getCriterios(ManejadorDeCategorias manejadorDeCategorias) {
-//        return repo.findAll(manejadorDeCategorias);
-//    }
 
     public CriterioDeCategorizacion findConCategorias(int criterio_elegido) {
         return repo.findConCategorias(criterio_elegido);

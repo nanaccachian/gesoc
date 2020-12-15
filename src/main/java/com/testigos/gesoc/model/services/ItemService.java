@@ -45,4 +45,8 @@ public class ItemService {
     public void update(Item item) {
         repo.update(item);
     }
+
+    public List<Item> findItemsSegunCategoria(int categoria_elegida) {
+        return repo.findItemsSegunCategoria(categoria_elegida);
+    }
 }

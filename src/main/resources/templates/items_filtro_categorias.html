@@ -171,21 +171,12 @@
     <section class="wrapper site-min-height">
       <h3 th:if="${!items.isEmpty()}">
         <i class="fa fa-angle-right"></i> Items
-        <a
-            href="categorizar_eleccion.html"
-            th:href="@{/items/{egreso_id}/categorizar(egreso_id = ${egreso})}"
-        >
-          <button style="margin-right: 10px; float: right; margin-bottom: 10px" type="button" class="btn btn-theme02 css_right right-side" >
-            <i class="fa fa-pencil-square" >&nbsp;</i> Categorizar items
-          </button>
-        </a>
       </h3>
       <div class="row" th:if="${!items.isEmpty()}">
-        <!-- page start-->
         <div class="col-md-12">
           <div class="content-panel">
             <table class="table table-hover">
-              <h4 th:text="${'Items del egreso: ' + egreso}"><i class="fa fa-angle-right"></i></h4>
+              <h4 th:text="'Items de la categoria: ' + ${categoria.getNombre()}"><i class="fa fa-angle-right"></i></h4>
               <hr>
               <thead>
               <tr>
@@ -207,21 +198,19 @@
               </tbody>
               <tfoot>
               <tr>
-                <th scope="row">Total: </th>
+                <th scope="row">Total invertido en categoria</th>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td th:text="${total}"></td>
+                <td th:text="${total_categoria}"></td>
               </tr>
               </tfoot>
             </table>
-            <!-- page end-->
           </div>
         </div>
       </div>
       <div class="row" th:if="${items.isEmpty()}">
-        <h3 class="title" style="margin-left: 10px; padding: 5px; color: darkred" ><i class="fa fa-angle-right"></i> El egreso seleccionado no
-          tiene items</h3>
+        <h3 class="title" style="margin-left: 10px; padding: 5px; color: darkred" ><i class="fa fa-angle-right"></i> No hay items de la categoria seleccionada</h3>
       </div>
     </section>
   </section>
